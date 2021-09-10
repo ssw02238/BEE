@@ -59,7 +59,7 @@
 
 #### 2) 간트차트
 
-![image-20210903104256170](README.assets/image-20210903104256170.png)
+![간트차트](README.assets/간트차트.png)
 
 
 
