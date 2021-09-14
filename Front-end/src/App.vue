@@ -2,24 +2,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <div id="back">
+
     <!-- nav bar --> 
-    <ul class="nav justify-content-center">
-      <li class="nav-item">
-        <RouterLink :to="{ name: 'serviceIntro' }">
-          <h2>About</h2>
+    <div class="total-nav">
+      <div class="logo">
+        <RouterLink :to="{ name: 'main' }">
+            <img src="@/assets/logo.png" width="100" class="pt-2">
         </RouterLink>
-      </li>
-      <li class="nav-item">
-        <RouterLink :to="{ name: 'esgRank' }">
-          <h2>Rank</h2>
-        </RouterLink>
-      </li>
-      <li class="nav-item">
-        <RouterLink :to="{ name: 'newsList' }">
-          <h2>News</h2>
-        </RouterLink>
-      </li>
-    </ul>
+      </div>
+      <div class="navbar">
+        <nav class="nav main-nav">
+          <RouterLink :to="{ name: 'serviceIntro' }">
+            <p class="nav-text">About</p>
+          </RouterLink>
+          <RouterLink :to="{ name: 'esgRank' }">
+            <p class="nav-text">Rank</p>
+          </RouterLink>
+          <RouterLink :to="{ name: 'newsList' }">
+            <p class="nav-text">News</p>
+          </RouterLink>
+        </nav>
+        
+        <nav class="nav sub-nav">
+          <RouterLink :to="{ name: 'login' }">
+            <p class="nav-text2">Log in</p>
+          </RouterLink>
+          
+          <RouterLink :to="{ name: 'signup' }">
+            <p class="nav-text2">Sign in</p>
+          </RouterLink>
+        </nav>
+      </div>
+    </div>
 
     <h2>hi</h2>
         <h2>hi</h2>
@@ -65,8 +79,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 #back {
   background-image: url("BackgroundIMG.png"); 
@@ -78,4 +90,44 @@ export default {
   padding:0;
 }
 
+.main-nav {
+  width: 40%;
+  /* 화면 비율에 따라 */ 
+  min-width: 20%;
+  height: 40px;
+  /* position: fixed; */
+  justify-content: space-around;
+  align-content: center;
+}
+
+.navbar {
+  background-color: rgb(34, 33, 33);
+  color:#FABD02;
+}
+.sub-nav {
+  width: 10%;
+  /* 화면 비율에 따라 */
+  height: 40px;
+  align-content: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.nav-text {
+  font-size: 1.2rem;
+  align-content: center;
+  margin-bottom: 0px;
+  padding: 5px;
+}
+
+.nav-text2 {
+  font-size: 0.9rem;
+  margin-bottom: 0px;
+  align-content: center;
+  padding: 5px;
+}
+
+.total-nav {
+  
+}
 </style>
