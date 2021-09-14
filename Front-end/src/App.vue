@@ -3,16 +3,19 @@
     <!-- nav bar --> 
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Active</a>
+        <RouterLink :to="{ name: 'serviceIntro' }">
+          <h2>About</h2>
+        </RouterLink>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <RouterLink :to="{ name: 'esgRank' }">
+          <h2>Rank</h2>
+        </RouterLink>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled">Disabled</a>
+        <RouterLink :to="{ name: 'newsList' }">
+          <h2>News</h2>
+        </RouterLink>
       </li>
     </ul>
 
