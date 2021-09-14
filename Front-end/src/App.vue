@@ -1,4 +1,6 @@
 <template>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <div id="back">
     <!-- nav bar --> 
     <ul class="nav justify-content-center">
@@ -20,6 +22,30 @@
     </ul>
 
     <h2>hi</h2>
+        <h2>hi</h2>
+            <h2>hi</h2>
+                <h2>hi</h2>
+        <h2>hi</h2>
+            <h2>hi</h2>
+                <h2>hi</h2>
+        <h2>hi</h2>
+            <h2>hi</h2>
+                <h2>hi</h2>
+        <h2>hi</h2>
+            <h2>hi</h2>
+                <h2>hi</h2>
+        <h2>hi</h2>
+            <h2>hi</h2>
+                <h2>hi</h2>
+        <h2>hi</h2>
+            <h2>hi</h2>
+                <h2>hi</h2>
+        <h2>hi</h2>
+            <h2>hi</h2>
+                <h2>hi</h2>
+        <h2>hi</h2>
+            <h2>hi</h2>
+                <h2>hi</h2>
     <!-- footer --> 
   </div>
 </template>
@@ -43,9 +69,13 @@ export default {
   margin-top: 60px;
 }
 #back {
-  background-image: url("back.png"); 
-  background-size: cover;
-  height: 100%;
+  background-image: url("BackgroundIMG.png"); 
+
+  min-height: 100%;
+  background-position:center;
+  background-attachment: fixed;
+  border:0;
+  padding:0;
 }
 
 </style>
