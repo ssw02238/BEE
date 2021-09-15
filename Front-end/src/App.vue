@@ -60,7 +60,9 @@
         <h2>hi</h2>
             <h2>hi</h2>
                 <h2>hi</h2>
+
     <!-- footer --> 
+    
   </div>
 </template>
 
