@@ -4,34 +4,35 @@
   <div id="back">
 
     <!-- nav bar --> 
-    <div class="logo">
-      <RouterLink :to="{ name: 'main' }">
-          <img src="@/assets/logo.png" width="100" class="pt-2">
-      </RouterLink>
-    </div>
-    <div class="navbar">
-      <nav class="nav main-nav">
-        <RouterLink :to="{ name: 'serviceIntro' }">
-          <p class="nav-text">About</p>
+    <div class="total-nav">
+      <div class="logo">
+        <RouterLink :to="{ name: 'main' }">
+            <img src="@/assets/logo.png" width="100" class="pt-2">
         </RouterLink>
-        <RouterLink :to="{ name: 'esgRank' }">
-          <p class="nav-text">Rank</p>
-        </RouterLink>
-        <RouterLink :to="{ name: 'newsList' }">
-          <p class="nav-text">News</p>
-        </RouterLink>
-      </nav>
-      
-      <nav class="nav sub-nav">
-        <RouterLink :to="{ name: 'login' }">
-          <p class="nav-text2">Log in</p>
-        </RouterLink>
+      </div>
+      <div class="navbar">
+        <nav class="nav main-nav">
+          <RouterLink :to="{ name: 'serviceIntro' }">
+            <p class="nav-text">About</p>
+          </RouterLink>
+          <RouterLink :to="{ name: 'esgRank' }">
+            <p class="nav-text">Rank</p>
+          </RouterLink>
+          <RouterLink :to="{ name: 'newsList' }">
+            <p class="nav-text">News</p>
+          </RouterLink>
+        </nav>
         
-        <RouterLink :to="{ name: 'signup' }">
-          <p class="nav-text2">Sign in</p>
-        </RouterLink>
-      </nav>
-
+        <nav class="nav sub-nav">
+          <RouterLink :to="{ name: 'login' }">
+            <p class="nav-text2">Log in</p>
+          </RouterLink>
+          
+          <RouterLink :to="{ name: 'signup' }">
+            <p class="nav-text2">Sign in</p>
+          </RouterLink>
+        </nav>
+      </div>
     </div>
 
     <h2>hi</h2>
@@ -59,7 +60,23 @@
         <h2>hi</h2>
             <h2>hi</h2>
                 <h2>hi</h2>
+
     <!-- footer --> 
+    <footer class="py-3">
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item me-2">
+          Home 
+        </li>
+        <li class="nav-item me-2">
+          About
+        </li>
+        <li class="nav-item">
+          My Page
+        </li>
+      </ul>
+      <p class="text-center text-muted">김예찬 · 김윤서 · 방지환 · 이규정 · 정희진</p>
+      <p class="text-center text-muted">Copyright 2021 BEE ( Best ESG Enterprise ) ®All Rights Reserved</p>
+    </footer>
   </div>
 </template>
 
@@ -78,7 +95,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  margin-top: 50px;
 }
 #back {
   background-image: url("BackgroundIMG.png"); 
@@ -103,13 +119,12 @@ export default {
 }
 
 .navbar {
-  background-color: black;
+  background-color: rgb(34, 33, 33);
   color:#FABD02;
 }
 .sub-nav {
   width: 10%;
-  /* 화면 비율에 따라 */ 
-  min-width: 10%;
+  /* 화면 비율에 따라 */
   height: 40px;
   align-content: center;
   justify-content: center;
@@ -128,5 +143,9 @@ export default {
   margin-bottom: 0px;
   align-content: center;
   padding: 5px;
+}
+
+footer {
+  background-color: #FABD02;
 }
 </style>
