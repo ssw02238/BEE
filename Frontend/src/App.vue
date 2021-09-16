@@ -97,13 +97,14 @@ export default {
   text-align: center;
 }
 #back {
-  background-image: url("BackgroundIMG.png"); 
+  background-image: url("BackgroundIMG.jpg"); 
 
   min-height: 100%;
   background-position:center;
   background-attachment: fixed;
   border:0;
   padding:0;
+  background-size: cover;
 }
 
 .main-nav {
