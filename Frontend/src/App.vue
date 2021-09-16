@@ -5,12 +5,13 @@
 
     <!-- nav bar --> 
     <div class="total-nav">
+      <div class="navbar">
       <div class="logo">
         <RouterLink :to="{ name: 'main' }">
             <img src="@/assets/logo.png" width="100" class="pt-2">
         </RouterLink>
       </div>
-      <div class="navbar">
+      
         <nav class="nav main-nav">
           <RouterLink :to="{ name: 'serviceIntro' }">
             <p class="nav-text">About</p>
