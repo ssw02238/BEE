@@ -7,9 +7,10 @@
     <div class="total-nav">
       <div class="logo">
         <RouterLink :to="{ name: 'main' }">
-            <img src="@/assets/logo.png" width="100" class="pt-2">
+            <img src="@/assets/logo.png" width="150" class="pt-2">
         </RouterLink>
       </div>
+      
       <div class="navbar">
         <nav class="nav main-nav">
           <RouterLink :to="{ name: 'serviceIntro' }">
@@ -108,7 +109,6 @@ export default {
 }
 
 .main-nav {
-  background-color: black;
   color:#FABD02;
   width: 40%;
   /* 화면 비율에 따라 */ 
@@ -144,6 +144,10 @@ export default {
   margin-bottom: 0px;
   align-content: center;
   padding: 5px;
+}
+.total-nav {
+  display: flex;
+  /* justify-items: center; */
 }
 
 footer {
