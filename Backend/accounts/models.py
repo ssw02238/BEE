@@ -7,3 +7,7 @@ class User(AbstractUser):
     pass
 
 
+
+# ESG 성향 테스트 추가
+class Survey(models.Model):
+    pass
