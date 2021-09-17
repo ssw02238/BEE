@@ -5,12 +5,15 @@
 
     <!-- nav bar --> 
     <div class="total-nav">
-      <div class="logo">
+      <div class="navbar">
+        <div style="width: 20%; ">
+       <div class="logo">
         <RouterLink :to="{ name: 'main' }">
-            <img src="@/assets/logo.png" width="100" class="pt-2">
+            <img src="@/assets/logo.png" width="150" class="pt-2">
         </RouterLink>
       </div>
-      <div class="navbar">
+        </div>
+        <div style="width: 80%;display: contents;background-color:rgb(34, 33, 33)!important">
         <nav class="nav main-nav">
           <RouterLink :to="{ name: 'serviceIntro' }">
             <p class="nav-text">About</p>
@@ -32,6 +35,7 @@
             <p class="nav-text2">Sign in</p>
           </RouterLink>
         </nav>
+        </div>
       </div>
     </div>
 
@@ -97,17 +101,18 @@ export default {
   text-align: center;
 }
 #back {
-  background-image: url("BackgroundIMG.png"); 
+  background-image: url("BackgroundIMG.jpg"); 
 
   min-height: 100%;
   background-position:center;
   background-attachment: fixed;
   border:0;
   padding:0;
+  background-size: cover;
 }
 
 .main-nav {
-  background-color: black;
+  background-color: rgb(34, 33, 33);
   color:#FABD02;
   width: 40%;
   /* 화면 비율에 따라 */ 
@@ -119,10 +124,12 @@ export default {
 }
 
 .navbar {
-  background-color: rgb(34, 33, 33);
-  color:#FABD02;
+/*  background-color: rgb(34, 33, 33);
+  color:#FABD02;*/
+
 }
 .sub-nav {
+    color:#FABD02;
   width: 10%;
   /* 화면 비율에 따라 */
   height: 40px;
@@ -143,6 +150,14 @@ export default {
   margin-bottom: 0px;
   align-content: center;
   padding: 5px;
+}
+.total-nav {
+ 
+  /* justify-items: center; */
+}
+.nav-content{
+  background-color: rgb(34, 33, 33);
+  display: contents;
 }
 
 footer {
