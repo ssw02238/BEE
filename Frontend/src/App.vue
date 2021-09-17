@@ -4,41 +4,68 @@
   <div id="back">
 
     <!-- nav bar --> 
-    <div class="total-nav">
-      <div class="navbar">
-        <div style="width: 20%; ">
-       <div class="logo">
+    <div class="navbar">
+
+      <!-- logo --> 
+      <div class="logo">
         <RouterLink :to="{ name: 'main' }">
             <img src="@/assets/logo.png" width="150" class="pt-2">
         </RouterLink>
       </div>
-        </div>
-        <div style="width: 80%;display: contents;background-color:rgb(34, 33, 33)!important">
-        <nav class="nav main-nav">
-          <RouterLink :to="{ name: 'serviceIntro' }">
-            <p class="nav-text">About</p>
-          </RouterLink>
-          <RouterLink :to="{ name: 'esgRank' }">
-            <p class="nav-text">Rank</p>
-          </RouterLink>
-          <RouterLink :to="{ name: 'newsList' }">
-            <p class="nav-text">News</p>
-          </RouterLink>
-        </nav>
+
+      <!-- 메뉴바 --> 
+        <div class="total-nav" style="background-color:blue;">
         
-        <nav class="nav sub-nav">
-          <RouterLink :to="{ name: 'login' }">
-            <p class="nav-text2">Log in</p>
-          </RouterLink>
-          
-          <RouterLink :to="{ name: 'signup' }">
-            <p class="nav-text2">Sign in</p>
-          </RouterLink>
-        </nav>
+          <nav class="nav main-nav">
+            <RouterLink :to="{ name: 'serviceIntro' }">
+              <p class="nav-text">About</p>
+            </RouterLink>
+            <RouterLink :to="{ name: 'esgRank' }">
+              <p class="nav-text">Rank</p>
+            </RouterLink>
+            <RouterLink :to="{ name: 'newsList' }">
+              <p class="nav-text">News</p>
+            </RouterLink>
+          </nav>
+        
+          <nav class="nav sub-nav">
+            <!-- <RouterLink :to="{ name: 'login' }"> -->
+              <p class="nav-text2">Log in</p>
+            <!-- </RouterLink> -->
+            
+            <!-- <RouterLink :to="{ name: 'signup' }"> -->
+              <p class="nav-text2">Sign in</p>
+            <!-- </RouterLink> -->
+          </nav>
+
         </div>
+        
+    </div>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
-
+  </div>
+</div>
     <h2>hi</h2>
         <h2>hi</h2>
             <h2>hi</h2>
@@ -81,6 +108,7 @@
       <p class="text-center text-muted">김예찬 · 김윤서 · 방지환 · 이규정 · 정희진</p>
       <p class="text-center text-muted">Copyright 2021 BEE ( Best ESG Enterprise ) ®All Rights Reserved</p>
     </footer>
+
   </div>
 </template>
 
@@ -102,7 +130,6 @@ export default {
 }
 #back {
   background-image: url("BackgroundIMG.jpg"); 
-
   min-height: 100%;
   background-position:center;
   background-attachment: fixed;
@@ -110,10 +137,13 @@ export default {
   padding:0;
   background-size: cover;
 }
+.logo {
+  width: 15%;
+}
 
 .main-nav {
-  background-color: rgb(34, 33, 33);
-  color:#FABD02;
+  background-color:rgb(48, 38, 38);
+  border-radius: 20px;
   width: 40%;
   /* 화면 비율에 따라 */ 
   min-width: 20%;
@@ -123,19 +153,15 @@ export default {
   align-content: center;
 }
 
-.navbar {
-/*  background-color: rgb(34, 33, 33);
-  color:#FABD02;*/
-
-}
 .sub-nav {
-    color:#FABD02;
-  width: 10%;
+  background-color:rgb(48, 38, 38);
+  border-radius: 20px;
+  width: 15%;
   /* 화면 비율에 따라 */
   height: 40px;
   align-content: center;
-  justify-content: center;
-  margin-right: 15px;
+  justify-content: space-around;
+  margin-right: 60px;
 }
 
 .nav-text {
@@ -152,8 +178,9 @@ export default {
   padding: 5px;
 }
 .total-nav {
- 
-  /* justify-items: center; */
+  width: 80%;
+  display: contents;
+  color: #FABD02;
 }
 .nav-content{
   background-color: rgb(34, 33, 33);
