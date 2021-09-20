@@ -1,71 +1,10 @@
 <template>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
   <div id="back">
 
     <!-- nav bar --> 
-    <div class="navbar">
+    <nav-bar />
 
-      <!-- logo --> 
-      <div class="logo">
-        <RouterLink :to="{ name: 'main' }">
-            <img src="@/assets/logo.png" width="150" class="pt-2">
-        </RouterLink>
-      </div>
 
-      <!-- 메뉴바 --> 
-        <div class="total-nav" style="background-color:blue;">
-        
-          <nav class="nav main-nav">
-            <RouterLink :to="{ name: 'serviceIntro' }">
-              <p class="nav-text">About</p>
-            </RouterLink>
-            <RouterLink :to="{ name: 'esgRank' }">
-              <p class="nav-text">Rank</p>
-            </RouterLink>
-            <RouterLink :to="{ name: 'newsList' }">
-              <p class="nav-text">News</p>
-            </RouterLink>
-          </nav>
-        
-          <nav class="nav sub-nav">
-            <!-- <RouterLink :to="{ name: 'login' }"> -->
-              <p class="nav-text2">Log in</p>
-            <!-- </RouterLink> -->
-            
-            <!-- <RouterLink :to="{ name: 'signup' }"> -->
-              <p class="nav-text2">Sign in</p>
-            <!-- </RouterLink> -->
-          </nav>
-
-        </div>
-        
-    </div>
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
     <h2>hi</h2>
         <h2>hi</h2>
             <h2>hi</h2>
@@ -91,32 +30,19 @@
         <h2>hi</h2>
             <h2>hi</h2>
                 <h2>hi</h2>
-
-    <!-- footer --> 
-    <footer class="py-3">
-      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item me-2">
-          Home 
-        </li>
-        <li class="nav-item me-2">
-          About
-        </li>
-        <li class="nav-item">
-          My Page
-        </li>
-      </ul>
-      <p class="text-center text-muted">김예찬 · 김윤서 · 방지환 · 이규정 · 정희진</p>
-      <p class="text-center text-muted">Copyright 2021 BEE ( Best ESG Enterprise ) ®All Rights Reserved</p>
-    </footer>
-
+    <footer-bar />
   </div>
 </template>
 
 <script>
+import NavBar from './components/NavBar.vue';
+import FooterBar from './components/FooterBar.vue';
 
 export default {
   name: 'App',
   components: {
+    NavBar,
+    FooterBar,
   }
 }
 </script>
