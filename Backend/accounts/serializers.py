@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'email')
+        fields = ('email', 'password', 'nickname')
 
 class ProfileSerializer(serializers.ModelSerializer):
     # 유저의 스크랩 내용
