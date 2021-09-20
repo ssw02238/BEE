@@ -10,3 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('username', 'password', 'email')
 
+class ProfileSerializer(serializers.ModelSerializer):
+    # 유저의 스크랩 내용
+    pass
+
