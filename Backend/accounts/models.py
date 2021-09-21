@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
 from django.db import models 
+
 class UserManager(BaseUserManager):    
     
     use_in_migrations = True    
@@ -10,12 +11,13 @@ class UserManager(BaseUserManager):
             raise ValueError('must have user email')        
         user = self.model(            
             email = self.normalize_email(email),            
-            nickname = nickname        
+            nickname = nickname
         )        
         user.set_password(password)        
         user.save(using=self._db)        
         return user     
-    def create_superuser(self, email, nickname,password ):        
+        
+    def create_superuser(self, email, nickname,password):        
        
         user = self.create_user(            
             email = self.normalize_email(email),            
@@ -27,6 +29,8 @@ class UserManager(BaseUserManager):
         user.is_staff = True        
         user.save(using=self._db)        
         return user 
+
+
 class User(AbstractBaseUser,PermissionsMixin):    
     
     objects = UserManager()

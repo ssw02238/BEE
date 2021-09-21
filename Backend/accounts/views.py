@@ -1,4 +1,6 @@
 #status & object
+from accounts.serializers import UserSerializer
+from django.core.checks import messages
 from django.shortcuts import get_list_or_404, get_object_or_404, render, redirect, HttpResponse
 from django.conf import settings
 
@@ -9,24 +11,57 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 
 #model
-from .models import User
 from django.contrib.auth import get_user_model
+from .models import UserManager
 
 #Authentication & Authorization
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
+
 @api_view(['POST'])
 def signup(request):
-    #비밀번호 일치, 불일치
-    #중복된 이메일
-    pass
+    User = get_user_model()
+    #비밀번호 불일치 status code : 400
+    password = request.data.get('password')
+    password_confirmation = request.data.get('password_confirmation')
 
+    if password != password_confirmation:
+        return Response({'error': '비밀번호가 일치하지 않습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    #이메일 중복 status code : 409
+    email = request.data.get('email')
+    try:
+        exist_email = User.objects.get(email=email)
+    except:
+        exist_email = None
+    
+    if not exist_email is None:
+        return Response({'error': '이미 존재하는 email 입니다.'}, status=status.HTTP_409_CONFLICT)
+    
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        user = serializer.save()
+        user.set_password(password)
+        user.save()
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+
+#password 변경
 @api_view(['PUT'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def password(request):
+    #비밀번호 불일치 status code : 400
+    # password = request.data.get('password')
+    # password_confirmation = request.data.get('password_confirmation')
+
+    # if password != password_confirmation:
+    #     return Response({'error': '비밀번호가 일치하지 않습니다.'}, status=status.HTTP_400_BAD_REQUEST)
+
     pass
 
+#마이페이지 
 @api_view(['GET'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])

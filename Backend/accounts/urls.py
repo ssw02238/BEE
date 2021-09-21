@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path('signup/', views.signup),
+    #로그인
     path('api-token-auth/', obtain_jwt_token),
     path('password/', views.password),
     path('profile/', views.profile),

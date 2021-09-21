@@ -13,21 +13,21 @@ class Corporate(models.Model):
     scrap_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     today_cnt = models.IntegerField()
 
-class Environment:
+class Environment(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
     co2 = models.IntegerField()
     energy = models.IntegerField()
     news_score = models.FloatField()
     news_cnt = models.IntegerField()
 
-class Social:
+class Social(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
     average_term = models.FloatField()
     term_ratio = models.FloatField()
     news_score = models.FloatField()
     news_cnt = models.IntegerField()
     
-class Governance:
+class Governance(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
     board_ration = models.FloatField()
     board_independency = models.BooleanField()
