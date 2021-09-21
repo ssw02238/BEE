@@ -26,9 +26,9 @@
               </li>
 
               <li class="nav-item mx-3 px-3">
-                <a v-if="!isLogin" class="nav-link" data-toggle="modal" data-target="#myModal"
-                  >로그인</a>
-                <a v-if="isLogin" class="nav-link" @click.prevent="logout">로그아웃</a>
+                <a class="nav-link" data-toggle="modal" data-target="#myModal"
+                  >login</a>
+                <!-- <a v-if="isLogin" class="nav-link" @click.prevent="logout">로그아웃</a> -->
               </li>
             </ul>
           </div>
@@ -90,20 +90,14 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
 
 export default {
   data() {
     return {};
   },
   computed: {
-          ...mapGetters(['user', 'isLogin']),
   },
   methods: {
-      ...mapActions(['logout']),
-      logout() {
-      this.$store.dispatch('logout');
-    },
   },
 };
 </script>
