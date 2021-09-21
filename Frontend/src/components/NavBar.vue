@@ -14,6 +14,9 @@
           <RouterLink :to="{ name: 'serviceIntro' }">
             <p class="nav-text">About</p>
           </RouterLink>
+          <RouterLink :to="{ name: 'welcome' }">
+            <p class="nav-text">welcome</p>
+          </RouterLink>
           <RouterLink :to="{ name: 'esgRank' }">
             <p class="nav-text">Rank</p>
           </RouterLink>
@@ -71,11 +74,6 @@ export default {
   align-content: center;
 }
 
-.navbar {
-/*  background-color: rgb(34, 33, 33);
-  color:#FABD02;*/
-
-}
 .sub-nav {
     color:#FABD02;
   width: 10%;
@@ -99,15 +97,9 @@ export default {
   align-content: center;
   padding: 5px;
 }
-.total-nav {
- 
-  /* justify-items: center; */
-}
 .nav-content{
   background-color: rgb(34, 33, 33);
   display: contents;
 }
-
-
 p {  color:#FABD02;}
 </style>
