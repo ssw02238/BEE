@@ -1,90 +1,36 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container-fluid mx-5 px-5">
-        <div class="d-flex">
-              <RouterLink :to="{ name: 'main' }">
+    <div class="total-nav">
+      <div class="navbar">
+        <div style="width: 20%; ">
+       <div class="logo">
+        <RouterLink :to="{ name: 'main' }">
             <img src="@/assets/logo.png" width="150" class="pt-2">
         </RouterLink>
-
-        </div>
-
-        <div class="d-flex justify-content-between">
-          <div
-            class="collapse navbar-collapse"
-            style="ms-auto me-auto d-flex justify-content-between"
-          >
-            <ul class="navbar-nav mb-2 mb-lg-0">
-              <li class="nav-item mx-3 px-3">
-                <a class="nav-link" href="/serviceIntro">About</a>
-              </li>
-              <li class="nav-item mx-3 px-3">
-                <a class="nav-link" href="/esgRank">Rank</a>
-              </li>
-              <li class="nav-item mx-3 px-3">
-                <a class="nav-link" href="/newsList">News</a>
-              </li>
-              <li class="nav-item mx-3 px-3">
-                <a class="nav-link" href="/welcome">welcome</a>
-              </li>
-
-              <li class="nav-item mx-3 px-3">
-                <a v-if="!isLogin" class="nav-link" data-toggle="modal" data-target="#myModal"
-                  >로그인</a>
-                <a v-if="isLogin" class="nav-link" @click.prevent="logout">로그아웃</a>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
-    </nav>
-
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="myModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header d-flex justify-content-center">
-            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
-            <a class="modal-title" id="myModalLabel">로그인</a>
-          </div>
-          <div class="modal-body">
-            <button
-              type="button"
-              class="my-3"
-              style="
-                border: none;
-                border-right: 0px;
-                border-top: 0px;
-                boder-left: 0px;
-                boder-bottom: 0px;
-              "
-            >
-              <img src="@/assets/logo.png" alt=""/>
-            </button>
-            <button
-              type="button"
-              class="my-3"
-              style="
-                border: none;
-                border-right: 0px;
-                border-top: 0px;
-                boder-left: 0px;
-                boder-bottom: 0px;
-              "
-            >
-              <img src="@/assets/logo.png" alt=""  />
-            </button>
-          </div>
-          <div class="modal-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-          </div>
+        </div>
+        <div style="width: 80%;display: contents;background-color:rgb(34, 33, 33)!important">
+        <nav class="nav main-nav">
+          <RouterLink :to="{ name: 'serviceIntro' }">
+            <p class="nav-text">About</p>
+          </RouterLink>
+          <RouterLink :to="{ name: 'esgRank' }">
+            <p class="nav-text">Rank</p>
+          </RouterLink>
+          <RouterLink :to="{ name: 'newsList' }">
+            <p class="nav-text">News</p>
+          </RouterLink>
+        </nav>
+        
+        <nav class="nav sub-nav">
+          <RouterLink :to="{ name: 'login' }">
+            <p class="nav-text2">Log in</p>
+          </RouterLink>
+          
+          <RouterLink :to="{ name: 'signup' }">
+            <p class="nav-text2">Sign in</p>
+          </RouterLink>
+        </nav>
         </div>
       </div>
     </div>
@@ -93,34 +39,75 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
 
 export default {
   data() {
     return {};
   },
   computed: {
-          ...mapGetters(['user', 'isLogin']),
   },
   methods: {
-      ...mapActions(['logout']),
-      logout() {
-      this.$store.dispatch('logout');
-    },
   },
 };
 </script>
 
 <style>
 #app {
-
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: rgb(34, 33, 33);
 }
 
-.nav-link {
-  font-size: 15px;
+.main-nav {
+  background-color: rgb(34, 33, 33);
+  color:#FABD02;
+  width: 40%;
+  /* 화면 비율에 따라 */ 
+  min-width: 20%;
+  height: 40px;
+  /* position: fixed; */
+  justify-content: space-around;
+  align-content: center;
 }
+
+.navbar {
+/*  background-color: rgb(34, 33, 33);
+  color:#FABD02;*/
+
+}
+.sub-nav {
+    color:#FABD02;
+  width: 10%;
+  /* 화면 비율에 따라 */
+  height: 40px;
+  align-content: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.nav-text {
+  font-size: 1.2rem;
+  align-content: center;
+  margin-bottom: 0px;
+  padding: 5px;
+}
+
+.nav-text2 {
+  font-size: 0.9rem;
+  margin-bottom: 0px;
+  align-content: center;
+  padding: 5px;
+}
+.total-nav {
+ 
+  /* justify-items: center; */
+}
+.nav-content{
+  background-color: rgb(34, 33, 33);
+  display: contents;
+}
+
+
+p {  color:#FABD02;}
 </style>

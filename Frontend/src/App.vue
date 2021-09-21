@@ -3,31 +3,7 @@
 
     <!-- nav bar --> 
     <nav-bar />
-    <h2>hi</h2>
-        <h2>hi</h2>
-            <h2>hi</h2>
-                <h2>hi</h2>
-        <h2>hi</h2>
-            <h2>hi</h2>
-                <h2>hi</h2>
-        <h2>hi</h2>
-            <h2>hi</h2>
-                <h2>hi</h2>
-        <h2>hi</h2>
-            <h2>hi</h2>
-                <h2>hi</h2>
-        <h2>hi</h2>
-            <h2>hi</h2>
-                <h2>hi</h2>
-        <h2>hi</h2>
-            <h2>hi</h2>
-                <h2>hi</h2>
-        <h2>hi</h2>
-            <h2>hi</h2>
-                <h2>hi</h2>
-        <h2>hi</h2>
-            <h2>hi</h2>
-                <h2>hi</h2>
+    <router-view />
     <footer-bar />
   </div>
 </template>
@@ -35,7 +11,8 @@
 <script>
 import NavBar from './components/NavBar.vue';
 import FooterBar from './components/FooterBar.vue';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap';
 export default {
   name: 'App',
   components: {

@@ -10,8 +10,8 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-    path: '/main',
-    name: '/main',
+    path: '/',
+    name: 'main',
     component: main,
 },
 {
@@ -21,17 +21,17 @@ const routes = [
 },
 {
     path: '/serviceIntro',
-    name: '/serviceIntro',
+    name: 'serviceIntro',
     component: serviceIntro,
 },
 {
     path: '/esgRank',
-    name: '/esgRank',
+    name: 'esgRank',
     component: esgRank,
 },
 {
     path: '/newsList',
-    name: '/newsList',
+    name: 'newsList',
     component: newsList,
 },
 ]
