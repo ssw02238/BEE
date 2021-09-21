@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button type="button" class="btn btn-primary btn-lg">둘러보기</button>
     
   </div>
 </template>
@@ -8,8 +9,7 @@
 
 export default {
   name: 'welcome',
-  components: {
-  }
+
 }
 </script>
 

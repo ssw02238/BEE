@@ -1,6 +1,5 @@
 <template>
   <div>
-    
   </div>
 </template>
 
@@ -8,8 +7,6 @@
 
 export default {
   name: 'serviceIntro',
-  components: {
-  }
 }
 </script>
 

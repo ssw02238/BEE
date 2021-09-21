@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container-fluid mx-5 px-5">
         <div class="d-flex">
-                    <RouterLink :to="{ name: 'main' }">
+              <RouterLink :to="{ name: 'main' }">
             <img src="@/assets/logo.png" width="150" class="pt-2">
         </RouterLink>
 
@@ -23,6 +23,9 @@
               </li>
               <li class="nav-item mx-3 px-3">
                 <a class="nav-link" href="/newsList">News</a>
+              </li>
+              <li class="nav-item mx-3 px-3">
+                <a class="nav-link" href="/welcome">welcome</a>
               </li>
 
               <li class="nav-item mx-3 px-3">

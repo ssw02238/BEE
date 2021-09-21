@@ -4,6 +4,7 @@ import main from '../views/main.vue'
 import serviceIntro from '../views/Intro/serviceIntro.vue'
 import esgRank from '../views/Information/esgRank.vue'
 import newsList from '../views/Information/newsList.vue'
+import welcome from '../views/Intro/welcome.vue'
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,11 @@ const routes = [
     path: '/main',
     name: '/main',
     component: main,
+},
+{
+    path: '/welcome',
+    name: '/welcome',
+    component: welcome,
 },
 {
     path: '/serviceIntro',

@@ -3,8 +3,6 @@
 
     <!-- nav bar --> 
     <nav-bar />
-
-
     <h2>hi</h2>
         <h2>hi</h2>
             <h2>hi</h2>
