@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>여기다가 작성하시면 됩니다</h1>
+    <h1 style='color:red;'>여기다가 작성하시면 됩니다</h1>
   </div>
 </template>
 
@@ -11,5 +11,5 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 </style>

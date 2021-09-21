@@ -2,9 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import main from '../views/main.vue'
 import serviceIntro from '../views/Intro/serviceIntro.vue'
+import welcome from '../views/Intro/welcome.vue'
 import esgRank from '../views/Information/esgRank.vue'
 import newsList from '../views/Information/newsList.vue'
-import welcome from '../views/Intro/welcome.vue'
 
 Vue.use(VueRouter)
 

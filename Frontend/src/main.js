@@ -21,3 +21,7 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
+// welcome page
+import SequentialEntrance from 'vue-sequential-entrance'
+import 'vue-sequential-entrance/vue-sequential-entrance.css'
+Vue.use(SequentialEntrance);
