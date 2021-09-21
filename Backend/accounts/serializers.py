@@ -1,4 +1,3 @@
-from accounts.views import password
 from django.db.models import fields
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
@@ -18,10 +17,7 @@ class PasswordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('password')
+        fields = ('password',)
         read_only_fields = ('email', 'nickname',)
 
-class ProfileSerializer(serializers.ModelSerializer):
-    # 유저의 스크랩 내용
-    pass
 
