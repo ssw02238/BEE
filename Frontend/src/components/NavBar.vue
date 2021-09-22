@@ -26,15 +26,18 @@
         </nav>
         
         <nav class="nav sub-nav">
-          <RouterLink :to="{ name: 'login' }">
-            <p class="nav-text2">Log in</p>
-          </RouterLink>
-          
-          <RouterLink :to="{ name: 'signup' }">
-            <p class="nav-text2">Sign in</p>
-          </RouterLink>
+            <p id="show-modal" @click="showModal = true" class="nav-text2">Log in</p>
+         <modal v-if="showModal" @close="showModal = false">
+        <h3 slot="header">Login </h3>
+      </modal> 
+            <p id="show-modal2" @click="showModal2 = true" class="nav-text2">Sign up</p>
+         <modal2 v-if="showModal2" @close="showModal2 = false">
+        <h3 slot="header">Sign Up </h3>
+      </modal2> 
         </nav>
         </div>
+
+
       </div>
     </div>
 
@@ -42,15 +45,20 @@
 </template>
 
 <script>
+import Modal from "./login.vue"
 
+import Modal2 from "./signup.vue"
 export default {
-  data() {
-    return {};
+  components:{
+    Modal,Modal2
   },
-  computed: {
-  },
-  methods: {
-  },
+  data:function(){
+    return{
+      doItem:"",
+      showModal:false,
+      showModal2:false,
+    };
+  }
 };
 </script>
 
