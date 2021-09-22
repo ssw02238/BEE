@@ -16,7 +16,7 @@ const routes = [
 },
 {
     path: '/welcome',
-    name: '/welcome',
+    name: 'welcome',
     component: welcome,
 },
 {
