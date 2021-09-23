@@ -1,6 +1,5 @@
 #status & object
 from os import stat
-import corporates
 from django.core.checks import messages
 from django.shortcuts import get_list_or_404, get_object_or_404, render, redirect, HttpResponse
 from django.conf import settings
