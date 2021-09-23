@@ -35,18 +35,18 @@ class NewsSerializer(serializers.ModelSerializer):
 
 # 기업 Detail
 class CorporateDetailSerializer(serializers.ModelSerializer):
-    environment_evaluation = EnvironmentSerializer(read_only=True, source="environment_set")
-    social_evaluation = SocialSerializer(read_only=True, source="social_set")
-    governance_evaluation = GovernanceSerializer(read_only=True, source="governance_set")
-    news = NewsSerializer(read_only=True, many=True, source="news_set")
-    # scrap cnt 추가해야함
+    environment_evaluation = EnvironmentSerializer(many=True, read_only=True, source="environment_set")
+    social_evaluation = SocialSerializer(many=True, read_only=True, source="social_set")
+    governance_evaluation = GovernanceSerializer(many=True, read_only=True, source="governance_set")
+    news = NewsSerializer(many=True, read_only=True, source="news_set")
 
     class Meta:
         model = Corporate
-        fields = ('name', 'E_rating', 'S_rating', 'G_rating', 'ESG_rating',)
+        fields = '__all__'
 
 
-# 유사 기업 & 기업 검색 등 기업의 대략적인 정보만
+
+# ESG 랭킹, 유사 기업 & 기업 검색 등 기업의 대략적인 정보만
 class CorporateSerializer(serializers.ModelSerializer):
 
     class Meta:
