@@ -10,7 +10,7 @@ class Corporate(models.Model):
     G_rating = models.FloatField()
     ESG_rating = models.FloatField()
     scrap_cnt = models.IntegerField()
-    scrap_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    scrap_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='scrap_corporates')
     today_cnt = models.IntegerField()
 
 class Environment(models.Model):
