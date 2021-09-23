@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from corporates.seiralizers import CorporateSerializer
 # Create your views here.
 
 def esg_ranking(reqeust):
