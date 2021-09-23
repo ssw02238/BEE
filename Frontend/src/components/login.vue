@@ -11,16 +11,23 @@
 
               <div class="modal-body">
                 <slot name="body">
-                  default body2
+                  <form>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label"> Email id</label>
+                      <input type="id" class="form-control" id="idInput" v-model="credentials.email">
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1" v-model="credentials.password">
+                    </div>
+                  </form>
                 </slot>
               </div>
 
               <div class="modal-footer">
                 <slot name="footer">
-                  푸터
-                  <button class="modal-default-button" @click="$emit('close')">
-                    OK
-                  </button>
+                  <button type="submit" class="btn btn-warning" @click="[$emit('close'), login(credentials)]">로그인</button>
+                  <button type="submit" class="btn btn-danger" @click="[$emit('close')]">취소</button>
                 </slot>
               </div>
             </div>
@@ -30,7 +37,50 @@
 </template>
 
 <script>
-export default {};
+import axios from 'axios'
+export default {
+  name: 'login',
+  data: function() {
+    return {
+      credentials: {
+        email: null, 
+        password: null,
+      }
+    }
+  },
+  methods: {
+    setToken: function () {
+      const jwtToken = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${jwtToken}`
+      }
+      return config 
+    },
+    login: function () {
+      console.log('login 확인')
+      axios({
+        method:'post',
+        url:'http://127.0.0.1:8000/accounts/api-token-auth/',
+        data: this.credentials
+      })
+      .then(res => {
+        console.log('결과', res)
+        localStorage.setItem('jwt', res.data.token)
+        localStorage.setItem("email", res.data.email)
+        localStorage.setItem("nickname", res.data.nickname)
+        localStorage.setItem("password", res.data.password)
+        this.$emit('login')
+        this.$router.push({ name: 'main'})
+        this.$router.go()
+      })
+      .catch(err => {
+        this.$router.push({ name: 'signup'})
+        console.log('회원가입으로 이동')
+        console.log(err)
+      })
+    }
+  }
+};
 </script>
 <style>
 .modal-mask {
