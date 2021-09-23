@@ -12,16 +12,30 @@
 
               <div class="modal-body">
                 <slot name="body">
-                  default body2
+                  <form>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" v-model="credentials.email">
+                    </div>
+                    <div class="mb-3">
+                      <label for="nickname" class="form-label">nickname</label>
+                      <input type="text" class="form-control" id="nickname" v-model="credentials.nickname">
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1" v-model="credentials.password">
+                    </div>
+                    <div class="mb-3">
+                      <label for="passwordConfirmation" class="form-label">Password 확인</label>
+                      <input type="password" class="form-control" id="passwordConfirmation" v-model="credentials.password_confirmation">
+                    </div>
+                  </form>
                 </slot>
               </div>
 
               <div class="modal-footer">
                 <slot name="footer">
-                  default footer
-                  <button class="modal-default-button" @click="$emit('close')">
-                    OK
-                  </button>
+                  <button type="submit" class="btn btn-warning" @click="[signup(credentials),$emit('close')]">회원가입</button>
                 </slot>
               </div>
             </div>
@@ -31,7 +45,41 @@
 </template>
 
 <script>
-export default {};
+import axios from 'axios'
+export default {
+  name: 'signup',
+  data: function () {
+    return {
+      credentials: {
+        email: null,
+        nickname: null,
+        password: null,
+        password_confirmation: null,
+      }
+    }
+  },
+  methods: {
+    signup: function () {
+      axios({
+        method: 'post',
+        url: 'http://127.0.0.1:8000/api/accounts/signup',
+        data: this.credentials,
+      })
+        .then(res => {
+          console.log(res)
+          localStorage.setItem("email", res.data.email)
+          localStorage.setItem("nickname", res.data.nickname)
+          localStorage.setItem("password", res.data.password)
+
+          alert('회원가입에 성공하였습니다. 로그인을 진행해주세요')
+          this.$router.push({ name: 'main' })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
+}
 </script>
 <style>
 .modal-mask {

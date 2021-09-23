@@ -11,29 +11,30 @@
         </div>
         <div style="width: 80%;display: contents;background-color:rgb(34, 33, 33)!important">
         <nav class="nav main-nav">
-          <RouterLink :to="{ name: 'serviceIntro' }">
+          <RouterLink class="routerLink" :to="{ name: 'serviceIntro' }">
             <p class="nav-text">About</p>
           </RouterLink>
-          <RouterLink :to="{ name: 'welcome' }">
+          <RouterLink class="routerLink" :to="{ name: 'welcome' }">
             <p class="nav-text">welcome</p>
           </RouterLink>
-          <RouterLink :to="{ name: 'esgRank' }">
+          <RouterLink class="routerLink" :to="{ name: 'esgRank' }">
             <p class="nav-text">Rank</p>
           </RouterLink>
-          <RouterLink :to="{ name: 'newsList' }">
+          <RouterLink class="routerLink" :to="{ name: 'newsList' }">
             <p class="nav-text">News</p>
           </RouterLink>
         </nav>
         
         <nav class="nav sub-nav">
-            <p id="show-modal" @click="showModal = true" class="nav-text2">Log in</p>
+          <p id="show-modal" @click="showModal = true" class="nav-text2">Log in</p>
          <modal v-if="showModal" @close="showModal = false">
-        <h3 slot="header">Login </h3>
+        <h3 slot="header" style="color:#FABD02">Login </h3>
       </modal> 
-            <p id="show-modal2" @click="showModal2 = true" class="nav-text2">Sign up</p>
+
+        <p id="show-modal2" @click="showModal2 = true" class="nav-text2">Sign up</p>
          <modal2 v-if="showModal2" @close="showModal2 = false">
-        <h3 slot="header">Sign Up </h3>
-      </modal2> 
+            <h3 slot="header" style="color:#FABD02">Sign Up </h3>
+          </modal2> 
         </nav>
         </div>
 
@@ -50,7 +51,8 @@ import Modal from "./login.vue"
 import Modal2 from "./signup.vue"
 export default {
   components:{
-    Modal,Modal2
+    Modal,
+    Modal2
   },
   data:function(){
     return{
@@ -63,6 +65,9 @@ export default {
 </script>
 
 <style>
+.routerLink {
+  text-decoration: none;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
