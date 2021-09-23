@@ -23,8 +23,20 @@ export default {
 </script>
 
 <style>
+@font-face {
+    font-family: 'InfinitySans-BoldA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-BoldA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'InfinitySans-RegularA1';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -46,6 +58,7 @@ export default {
     }
   } */
 #back {
+  font-family: 'InfinitySans-RegularA1';
   background-image: url("BackgroundIMG.jpg"); 
   min-height: 100%;
   background-position:center;
@@ -58,51 +71,6 @@ export default {
   width: 15%;
 }
 
-.main-nav {
-  background-color:rgb(48, 38, 38);
-  border-radius: 20px;
-  width: 40%;
-  /* 화면 비율에 따라 */ 
-  min-width: 20%;
-  height: 40px;
-  /* position: fixed; */
-  justify-content: space-around;
-  align-content: center;
-}
-
-.sub-nav {
-  background-color:rgb(48, 38, 38);
-  border-radius: 20px;
-  width: 15%;
-  /* 화면 비율에 따라 */
-  height: 40px;
-  align-content: center;
-  justify-content: space-around;
-  margin-right: 60px;
-}
-
-.nav-text {
-  font-size: 1.2rem;
-  align-content: center;
-  margin-bottom: 0px;
-  padding: 5px;
-}
-
-.nav-text2 {
-  font-size: 0.9rem;
-  margin-bottom: 0px;
-  align-content: center;
-  padding: 5px;
-}
-.total-nav {
-  width: 80%;
-  display: contents;
-  color: #FABD02;
-}
-.nav-content{
-  background-color: rgb(34, 33, 33);
-  display: contents;
-}
 
 footer {
   background-color: #FABD02;

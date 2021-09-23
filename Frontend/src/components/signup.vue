@@ -14,7 +14,7 @@
                 <slot name="body">
                   <form>
                     <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Email</label>
+                      <label for="exampleInputEmail1" class="form-label">Email Id</label>
                       <input type="email" class="form-control" id="exampleInputEmail1" v-model="credentials.email">
                     </div>
                     <div class="mb-3">
@@ -36,6 +36,7 @@
               <div class="modal-footer">
                 <slot name="footer">
                   <button type="submit" class="btn btn-warning" @click="[signup(credentials),$emit('close')]">회원가입</button>
+                  <button type="submit" class="btn btn-danger" @click="[$emit('close')]">취소</button>
                 </slot>
               </div>
             </div>
@@ -62,7 +63,7 @@ export default {
     signup: function () {
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:8000/api/accounts/signup',
+        url: 'http://127.0.0.1:8000/accounts/signup/',
         data: this.credentials,
       })
         .then(res => {

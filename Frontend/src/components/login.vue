@@ -26,10 +26,8 @@
 
               <div class="modal-footer">
                 <slot name="footer">
-                  <button type="submit" class="btn btn-warning" @click="[$emit('close'), login]">로그인</button>
-                  <!-- <button class="modal-default-button" @click="$emit('close')"> -->
-                    <!-- OK
-                  </button> -->
+                  <button type="submit" class="btn btn-warning" @click="[$emit('close'), login(credentials)]">로그인</button>
+                  <button type="submit" class="btn btn-danger" @click="[$emit('close')]">취소</button>
                 </slot>
               </div>
             </div>
@@ -59,15 +57,21 @@ export default {
       return config 
     },
     login: function () {
+      console.log('login 확인')
       axios({
         method:'post',
-        url:'http://127.0.0.1:8000/api/accounts/api-token-auth/',
+        url:'http://127.0.0.1:8000/accounts/api-token-auth/',
         data: this.credentials
       })
       .then(res => {
+        console.log('결과', res)
         localStorage.setItem('jwt', res.data.token)
+        localStorage.setItem("email", res.data.email)
+        localStorage.setItem("nickname", res.data.nickname)
+        localStorage.setItem("password", res.data.password)
         this.$emit('login')
         this.$router.push({ name: 'main'})
+        this.$router.go()
       })
       .catch(err => {
         this.$router.push({ name: 'signup'})

@@ -9,7 +9,7 @@
         </RouterLink>
       </div>
         </div>
-        <div style="width: 80%;display: contents;background-color:rgb(34, 33, 33)!important">
+        <div style="width: 80%; display: contents">
         <nav class="nav main-nav">
           <RouterLink class="routerLink" :to="{ name: 'serviceIntro' }">
             <p class="nav-text">About</p>
@@ -25,20 +25,28 @@
           </RouterLink>
         </nav>
         
-        <nav class="nav sub-nav">
-          <p id="show-modal" @click="showModal = true" class="nav-text2">Log in</p>
-         <modal v-if="showModal" @close="showModal = false">
-        <h3 slot="header" style="color:#FABD02">Login </h3>
-      </modal> 
+        <nav class="nav sub-nav" v-if="isLogin">
 
-        <p id="show-modal2" @click="showModal2 = true" class="nav-text2">Sign up</p>
-         <modal2 v-if="showModal2" @close="showModal2 = false">
+          <p class="nav-text2">{{nickname}}</p>
+          <RouterLink @click.native="logout" to="#" class="routerLink">
+            <p class="nav-text2">로그아웃</p>
+          </RouterLink>
+        </nav>
+
+        <nav class="nav sub-nav" v-else>
+
+          <p id="show-modal" @click="showModal = true" class="nav-text2">Log in</p>
+          <modal v-if="showModal" @close="showModal = false">
+            <h3 slot="header" style="color:#FABD02">Login </h3>
+          </modal> 
+
+          <p id="show-modal2" @click="showModal2 = true" class="nav-text2">Sign up</p>
+          <modal2 v-if="showModal2" @close="showModal2 = false">
             <h3 slot="header" style="color:#FABD02">Sign Up </h3>
           </modal2> 
         </nav>
+
         </div>
-
-
       </div>
     </div>
 
@@ -56,10 +64,30 @@ export default {
   },
   data:function(){
     return{
+      isLogin: false,
+      nickname: null,
       doItem:"",
       showModal:false,
       showModal2:false,
     };
+  },
+  methods: {
+    logout: function () {
+      this.isLogin = false
+      this.$router.push({ name: 'welcome' })
+    },
+  },
+  async mounted() {
+    try {
+      const token = localStorage.getItem('jwt')
+      if (token) {
+        this.isLogin = true
+        this.nickname = localStorage.getItem('nickname')
+      }
+    }
+    catch (err) {
+      console.log(err)
+    }
   }
 };
 </script>
@@ -76,7 +104,6 @@ export default {
 }
 
 .main-nav {
-  background-color: rgb(34, 33, 33);
   color:#FABD02;
   width: 40%;
   /* 화면 비율에 따라 */ 
@@ -89,30 +116,35 @@ export default {
 
 .sub-nav {
     color:#FABD02;
-  width: 10%;
+  width: 15%;
+  align-content: center;
+  margin-right: 60px;
+  border-radius: 20px;
   /* 화면 비율에 따라 */
   height: 40px;
-  align-content: center;
-  justify-content: center;
-  margin-right: 15px;
+  justify-content: space-around;
 }
 
 .nav-text {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   align-content: center;
   margin-bottom: 0px;
   padding: 5px;
 }
 
 .nav-text2 {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   margin-bottom: 0px;
   align-content: center;
   padding: 5px;
 }
 .nav-content{
-  background-color: rgb(34, 33, 33);
   display: contents;
+}
+.total-nav {
+  width: 80%;
+  display: contents;
+  color: #FABD02;
 }
 p {  color:#FABD02;}
 </style>
