@@ -14,7 +14,7 @@
                   <form>
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label"> Email id</label>
-                      <input type="id" class="form-control" id="idInput" v-model="credentials.email">
+                      <input type="id" class="form-control" id="idInput" v-model="credentials.email" placeholder="name@example.com">
                     </div>
                     <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -60,18 +60,28 @@ export default {
       console.log('login 확인')
       axios({
         method:'post',
-        url:'http://127.0.0.1:8000/accounts/api-token-auth/',
+        url:'http://127.0.0.1:8000/api/accounts/api-token-auth/',
         data: this.credentials
       })
       .then(res => {
         console.log('결과', res)
         localStorage.setItem('jwt', res.data.token)
-        // localStorage.setItem("email", res.data.email)
-        // localStorage.setItem("nickname", res.data.nickname)
-        // localStorage.setItem("password", res.data.password)
         this.$emit('login')
         this.$router.push({ name: 'main'})
         this.$router.go()
+      })
+      .then(res => {
+        console.log(res)
+        axios({
+          method:'get',
+          url: 'http://127.0.0.1:8000/api/accounts/profile/',
+          headers: this.setToken()
+        })
+      .then(res => {
+        console.log('닉네임 받기', res.data)
+        localStorage.setItem('nickname', res.data.nickname)
+        localStorage.setItem('email', res.data.email)
+       })
       })
       .catch(err => {
         this.$router.push({ name: 'signup'})
