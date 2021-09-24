@@ -79,9 +79,10 @@ def profile(request):
     client_email = request.user.email
 
     client_object = get_object_or_404(get_user_model(), email=client_email)
-    corporates_serializer = CorporateSerializer(client.corporate_set.all(), many=True)
+    corporates_serializer = CorporateSerializer(client.scrap_corporates.all(), many=True)
     client_info = {
         'nickname': client_object.nickname,
+        'email': client_email,
         'corporates': corporates_serializer.data,
     }
     return JsonResponse(client_info, status=status.HTTP_200_OK)
