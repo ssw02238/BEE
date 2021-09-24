@@ -25,7 +25,7 @@
           <img src="@/assets/logo.png" class="card-img-top" alt="...">
           <div class="card-body">
             <h4 class="card-title">Information</h4>
-            <p class="card-text">기업 정보를 분석하여 BEE만의 ESG 점수를 안내합니다. <br> 해당 점수로 좋은 투자 가치를 실현해보세요!</p>
+            <p id="font" class="card-text">기업 정보를 분석하여 BEE만의 ESG 점수를 안내합니다. <br> 해당 점수로 좋은 투자 가치를 실현해보세요!</p>
           </div>
         </div>
 
@@ -33,7 +33,7 @@
           <img src="@/assets/logo.png" class="card-img-top" alt="...">
           <div class="card-body">
             <h4 class="card-title">ESG Test</h4>
-            <p class="card-text">나의 ESG MBTI는 무엇일까?<br> 성향 평가를 통해 투자 성향이 맞는 기업을 찾아보세요</p>
+            <p id="font" class="card-text">나의 ESG MBTI는 무엇일까?<br> 성향 평가를 통해 투자 성향이 맞는 기업을 찾아보세요</p>
           </div>
         </div>
 
@@ -41,7 +41,7 @@
           <img src="@/assets/logo.png" class="card-img-top" alt="...">
           <div class="card-body">
             <h4 class="card-title">Analysis</h4>
-            <p class="card-text">ESG  점수를 바탕으로 비슷한 유형의 기업을 분류해드립니다.</p>
+            <p id="font" class="card-text">ESG  점수를 바탕으로 비슷한 유형의 기업을 분류해드립니다.</p>
           </div>
         </div>
       </div> 
