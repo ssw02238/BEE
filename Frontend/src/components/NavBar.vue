@@ -74,6 +74,7 @@ export default {
   methods: {
     logout: function () {
       this.isLogin = false
+      // localStorage.removeItem('jwt')
       this.$router.push({ name: 'welcome' })
     },
   },
