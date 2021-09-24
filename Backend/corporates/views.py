@@ -12,6 +12,12 @@ from django.http import JsonResponse
 from .models import Corporate, News
 from .seiralizers import CorporateSerializer, CorporateDetailSerializer, NewsSerializer
 
+#Authentication & Authorization
+from rest_framework.decorators import authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+
+
 #기업 디테일 모든 정보를 다 넣어놓음
 @api_view(['GET'])
 def corp_detail(request, corp_id):
@@ -28,8 +34,29 @@ def corp_news(request, corp_id):
 #유사 기업
 @api_view(['GET'])
 def similar_corp(request, corp_id):
+    #추천 알고리즘 적용 후 작성
     pass
 
 @api_view(['POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
 def add_scrap(request, corp_id):
-    pass
+    corp = get_object_or_404(Corporate, pk=corp_id)
+
+    #스크랩 취소 (이미 스크랩한 유저)
+    if corp.scrap_user.filter(pk=request.user.pk).exists():
+        corp.scrap_user.remove(request.user)
+        return Response({'messages': '스크랩 취소'}, status=status.HTTP_204_OK)
+
+    #스크랩 추가
+    else:
+        corp.scrap_user.add(request.user)
+        return Response({'messages': '스크랩 성공'}, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def search(request, corp_name):
+    #404 띄울 것인지 고민하라
+    corp = get_object_or_404(Corporate, name=corp_name)
+    serializer = CorporateSerializer(corp)
+    return Response(serializer.data)
+

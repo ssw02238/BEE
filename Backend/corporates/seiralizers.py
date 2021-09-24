@@ -44,8 +44,6 @@ class CorporateDetailSerializer(serializers.ModelSerializer):
         model = Corporate
         fields = '__all__'
 
-
-
 # ESG 랭킹, 유사 기업 & 기업 검색 등 기업의 대략적인 정보만
 class CorporateSerializer(serializers.ModelSerializer):
 
