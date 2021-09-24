@@ -67,8 +67,6 @@ export default {
         console.log('결과', res)
         localStorage.setItem('jwt', res.data.token)
         this.$emit('login')
-        this.$router.push({ name: 'main'})
-        this.$router.go()
       })
       .then(res => {
         console.log(res)
@@ -81,6 +79,8 @@ export default {
         console.log('닉네임 받기', res.data)
         localStorage.setItem('nickname', res.data.nickname)
         localStorage.setItem('email', res.data.email)
+        this.$router.push({ name: 'main'})
+        this.$router.go()
        })
       })
       .catch(err => {

@@ -1,4 +1,3 @@
-
 from pathlib import Path
 import datetime
 
@@ -31,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'accounts',
     'boards',
     'corporates',
@@ -84,15 +83,15 @@ WSGI_APPLICATION = 'bee.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = { 
-	'default': { 
-    	'ENGINE': 'django.db.backends.mysql', 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'BEE',
-        'USER': 'admin', 
-        'PASSWORD': '1q2w3e4r5t!', 
-        'HOST': 'bee.cjkrtt0iwcwz.ap-northeast-2.rds.amazonaws.com', 
-        'PORT': '3306', 
-     } 
+        'USER': 'admin',
+        'PASSWORD': '1q2w3e4r5t!',
+        'HOST': 'bee.cjkrtt0iwcwz.ap-northeast-2.rds.amazonaws.com',
+        'PORT': '3306',
+    }
 }
 
 
@@ -142,7 +141,7 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#drf jwt setting
+# drf jwt setting
 # 주석 처리 안할 시 자격 인증 데이터가 제공되지 않았습니다...401 에러 나옴
 # REST_FRAMEWORK = {
 #     'DEFAULT_PERMISSION_CLASSES': (
@@ -151,11 +150,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     'DEFAULT_AUTHENTICATION_CLASSES': (
 #         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
 #     ),
-# }   
+# }
 
 REST_USE_JWT = True
 
-#JWT 부가적인 세팅
+# JWT 부가적인 세팅
 JWT_AUTH = {
     'JWT_VERIFY_EXPIRATION': True,
     'JWT_ALLOW_REFRESH': False,
