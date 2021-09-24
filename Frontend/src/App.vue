@@ -24,19 +24,13 @@ export default {
 
 <style>
 @font-face {
-    font-family: 'InfinitySans-BoldA1';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-BoldA1.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'InfinitySans-RegularA1';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-family: 'SLEIGothicTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SLEIGothicTTF.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 #app {
-  font-family: 'InfinitySans-RegularA1';
+  font-family: 'SLEIGothicTTF';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -58,7 +52,7 @@ export default {
     }
   } */
 #back {
-  font-family: 'InfinitySans-RegularA1';
+  font-family: 'SLEIGothicTTF';
   background-image: url("BackgroundIMG.jpg"); 
   min-height: 100%;
   background-position:center;
