@@ -9,19 +9,21 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 
 #model & serializing
-from .models import Corporate
-from .seiralizers import CorporateSerializer
+from .models import Corporate, News
+from .seiralizers import CorporateSerializer, CorporateDetailSerializer, NewsSerializer
 
-# Create your views here.
+#기업 디테일 모든 정보를 다 넣어놓음
 @api_view(['GET'])
 def corp_detail(request, corp_id):
-    corp = get_object_or_404(Corporate, corp_id=corp_id)
-    corp_serializer = CorporateSerializer(corp)
-    pass
-
+    corp = get_object_or_404(Corporate, id=corp_id)
+    corp_serializer = CorporateDetailSerializer(corp)
+    return Response(corp_serializer.data)
+    
 @api_view(['GET'])
 def corp_news(request, corp_id):
-    pass
+    news = get_list_or_404(News.objects.filter(corporate_id=corp_id))
+    serializers = NewsSerializer(news, many=True)
+    return Response(serializers.data)
 
 #유사 기업
 @api_view(['GET'])

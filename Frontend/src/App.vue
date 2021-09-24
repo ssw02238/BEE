@@ -65,7 +65,6 @@ export default {
   width: 15%;
 }
 
-
 footer {
   background-color: #FABD02;
 }

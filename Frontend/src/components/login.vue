@@ -66,9 +66,9 @@ export default {
       .then(res => {
         console.log('결과', res)
         localStorage.setItem('jwt', res.data.token)
-        localStorage.setItem("email", res.data.email)
-        localStorage.setItem("nickname", res.data.nickname)
-        localStorage.setItem("password", res.data.password)
+        // localStorage.setItem("email", res.data.email)
+        // localStorage.setItem("nickname", res.data.nickname)
+        // localStorage.setItem("password", res.data.password)
         this.$emit('login')
         this.$router.push({ name: 'main'})
         this.$router.go()
