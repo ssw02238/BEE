@@ -49,4 +49,4 @@ class CorporateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Corporate
-        fields = ('name', 'E_rating', 'S_rating', 'G_rating', 'ESG_rating',)
+        fields = ('name', 'pk', 'E_rating', 'S_rating', 'G_rating', 'ESG_rating',)
