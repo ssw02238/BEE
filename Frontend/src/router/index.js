@@ -5,6 +5,8 @@ import serviceIntro from '../views/Intro/serviceIntro.vue'
 import welcome from '../views/Intro/welcome.vue'
 import esgRank from '../views/Information/esgRank.vue'
 import newsList from '../views/Information/newsList.vue'
+import myPage from '../views/Mypage/mypage.vue'
+import test from '../views/Test/test.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +35,16 @@ const routes = [
     path: '/newsList',
     name: 'newsList',
     component: newsList,
+},
+{
+    path: '/myPage',
+    name: 'myPage',
+    component: myPage,
+},
+{
+    path: '/test',
+    name: 'test',
+    component: test,
 },
 ]
 

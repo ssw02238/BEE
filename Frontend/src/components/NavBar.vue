@@ -26,8 +26,10 @@
         </nav>
         
         <nav class="nav sub-nav" v-if="isLogin">
+          <RouterLink class="routerLink" :to="{ name: 'myPage' }">
+            <p class="nav-text2">{{nickname}}</p>
+          </RouterLink>
 
-          <p class="nav-text2">{{nickname}}</p>
           <RouterLink @click.native="logout" to="#" class="routerLink">
             <p class="nav-text2">로그아웃</p>
           </RouterLink>
@@ -74,7 +76,10 @@ export default {
   methods: {
     logout: function () {
       this.isLogin = false
-      // localStorage.removeItem('jwt')
+      localStorage.removeItem('jwt')
+      localStorage.removeItem('nickname')
+      console.log('logout 성공')
+
       this.$router.push({ name: 'welcome' })
     },
   },
@@ -116,7 +121,7 @@ export default {
 }
 
 .sub-nav {
-    color:#FABD02;
+  color:#FABD02;
   width: 15%;
   align-content: center;
   margin-right: 60px;

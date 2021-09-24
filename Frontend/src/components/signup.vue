@@ -15,7 +15,7 @@
                   <form>
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Email Id</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" v-model="credentials.email">
+                      <input type="email" class="form-control" id="exampleInputEmail1" v-model="credentials.email" placeholder="name@example.com">
                     </div>
                     <div class="mb-3">
                       <label for="nickname" class="form-label">nickname</label>
@@ -63,7 +63,7 @@ export default {
     signup: function () {
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:8000/accounts/signup/',
+        url: 'http://127.0.0.1:8000/api/accounts/signup/',
         data: this.credentials,
       })
         .then(res => {
@@ -77,7 +77,7 @@ export default {
           this.$router.go()
         })
         .catch(err => {
-          console.log(err)
+          console.log('axios 오류', err)
         })
     }
   }
