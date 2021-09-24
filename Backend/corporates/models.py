@@ -24,6 +24,7 @@ class Social(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
     average_term = models.FloatField()
     term_ratio = models.FloatField()
+    woman_ratio = models.FloatField()
     news_score = models.FloatField()
     news_cnt = models.IntegerField()
     
