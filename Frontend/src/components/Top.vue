@@ -1,5 +1,5 @@
 <template>
-<div class="row align">
+<div class="row align" style="background-color:black;" id="font">
     <!-- E table --> 
     <table class="table" style="width:30%;">
         <thead>
@@ -84,13 +84,16 @@
 <script>
 export default {
     name: 'Top',
-    
 }
 </script>
 
 <style scoped>
 .align {
     justify-content:space-around
+}
+.table {
+    background-color: black;
+    color:white;
 }
 
 </style>

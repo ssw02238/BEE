@@ -1,6 +1,6 @@
 <template>
-  <table class="table" style="font-size:15px; background-color:#ffdc74; text-align:center">
-      <thead>
+  <table class="table" style="font-size:15px; text-align:center">
+      <thead style="background-color:#1b1b1b; color:white; text-align:center">
         <tr>
           <th scope="col">Rank</th>
           <th scope="col">기업</th>

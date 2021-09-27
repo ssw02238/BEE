@@ -12,8 +12,8 @@
         <p class="card-text" style="font-size:1.5rem;">Best ESG Enterprises</p>
       </div>
       <div class="card-footer">
-        <RouterLink :to="{ name: 'serviceIntro' }">
-          <h4 style="text-decoration: none;">둘 러 보 기</h4>
+        <RouterLink :to="{ name: 'serviceIntro' }" class="routerLink">
+          <h2>이 용 하 기 </h2>
         </RouterLink>
       </div>
     </div>
@@ -57,6 +57,9 @@ export default {
 </script>
 
 <style scoped>
+.routerLink {
+  text-decoration: none;
+}
 h4, p{
   text-align: center;
 }
@@ -64,7 +67,7 @@ h4, p{
   background-color: black;
   color: #FABD02;
 }
-h4, h2 {
+h2 {
   color: #FABD02;
 }
 .card-title {

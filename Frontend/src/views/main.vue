@@ -8,11 +8,12 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
           <button class="accordion-button collapsed" id="font" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-            ESG TOP 1 {{ top }}  🔔
+            ESG TOP 1 {{ top }}
+            <span class="ms-5" style="color:yellow"><b>Click!</b></span>
           </button>
         </h2>
         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body" id="font">
+          <div class="accordion-body" id="font" style="background-color:black;">
             <Top />
           </div>
         </div>
@@ -86,7 +87,7 @@ h1, h3 {
   color:#FABD02;
 }
 .accordion-button {
-  background-color: #ffdc74;
-  color: black;
+  background-color: #1b1b1b;
+  color: white;
 }
 </style>
