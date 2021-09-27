@@ -10,14 +10,14 @@
       </div>
       <div class="carousel-inner" style="width:75%;margin: auto;">
         <div class="carousel-item active" style="display:block;">
-          <img src="@/assets/1.jpg" class="d-block w-100" alt="image1">
+          <img src="@/assets/carousel1.jpg" class="d-block w-100" alt="image1">
           <div class="carousel-caption d-none d-md-block">
             <h5>Environmental Responsibility</h5>
             <p id="font"> 환경 경영 <br> 에너지 사용량, 온실가스 배출량으로 기준으로 평가합니다. </p>
           </div>
         </div>
         <div class="carousel-item">
-          <img src="@/assets/2.jpg" class="d-block w-100" alt="image2">
+          <img src="@/assets/carousel2.jpg" class="d-block w-100" alt="image2">
           <div class="carousel-caption d-none d-md-block">
             <h5>Social Responsibility</h5>
             <p id="font">사회 책임 경영 <br> 평등한 고용 사회를 만들기 위해 임원 내 여성비율, 기간제 근로자 비율 등을 기준으로 평가합니다. </p>
@@ -58,6 +58,7 @@
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <div id="font"> 
+          불안정한 ESG 지표에 대한 기준을 확립하고 실시간 점수를 제공함으로써 투자자의 책임투자와 기업의 지속 가능 경영을 독려<hr>
           BEE(Best ESG Enterprise)는 누구나 쉽게 기업의 비재무적 정보를 통한 ESG 평가를 확인할 수 있는 서비스를 제공합니다. <br><br>
           <b>BEE와 함께 새로운 투자 가치를 실현해보세요!</b>
             </div>
@@ -110,6 +111,10 @@ img{
 .nav-link {
   background-color: #FABD02;
   color:black;
+}
+
+.carousel-item {
+  height:500px;
 }
 
 </style>
