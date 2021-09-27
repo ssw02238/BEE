@@ -10,7 +10,7 @@
       </div>
       <div class="carousel-inner" style="width:75%;margin: auto;">
         <div class="carousel-item active" style="display:block;">
-          <img src="@/assets/carousel1.jpg" class="d-block w-100" alt="image1">
+          <img src="@/assets/1.jpg" class="d-block w-100" alt="image1">
           <div class="carousel-caption d-none d-md-block">
             <h5>Environmental Responsibility</h5>
             <p id="font"> 환경 경영 <br> 에너지 사용량, 온실가스 배출량으로 기준으로 평가합니다. </p>
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img src="@/assets/1.jpg" class="d-block w-100" alt="image3">
+          <img src="@/assets/carousel1.jpg" class="d-block w-100" alt="image3">
           <div class="carousel-caption d-none d-md-block">
             <h5>Governance</h5>
             <p id="font">기업 지배 구조 <br> 투명한 지배구조를 갖춘 기업으로, 이사회 독립성, 배당 성향 등으로 평가합니다.  </p>

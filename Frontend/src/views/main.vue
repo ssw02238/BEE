@@ -115,7 +115,13 @@ export default {
           this.s2 = res.data.social_evaluation[0].average_term
           this.s3 = res.data.social_evaluation[0].term_ratio
           this.g1 = res.data.governance_evaluation[0].board_ration
-          this.g2 = res.data.governance_evaluation[0].board_independency
+          // this.g2 = res.data.governance_evaluation[0].board_independency
+          if (res.data.governance_evaluation[0].board_independency == true) {
+            this.g2 = '일치'
+          }
+          else{
+            this.g2 = '불일치'
+          }
           this.g3 = res.data.governance_evaluation[0].largest_shareholder
           this.g4 = res.data.governance_evaluation[0].salary_gap
           this.g5 = res.data.governance_evaluation[0].dividen_ratio   

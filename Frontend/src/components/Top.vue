@@ -91,7 +91,7 @@ export default {
         s2: Number,
         s3: Number,
         g1: Number,
-        g2: Number,
+        g2: String,
         g3: Number,
         g4: Number,
         g5: Number
