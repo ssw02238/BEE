@@ -14,6 +14,9 @@
           <RouterLink class="routerLink" :to="{ name: 'serviceIntro' }">
             <p class="nav-text">About</p>
           </RouterLink>
+          <RouterLink class="routerLink" :to="{ name: 'infoDetail' }">
+            <p class="nav-text">infoDetail</p>
+          </RouterLink>
           <RouterLink class="routerLink" :to="{ name: 'welcome' }">
             <p class="nav-text">welcome</p>
           </RouterLink>

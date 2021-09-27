@@ -7,6 +7,7 @@ import esgRank from '../views/Information/esgRank.vue'
 import newsList from '../views/Information/newsList.vue'
 import myPage from '../views/Mypage/mypage.vue'
 import test from '../views/Test/test.vue'
+import infoDetail from '../views/Information/infoDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,11 @@ const routes = [
     path: '/serviceIntro',
     name: 'serviceIntro',
     component: serviceIntro,
+},
+{
+    path: '/infoDetail',
+    name: 'infoDetail',
+    component: infoDetail,
 },
 {
     path: '/esgRank',
