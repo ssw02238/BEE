@@ -49,21 +49,21 @@
 
     <!-- ESG 성향 --> 
     <h3 class="my-4">{{ nickname }} 님의 ESG 성향</h3>  
-    <esgMbti/>
+    <Graphmain/>
   </div>
 </template>
 
 <script>
 import rankTable from '../components/table.vue'
 import Top from '../components/Top.vue'
-import esgMbti from '../components/esg_mbti.vue'
+import Graphmain from '../components/graph_main.vue'
 
 export default {
   name: 'main',
   components: {
     rankTable,
     Top,
-    esgMbti
+    Graphmain
   },
   data:function(){
     return{
