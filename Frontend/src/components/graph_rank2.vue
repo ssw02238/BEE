@@ -9,22 +9,18 @@
 <script>
 import VueApexCharts from 'vue-apexcharts'
 export default {
-    name: 'esg_mbti',
     components: {
         apexchart: VueApexCharts,
     },
     data() {
         return {
           series: [30, 29, 79],
+          
           chartOptions: {
-
+             labels: ['E Score', 'S Score', 'G Score'],
             fill: {
-                colors: ['#FABD02']
+                colors:['#F44336', '#E91E63', '#9C27B0']
             },
- 
-            // dataLabels: {
-            //   enabled: false,
-            // },
           },
         }
     }       
