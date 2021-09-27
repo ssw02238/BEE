@@ -25,8 +25,53 @@
     <hr style="color:gold; height:8px;">
 
     <!-- 뉴스 목록 --> 
+    <h2 class="corporate-name">News</h2>
+    <p class="ps-2">클릭 후 해당 뉴스를 확인해보세요</p>
+    <table class="table table-dark table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="font">
+          <th scope="row">1</th>
+          <td>삼성전자... 에너지 배출량 개선 결과 발표</td>
+          <td>2021-08-14</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr style="color:gold; height:8px;">
 
-
+    <!-- 유사기업 보여주기 --> 
+    <h2 class="corporate-name">Recommendations</h2>
+    
+      <div class="row recom">
+        <!-- <div v-for="(recommend, idx) in recommends" :key="idx" @click="goDetail(article.movieId)""> -->
+        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+          <div class="d-flex justify-content-between">
+            <h5 class="mb-1">현대 모비스 ✓8 </h5>
+            <small>스크랩 담기 ▲</small>
+          </div>
+        <p class="mb-1" style="color:black;">E: 60 S:40 G:10</p>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+          <div class="d-flex justify-content-between">
+            <h5 class="mb-1">현대 모비스 ✓8 </h5>
+            <small>스크랩 담기 ▲</small>
+          </div>
+        <p class="mb-1" style="color:black;">E: 60 S:40 G:10</p>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+          <div class="d-flex justify-content-between">
+            <h5 class="mb-1">현대 모비스 ✓8 </h5>
+            <small>스크랩 담기 ▲</small>
+          </div>
+        <p class="mb-1" style="color:black;">E: 60 S:40 G:10</p>
+      </a>
+    </div>
   </div>
 </template>
 
@@ -80,5 +125,12 @@ export default {
 .card {
   background-color:black;
 }
-
+.recom {
+  margin-bottom: 50px;
+  display:flex;
+  justify-content: space-around;
+}
+a {
+  width: 30%
+}
 </style>
