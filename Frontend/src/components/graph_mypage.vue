@@ -1,7 +1,7 @@
 <!-- 레이더 차트 -->
 <template>
     <div id="chart">
-        <apexchart type="radar" height="350" :options="chartOptions" :series="series"></apexchart>
+        <apexchart type="radar" height="250" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
 <script>

@@ -41,13 +41,14 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 export default {
   name: 'newsList',
   components: {
   },
   data() {
       return {
+        news: [],
         items: [
           { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
           { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
@@ -66,7 +67,34 @@ export default {
           { age: 29, first_name: 'Dick', last_name: 'Dunlap' }
         ]
       }
-    }
+    },
+    methods: {
+      setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+      // 오늘의 기업 출력 
+      getNews: function () {
+        axios({
+          method: 'get',
+          url: 'http://127.0.0.1:8000/api/boards/news/',
+          headers: this.setToken()
+        })
+          .then(res => {
+            this.news = res.data
+            console.log(this.news)
+          })
+          .catch(err => {
+            console.log('오류', err)
+          })
+      },
+  },
+  async mounted() {
+    this.getNews()
+  }
   
 }
 </script>
