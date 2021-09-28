@@ -12,6 +12,9 @@ class Corporate(models.Model):
     scrap_cnt = models.IntegerField()
     scrap_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='scrap_corporates')
     today_cnt = models.IntegerField()
+    first = models.IntegerField()
+    second = models.IntegerField()
+    third = models.IntegerField()
 
 class Environment(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
