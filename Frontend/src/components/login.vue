@@ -60,7 +60,7 @@ export default {
       console.log('login 확인')
       axios({
         method:'post',
-        url:'http://127.0.0.1:8000/api/accounts/api-token-auth/',
+        url:'http://127.0.0.1:8000/accounts/api-token-auth/',
         data: this.credentials
       })
       .then(res => {
@@ -72,7 +72,7 @@ export default {
         console.log(res)
         axios({
           method:'get',
-          url: 'http://127.0.0.1:8000/api/accounts/profile/',
+          url: 'http://127.0.0.1:8000/accounts/profile/',
           headers: this.setToken()
         })
       .then(res => {

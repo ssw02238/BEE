@@ -1,54 +1,82 @@
 <template>
-  <div>
-    <Profile />
-<div class="row">
-  <div class="col">
-<!-- 테이블 시작 -->
-<table class="table table-dark" style="width: 500px;margin-left:25%;">
-  <thead>
-    <tr>
-      <th scope="col">No</th>
-      <th scope="col">기사 제목</th>
+  <div class="container">
+    <div class="mb-5">
+      <Profile />
+    </div>
+  <div class="mypage row">
+        <!-- 테이블 시작 -->
+        <table class="table" style="width: 20%;margin: auto">
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">스크랩 기업</th>
 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>ESG 경영 논란 ~~~ </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>ESG 경영 논란 ~~~ </td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>ESG 경영 논란 ~~~ </td>
-    </tr>
-  </tbody>
-</table>
-  </div>
-<!-- 테이블 종료 -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td> 삼성전자 </td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td> 올리브영 </td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td> 삼성 디스플레이 </td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td> 삼성전자 </td>
+            </tr>
+          </tbody>
+        </table>
+      <!-- 테이블 종료 -->
+
+      <!-- 추천 기업 --> 
+      <table class="table" style="width: 20%;margin: auto">
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">추천 기업</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td> 삼성전자 </td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td> LG 디스플레이 </td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td> CJ ENM </td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td> 녹십자 </td>
+            </tr>
+          </tbody>
+        </table>
   
-  <!-- ESG Chart 시작 -->
-  <div class="col">
-<div class="card" style="width: 500px;margin-right:20%;" >
-  <div class="card-body">
-    <h5 class="card-title"> ESG 성향 </h5>
-    <p class="card-text">일단 뭐 쓸거 없어서 암거나 써놨음 </p>
-        <Graph/>
+      <!-- ESG Chart 시작 -->
+        <div class="card" style="width: 30%;margin: auto" >
+          <div class="card-body">
+            <h5 class="card-title"> ESG 성향 </h5>
+            <p class="card-text">일단 뭐 쓸거 없어서 암거나 써놨음 </p>
+                <Graph/>
+          </div>
+        </div>
+        <!-- ESG Chart 종료 -->
   </div>
-</div>
-  </div>
-    <!-- ESG Chart 종료 -->
-</div>
 
     <RouterLink class="routerLink" :to="{ name: 'test' }">
       <p>ESG Mbti</p>
     </RouterLink>
 
-    <div class="row">
-</div>
   </div>
 </template>
 
@@ -61,14 +89,19 @@ export default {
   components: {
     Profile,Graph
   },
-  }
-          
-     
-    
+  }  
 </script>
 
 <style scoped>
 th,td{
     text-align: center;
+}
+.mypage {
+  display:flex;
+  justify-content: space-around;
+}
+.table {
+  color:white;
+  background-color:black;
 }
 </style>
