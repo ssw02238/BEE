@@ -10,27 +10,14 @@
           <th scope="col">총점</th>
         </tr>
       </thead>
-      <!-- <tbody v-for="(article, idx) in paginatedArticles" :key="idx" @click="goDetail(article.movieId)" style="background-color:#9d9b9a;">
+      <tbody v-for="(corporate, idx) in rank" :key="idx" style="background-color:black; text-align:center">
         <tr>
-          <th>{{ 10*(page-1) + idx+1 }}</th>
-          <th>{{ article.movietitle }}</th>
-          <th>{{ article.content }}</th>
-          <th v-if="article.rating === 5">★★★★★</th>
-          <th v-else-if="4 <= article.rating">★★★★☆</th>
-          <th v-else-if="3 <= article.rating">★★★☆☆</th>
-          <th v-else-if="2 <= article.rating">★★☆☆☆</th>
-          <th v-else-if="1 <= article.rating">★☆☆☆☆</th>
-          <th v-else></th>
-        </tr>
-      </tbody> -->
-      <tbody style="background-color:white; text-align:center">
-        <tr>
-          <th>1번여</th>
-          <th>삼성전자</th>
-          <th>15</th>
-          <th>30</th>
-          <th>25</th>
-          <th>75</th>
+          <th>{{ idx+1 }}</th>
+          <th>{{ corporate.name }}</th>
+          <th>{{ corporate.E_rating }}</th>
+          <th>{{ corporate.S_rating }}</th>
+          <th>{{ corporate.G_rating }}</th>
+          <th>{{ corporate.ESG_rating }}</th>
 
         </tr>
       </tbody>
@@ -41,6 +28,9 @@
 <script>
 export default {
     name: 'table',
+    props: {
+      rank: Array,
+    }
 
 }
 </script>

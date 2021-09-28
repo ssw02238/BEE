@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="table table-dark" style="width: 75%;margin:auto;">
+    <table class="table" style="width: 75%;margin:auto;">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -45,27 +45,9 @@ export default {
   name: 'newsList',
   components: {
   },
-<<<<<<< HEAD
   data() {
       return {
         news: [],
-        items: [
-          { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-          { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-          {
-            age: 89,
-            first_name: 'Geneva',
-            last_name: 'Wilson',
-            _rowVariant: 'danger'
-          },
-          {
-            age: 40,
-            first_name: 'Thor',
-            last_name: 'MacDonald',
-            _cellVariants: { age: 'info', first_name: 'warning' }
-          },
-          { age: 29, first_name: 'Dick', last_name: 'Dunlap' }
-        ]
       }
     },
     methods: {
@@ -76,7 +58,7 @@ export default {
       }
       return config
     },
-      // 오늘의 기업 출력 
+      // 뉴스 리스트 출력 
       getNews: function () {
         axios({
           method: 'get',
@@ -91,20 +73,36 @@ export default {
             console.log('오류', err)
           })
       },
+      // scrap 하기 
+      getScrap() {
+        axios({
+          method: 'post',
+          url: 'http://127.0.0.1:8000/api/corporates/${corp_id}/scrap/',
+          headers: this.setToken()
+        })
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log('오류', err)
+          })
+      }
   },
   async mounted() {
     this.getNews()
   }
-=======
- 
-    
->>>>>>> c306945efb03f1a1eb22138a7b795bfafeda2c82
-  
 }
 </script>
 
 <style>
 th,td{
     text-align: center;
+}
+.table {
+  color:white;
+  background-color:black;
+}
+td {
+  font-family: 'Pretendard-Regular';
 }
 </style>

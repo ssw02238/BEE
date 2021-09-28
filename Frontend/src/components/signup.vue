@@ -63,14 +63,11 @@ export default {
     signup: function () {
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:8000/api/accounts/signup/',
+        url: 'http://127.0.0.1:8000/accounts/signup/',
         data: this.credentials,
       })
         .then(res => {
           console.log(res)
-          // localStorage.setItem("email", res.data.email)
-          // localStorage.setItem("nickname", res.data.nickname)
-          // localStorage.setItem("password", res.data.password)
 
           alert('회원가입에 성공하였습니다. 로그인을 진행해주세요')
           this.$router.push({ name: 'main' })

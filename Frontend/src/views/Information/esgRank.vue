@@ -21,7 +21,7 @@
 
     <!-- 랭킹 테이블 시작 -->
       <div class="card-body" style="background-color: black;">
-              <Table/>
+        <Table/>
       </div>
     <!-- 랭킹 테이블 끝 -->
     </div>
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-
+import axios from 'axios'
 
 import Table from '../../components/table.vue'
 import Graph from '../../components/graph_rank.vue'
@@ -60,6 +60,37 @@ export default {
   name: 'esgRank',
   components: {
   Table,Graph,Graph2,Scrap
+  },
+  data() {
+    return{
+      esg_rank: [],
+    }
+  },
+  methods: {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+    // esg rank 조회 
+    getRank: function () {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/api/boards/esg-ranking/',
+        headers: this.setToken()
+      })
+        .then(res => {
+          console.log('esg ranking 정보', res.data)
+        })
+        .catch(err => {
+          console.log('오류', err)
+        })
+    },
+  },
+  async mounted() {
+    this.getRank()
   }
 }
 </script>
