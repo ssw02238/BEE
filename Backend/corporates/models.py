@@ -12,6 +12,9 @@ class Corporate(models.Model):
     scrap_cnt = models.IntegerField()
     scrap_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='scrap_corporates')
     today_cnt = models.IntegerField()
+    first = models.IntegerField()
+    second = models.IntegerField()
+    third = models.IntegerField()
 
 class Environment(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
@@ -30,7 +33,7 @@ class Social(models.Model):
     
 class Governance(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
-    board_ration = models.FloatField()
+    board_ratio = models.FloatField()
     board_independency = models.BooleanField()
     salary_gap = models.FloatField()
     dividen_ratio = models.FloatField()
@@ -48,3 +51,5 @@ class News(models.Model):
     publisher = models.CharField(max_length=50)
     keyword = models.CharField(max_length=20)
     category = models.CharField(max_length=10)
+
+

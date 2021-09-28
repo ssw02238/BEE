@@ -12,7 +12,7 @@
         <p class="card-text" style="font-size:1.5rem;">Best ESG Enterprises</p>
       </div>
       <div class="card-footer">
-        <RouterLink :to="{ name: 'serviceIntro' }" class="routerLink">
+        <RouterLink :to="{ name: 'main' }" class="routerLink">
           <h2>이 용 하 기 </h2>
         </RouterLink>
       </div>

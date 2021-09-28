@@ -86,3 +86,17 @@ def profile(request):
         'corporates': corporates_serializer.data,
     }
     return JsonResponse(client_info, status=status.HTTP_200_OK)
+
+
+# mbti 점수 저장 
+@api_view(['POST'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def mbti(request):
+    User = get_user_model()
+    client = request.user
+    client.e_score = request.data.get('e_score')
+    client.s_score = request.data.get('s_score')
+    client.g_score = request.data.get('g_score')
+    client.save()
+

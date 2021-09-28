@@ -49,6 +49,10 @@ class User(AbstractBaseUser,PermissionsMixin):
     is_superuser = models.BooleanField(default=False)    
     is_staff = models.BooleanField(default=False)     
     date_joined = models.DateTimeField(auto_now_add=True)     
+    # mbti 필드 
+    e_score = models.FloatField(default = 0)
+    s_sore = models.FloatField(default = 0)
+    g_score = models.FloatField(default = 0)
     USERNAME_FIELD = 'email'    
     REQUIRED_FIELDS = ['nickname']
 
