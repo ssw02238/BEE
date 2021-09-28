@@ -8,7 +8,7 @@
       <div class="row g-0">
 
         <div class="col-md-4">
-          <apexchart class="chart mt-5" type="radar" height="350" :options="chartOptions" :series="series"></apexchart>
+          <Graph/>
         </div>
 
         <div class="col-md-8">
@@ -77,35 +77,14 @@
 
 <script>
 import Top from '../../components/Top.vue'
-import VueApexCharts from 'vue-apexcharts'
+import Graph from '../../components/graph_infodetail.vue' 
 
 export default {
   name: 'infoDetail',
   components: {
-    apexchart: VueApexCharts,
+    Graph,
     Top,
-  },
-  data () {
-      return {
-        chartOptions: {
-          chart: {
-            id: 'vuechart-example'
-          },
-          xaxis: {
-            categories: ["Environment", "Social", "Governance",]
-          }
-        },
-        series: [{
-          name: 'series-1',
-          data: [60, 10, 45,]
-        }]
-      }
-    },
-    methods: {
-      open (link) {
-        this.$electron.shell.openExternal(link)
-      }
-    }
+  },  
 }
 </script>
 

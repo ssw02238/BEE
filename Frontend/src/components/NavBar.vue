@@ -2,14 +2,16 @@
   <div>
     <div class="total-nav">
       <div class="navbar">
-        <div style="width: 20%; ">
+        <div style="width: 20%;">
        <div class="logo">
         <RouterLink :to="{ name: 'main' }">
             <img src="@/assets/logo.png" width="150" class="pt-2">
         </RouterLink>
       </div>
         </div>
+
         <div style="width: 80%; display: contents">
+
         <nav class="nav main-nav">
           <RouterLink class="routerLink" :to="{ name: 'serviceIntro' }">
             <p class="nav-text">About</p>
@@ -28,6 +30,7 @@
           </RouterLink>
         </nav>
         
+
         <nav class="nav sub-nav" v-if="isLogin">
           <RouterLink class="routerLink" :to="{ name: 'myPage' }">
             <p class="nav-text2">{{nickname}}</p>
@@ -50,7 +53,6 @@
             <h3 slot="header" style="color:#FABD02">Sign Up </h3>
           </modal2> 
         </nav>
-
         </div>
       </div>
     </div>

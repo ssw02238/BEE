@@ -36,9 +36,7 @@
   <div class="card-body">
     <h5 class="card-title"> ESG 성향 </h5>
     <p class="card-text">일단 뭐 쓸거 없어서 암거나 써놨음 </p>
-        <div id="chart">
-        <apexchart type="radar" height="350" :options="chartOptions" :series="series"></apexchart>
-      </div>
+        <Graph/>
   </div>
 </div>
   </div>
@@ -55,35 +53,14 @@
 </template>
 
 <script>
- import VueApexCharts from 'vue-apexcharts'
 import Profile from '../../components/Profile.vue';
+import Graph from '../../components/graph_mypage.vue';
+
 export default {
   name: 'mypage',
   components: {
-    Profile,
-    apexchart: VueApexCharts,
+    Profile,Graph
   },
-    data () {
-      return {
-        chartOptions: {
-          chart: {
-            id: 'vuechart-example'
-          },
-          xaxis: {
-            categories: ["Environment", "Social", "Governance",]
-          }
-        },
-        series: [{
-          name: 'series-1',
-          data: [60, 10, 45,]
-        }]
-      }
-    },
-    methods: {
-      open (link) {
-        this.$electron.shell.openExternal(link)
-      }
-    }
   }
           
      
