@@ -9,4 +9,6 @@ urlpatterns = [
     path('api-token-auth/', obtain_jwt_token),
     path('password/', views.password),
     path('profile/', views.profile),
+    # mbti 점수 기록 
+    path('mbti/', views.mbti)
 ]
