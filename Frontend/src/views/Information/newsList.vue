@@ -35,8 +35,7 @@
     </tr>
   </tbody>
 </table>
-
-    <b-table hover :items="items"></b-table>
+ 
   </div>
 </template>
 
@@ -46,6 +45,7 @@ export default {
   name: 'newsList',
   components: {
   },
+<<<<<<< HEAD
   data() {
       return {
         news: [],
@@ -95,6 +95,10 @@ export default {
   async mounted() {
     this.getNews()
   }
+=======
+ 
+    
+>>>>>>> c306945efb03f1a1eb22138a7b795bfafeda2c82
   
 }
 </script>
