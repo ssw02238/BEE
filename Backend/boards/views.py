@@ -64,7 +64,7 @@ def g_ranking(reqeust):
 @permission_classes([IsAuthenticated])
 def bestcorp(request):
     corp = get_object_or_404(Corporate.objects.order_by('-ESG_rating')[:1])
-    serializer = CorporateSerializer(corp)
+    serializer = CorporateDetailSerializer(corp)
     
     return Response(serializer.data)
     
