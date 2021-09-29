@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="table table-dark" style="width: 75%;margin:auto;">
+    <table class="table" style="width: 75%;margin:auto;">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -35,44 +35,74 @@
     </tr>
   </tbody>
 </table>
-
-    <b-table hover :items="items"></b-table>
+ 
   </div>
 </template>
 
 <script>
-
+import axios from 'axios'
 export default {
   name: 'newsList',
   components: {
   },
   data() {
       return {
-        items: [
-          { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-          { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-          {
-            age: 89,
-            first_name: 'Geneva',
-            last_name: 'Wilson',
-            _rowVariant: 'danger'
-          },
-          {
-            age: 40,
-            first_name: 'Thor',
-            last_name: 'MacDonald',
-            _cellVariants: { age: 'info', first_name: 'warning' }
-          },
-          { age: 29, first_name: 'Dick', last_name: 'Dunlap' }
-        ]
+        news: [],
       }
-    }
-  
+    },
+    methods: {
+      setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+      // 뉴스 리스트 출력 
+      getNews: function () {
+        axios({
+          method: 'get',
+          url: 'http://127.0.0.1:8000/api/boards/news/',
+          headers: this.setToken()
+        })
+          .then(res => {
+            this.news = res.data
+            console.log(this.news)
+          })
+          .catch(err => {
+            console.log('오류', err)
+          })
+      },
+      // scrap 하기 
+      getScrap() {
+        axios({
+          method: 'post',
+          url: 'http://127.0.0.1:8000/api/corporates/${corp_id}/scrap/',
+          headers: this.setToken()
+        })
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.log('오류', err)
+          })
+      }
+  },
+  async mounted() {
+    this.getNews()
+  }
 }
 </script>
 
 <style>
 th,td{
     text-align: center;
+}
+.table {
+  color:white;
+  background-color:black;
+}
+td {
+  font-family: 'Pretendard-Regular';
 }
 </style>

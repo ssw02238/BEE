@@ -51,3 +51,5 @@ class News(models.Model):
     publisher = models.CharField(max_length=50)
     keyword = models.CharField(max_length=20)
     category = models.CharField(max_length=10)
+
+
