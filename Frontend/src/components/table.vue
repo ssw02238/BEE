@@ -14,10 +14,10 @@
         <tr id="font">
           <th>{{ idx+1 }}</th>
           <th>{{ corporate.name }}</th>
-          <th>{{ corporate.E_rating }}</th>
-          <th>{{ corporate.S_rating }}</th>
-          <th>{{ corporate.G_rating }}</th>
-          <th>{{ corporate.ESG_rating }}</th>
+          <th>{{ corporate.E_rating.toFixed(2) }}</th>
+          <th>{{ corporate.S_rating.toFixed(2) }}</th>
+          <th>{{ corporate.G_rating.toFixed(2) }}</th>
+          <th>{{ corporate.ESG_rating.toFixed(2) }}</th>
 
         </tr>
       </tbody>
