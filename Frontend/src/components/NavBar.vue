@@ -7,7 +7,7 @@
       <RouterLink :to="{ name: 'main' }">
           <img src="@/assets/logo.png" width="170" class="pt-2">
       </RouterLink>
-    </div>
+    </div >
 
     <!-- 글씨만 있는 네브 --> 
     <div class="letter-nav">
