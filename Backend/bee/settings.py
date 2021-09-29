@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-x89i0(zt2-8z6iy-*f_r)q39^%mrmsf%9o7(_gk*#ykq!@x^wi'
-#deploy
+# deploy
 # SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'bee.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#password를 어떻게 숨길까...
+# password를 어떻게 숨길까...
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
