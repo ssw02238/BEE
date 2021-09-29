@@ -19,7 +19,7 @@ export default {
           chartOptions: {
              labels: ['E Score', 'S Score', 'G Score'],
             fill: {
-                colors:['#F44336', '#E91E63', '#9C27B0']
+                colors:['#008ffb', '#00E396', '#FEB019']
             },
           },
         }

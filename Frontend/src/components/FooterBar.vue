@@ -41,6 +41,7 @@ export default {
 
 <style scoped>
   .routerLink {
-    color:black
+    color:black;
+    text-decoration: none;
   }
 </style>

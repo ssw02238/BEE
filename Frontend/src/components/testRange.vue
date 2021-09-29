@@ -1,6 +1,6 @@
 <template>
   <div>
- <form v-on:submit="submitForm">
+ <!-- <form> -->
     <!-- 문제 1번 -->
     <label for="customRange1" class="form-label1 question">Q 1. 나는 제로 웨이스트를 실천하는 기업에 대해 2개 이상 알고 있다.</label>
     
@@ -207,7 +207,7 @@
     </b-form-group>
 
   <button @click="submitForm" class="btn btn-lg btn-block mt-5 mb-5" type="submit" style="width:100%; background-color:#FABD01">제출하기</button>
- </form>
+ <!-- </form> -->
 
   </div>
 
@@ -230,11 +230,11 @@ export default {
         selected7: '',
         selected8: '',
         selected9: '',
-        // esg_score:{
+        esg_score:{
           e_score:parseInt(this.selected1) + parseInt(this.selected4)+ parseInt(this.selected7),
           s_score:parseInt(this.selected2) + parseInt(this.selected5)+ parseInt(this.selected8),
           g_score:parseInt(this.selected3) + parseInt(this.selected6)+ parseInt(this.selected9)
-        // }
+        }
       }
     },
     methods: {
@@ -246,11 +246,12 @@ export default {
       return config
     },
     submitForm: function () {
+      const config = this.setToken()
      axios({
         method: 'post',
         url: 'http://127.0.0.1:8000/accounts/mbti/',
-        data: [this.e_score,this.s_score,this.g_score],
-        headers: this.setToken()
+        data: this.esg_score,
+        headers: config
       })
         .then(res => {
           console.log('요청 제대로', res) 
