@@ -2,7 +2,7 @@
 <template>
     <div id="chart">
       <p class="card-text" style="font-size:1.5rem;">데이터 분석 그래프</p>
-        <apexchart style="color:#FABD02;" class="chart" type="donut" width="300" height="200" :options="chartOptions" :series="series"></apexchart>
+        <apexchart style="color:#FABD02;" class="chart" type="donut" height="200" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
 
