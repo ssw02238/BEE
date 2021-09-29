@@ -3,7 +3,7 @@
     <div id="chart">
         
       <p class="card-text" style="font-size:1.5rem;">스크랩 순위</p>
-<table class="table table" style="width: 300px;">
+<table class="table table" style="width:150px">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -34,7 +34,7 @@ export default {
 }
 </script>
 <style scoped>
-th,td{
-    color: yellow;
+th, td {
+  color:#f3c438
 }
 </style>

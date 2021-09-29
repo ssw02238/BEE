@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody v-for="(corporate, idx) in rank" :key="idx" style="background-color:black; text-align:center">
-        <tr>
+        <tr id="font">
           <th>{{ idx+1 }}</th>
           <th>{{ corporate.name }}</th>
           <th>{{ corporate.E_rating }}</th>

@@ -2,7 +2,7 @@
 <template>
     <div id="chart">
       <p class="card-text" style="font-size:1.5rem;">평균 점수</p>
-        <apexchart style="color:#FABD02;" class="chart" type="bar" width="300" height="200" :options="chartOptions" :series="series"></apexchart>
+        <apexchart style="color:#FABD02;" class="chart" type="bar" height="200" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
 

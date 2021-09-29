@@ -130,7 +130,6 @@ export default {
   width: 15%;
   align-content: center;
   margin-right: 60px;
-  border-radius: 20px;
   /* 화면 비율에 따라 */
   height: 40px;
   justify-content: space-around;
@@ -153,9 +152,11 @@ export default {
   display: contents;
 }
 .total-nav {
-  width: 80%;
+  width: 85%;
   display: contents;
   color: #FABD02;
 }
-p {  color:#FABD02;}
+p {  
+  color:#FABD02;
+  }
 </style>
