@@ -20,8 +20,8 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from django.db import connection
 import pandas as pd
 from sklearn.metrics.pairwise import euclidean_distances
-# from sqlalchemy import create_engine
-# import pymysql
+from sqlalchemy import create_engine
+import pymysql
 
 #기업 디테일 모든 정보를 다 넣어놓음
 @api_view(['GET'])
@@ -89,8 +89,11 @@ def similarity(request):
     corp_df['second'] = sim_df['second']
     corp_df['third'] = sim_df['third']
 
-    # db_connection_str = 'mysql+pymysql://[db유저이름]:[db password]@[host address]/[db name]'
-    # db_connection = create_engine(db_connection_str)
+    db_connection_str = 'mysql+pymysql://admin:1q2w3e4r5t!@bee.cjkrtt0iwcwz.ap-northeast-2.rds.amazonaws.com/BEE'
+    db_connection = create_engine(db_connection_str)
+    conn = db_connection.connect()
 
-    # corp_df.to_sql(name='corporates_corporate', con=db_connection, flavor='mysql', if_exists='append', index=False)
+    # corp_df.to_sql('corporates_corporate', con=db_connection, if_exists='append', index=False)
+    corp_df.set_index('id', inplace=True)
+    conn.close()
     return Response(corp_df)
