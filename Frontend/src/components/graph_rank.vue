@@ -35,7 +35,7 @@ export default {
               categories: ['E Score', 'S Score', 'G Score'],
               labels: {
                   style: {
-                      colors: ['#FABD02'],
+                      colors: ['#FABD02','#FABD02','#FABD02'],
                       fontSize: '15px',
                       fontFamily: 'Pretendard-Regular'
                   }

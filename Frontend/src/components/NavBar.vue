@@ -1,63 +1,61 @@
 <template>
-  <div>
-    <div class="total-nav">
-      <div class="navbar">
-        <div style="width: 20%;">
-       <div class="logo">
-        <RouterLink :to="{ name: 'main' }">
-            <img src="@/assets/logo.png" width="150" class="pt-2">
-        </RouterLink>
-      </div>
-        </div>
-
-        <div style="width: 80%; display: contents">
-
-        <nav class="nav main-nav">
-          <RouterLink class="routerLink" :to="{ name: 'serviceIntro' }">
-            <p class="nav-text">About</p>
-          </RouterLink>
-          <RouterLink class="routerLink" :to="{ name: 'infoDetail' }">
-            <p class="nav-text">infoDetail</p>
-          </RouterLink>
-          <RouterLink class="routerLink" :to="{ name: 'welcome' }">
-            <p class="nav-text">welcome</p>
-          </RouterLink>
-          <RouterLink class="routerLink" :to="{ name: 'esgRank' }">
-            <p class="nav-text">Rank</p>
-          </RouterLink>
-          <RouterLink class="routerLink" :to="{ name: 'newsList' }">
-            <p class="nav-text">News</p>
-          </RouterLink>
-        </nav>
-        
-
-        <nav class="nav sub-nav" v-if="isLogin">
-          <RouterLink class="routerLink" :to="{ name: 'myPage' }">
-            <p class="nav-text2">{{nickname}}</p>
-          </RouterLink>
-
-          <RouterLink @click.native="logout" to="#" class="routerLink">
-            <p class="nav-text2">로그아웃</p>
-          </RouterLink>
-        </nav>
-
-        <nav class="nav sub-nav" v-else>
-
-          <p id="show-modal" @click="showModal = true" class="nav-text2">Log in</p>
-          <modal v-if="showModal" @close="showModal = false">
-            <h3 slot="header" style="color:#FABD02">Login </h3>
-          </modal> 
-
-          <p id="show-modal2" @click="showModal2 = true" class="nav-text2">Sign up</p>
-          <modal2 v-if="showModal2" @close="showModal2 = false">
-            <h3 slot="header" style="color:#FABD02">Sign Up </h3>
-          </modal2> 
-        </nav>
-        </div>
-      </div>
+<div>
+  <div class="navbar nav">
+    
+    <!-- logo image --> 
+    <div class="logo ms-3">
+      <RouterLink :to="{ name: 'main' }">
+          <img src="@/assets/logo.png" width="170" class="pt-2">
+      </RouterLink>
     </div>
 
+    <!-- 글씨만 있는 네브 --> 
+    <div class="letter-nav">
+
+      <nav class="nav main-nav">
+        <RouterLink class="routerLink" :to="{ name: 'serviceIntro' }">
+          <p class="nav-text">About</p>
+        </RouterLink>
+        <!-- <RouterLink class="routerLink" :to="{ name: 'infoDetail' }">
+          <p class="nav-text">infoDetail</p>
+        </RouterLink> -->
+        <!-- <RouterLink class="routerLink" :to="{ name: 'welcome' }">
+          <p class="nav-text">welcome</p>
+        </RouterLink> -->
+        <RouterLink class="routerLink" :to="{ name: 'esgRank' }">
+          <p class="nav-text">Rank</p>
+        </RouterLink>
+        <RouterLink class="routerLink" :to="{ name: 'newsList' }">
+          <p class="nav-text">News</p>
+        </RouterLink>
+      </nav>
+    
+
+      <nav class="nav sub-nav" v-if="isLogin">
+        <RouterLink class="routerLink" :to="{ name: 'myPage' }">
+          <p class="nav-text2">{{nickname}}</p>
+        </RouterLink>
+
+        <RouterLink @click.native="logout" class="routerLink">
+          <p class="nav-text2">로그아웃</p>
+        </RouterLink>
+      </nav>
+
+      <nav class="nav sub-nav" v-else>
+        <p id="show-modal" @click="showModal = true" class="nav-text2">Log in</p>
+        <modal v-if="showModal" @close="showModal = false">
+          <h3 slot="header">Login </h3>
+        </modal> 
+        <p id="show-modal2" @click="showModal2 = true" class="nav-text2">Sign up</p>
+        <modal2 v-if="showModal2" @close="showModal2 = false">
+          <h3 slot="header">Sign Up </h3>
+        </modal2> 
+      </nav>
   </div>
+
+  <!-- 전체 네브바 닫기--> 
+  </div>
+</div>
 </template>
 
 <script>
@@ -113,31 +111,39 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+p {
+  color:#FABD02;
+}
+.logo {
+  width: 20%;
+  min-width: 15%
+}
+.nav {
+  width: 95%;
+  display: contents;
+  margin-left: 10px;
+}
+.letter-nav {
+  margin: auto;
+  display:contents;
+}
 
 .main-nav {
-  color:#FABD02;
   width: 40%;
-  /* 화면 비율에 따라 */ 
-  min-width: 20%;
-  height: 40px;
-  /* position: fixed; */
+  min-width: 200px;
   justify-content: space-around;
-  align-content: center;
 }
 
 .sub-nav {
-  color:#FABD02;
   width: 15%;
   align-content: center;
-  margin-right: 60px;
-  /* 화면 비율에 따라 */
-  height: 40px;
+  text-align: end;
   justify-content: space-around;
+  min-width: 80px;
 }
 
 .nav-text {
   font-size: 1.5rem;
-  align-content: center;
   margin-bottom: 0px;
   padding: 5px;
 }
@@ -145,18 +151,7 @@ export default {
 .nav-text2 {
   font-size: 1.2rem;
   margin-bottom: 0px;
-  align-content: center;
   padding: 5px;
 }
-.nav-content{
-  display: contents;
-}
-.total-nav {
-  width: 85%;
-  display: contents;
-  color: #FABD02;
-}
-p {  
-  color:#FABD02;
-  }
+
 </style>
