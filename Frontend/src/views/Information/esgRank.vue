@@ -38,10 +38,7 @@
     <!-- Graph 시작 -->
       <div class="card-body graphs">
         
-        <Graph
-        :e_avg="e_avg"
-        :s_avg="s_avg"
-        :g_avg="g_avg"/>
+        <Graph/>
         
         <Graph2/>
         <Scrap/>
@@ -67,10 +64,7 @@ export default {
   },
   data() {
     return{
-      rank: '',
-      e_avg:'',
-      s_avg:'',
-      g_avg:'',
+      rank: [],
     }
   },
   methods: {
@@ -90,10 +84,6 @@ export default {
       })
         .then(res => {
           this.rank = res.data.corp_data.slice(0, 10)
-          this.e_avg = Number(res.data.e_average)
-          this.s_avg = Number(res.data.s_average)
-          this.g_avg = Number(res.data.g_average)
-          console.log(this.e_avg)
         })
         .catch(err => {
           console.log('전체 순위 오류', err)

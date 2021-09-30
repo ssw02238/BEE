@@ -34,7 +34,7 @@ export default {
     },
     methods: {
       goDetail(pk) {
-        console.log('여기 pk', pk)
+       console.log('여기 pk', pk)
       this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
       },  
     }

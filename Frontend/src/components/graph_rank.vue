@@ -7,21 +7,17 @@
 </template>
 
 <script>
+import axios from 'axios'
 import VueApexCharts from 'vue-apexcharts'
 export default {
     name: 'graph_rank',
     components: {
         apexchart: VueApexCharts,
     },
-    props: {
-      e_avg: Number,
-      s_avg: Number,
-      g_avg: Number
-    },
     data() {
         return {
             series: [{
-              data: [this.e_avg, this.s_avg, this.g_avg]
+              data: []
           }],
           chartOptions: {
 
@@ -49,9 +45,37 @@ export default {
           },
         }
     },
-    // async mounted() {
-    //   console.log(this.e_avg, '평균 e')
-    // }   
+    methods: {
+      setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+    getESGRank() {
+          axios({
+            method: 'get',
+            url: 'http://127.0.0.1:8000/boards/esg-ranking/',
+            headers: this.setToken()
+          })
+            .then(res => {
+              this.e_avg = res.data.e_average
+              this.s_avg = res.data.s_average
+              this.g_avg = res.data.g_average
+              this.series[0].data.push(this.e_avg)
+              this.series[0].data.push(this.s_avg)
+              this.series[0].data.push(this.g_avg)
+              console.log(this.series[0].data)
+            })
+            .catch(err => {
+              console.log('전체 순위 오류', err)
+            })
+        },
+    },
+    async mounted() {
+      this.getESGRank()
+    }
 }
 </script>
 <style scoped>
