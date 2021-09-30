@@ -17,11 +17,13 @@ from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
-# from django.db import connection
 import pandas as pd
 from sklearn.metrics.pairwise import euclidean_distances
 from sqlalchemy import create_engine
 import pymysql
+
+import time
+import schedule
 
 #기업 디테일 모든 정보를 다 넣어놓음
 @api_view(['GET'])
@@ -114,3 +116,12 @@ def similarity(request):
     db.close()
 
     return Response(df)
+
+
+
+# 매일 정해진 시간에 함수 실행
+# schedule.every().day.at("00:00").do(similarity)
+
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)
