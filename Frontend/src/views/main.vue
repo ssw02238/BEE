@@ -41,15 +41,15 @@
     <div class="card mb-3" style="background-color:black;">
       <div class="row g-0">
         <div class="col-md-4" style="display:flex">
-          <img src="@/assets/esg_char.jpg" class="img-fluid rounded-start" alt="esg character" style="align-items:center">
+          <img src="@/assets/esg.jpg" class="img-fluid rounded-start" alt="esg character" style="align-items:center">
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title mb-4">오늘의 기업 🎉 {{ news_top }}</h5>
               <ul class="list-group card-text" id="font">
-                <li class="list-group-item">뉴스 제목 1</li>
-                <li class="list-group-item">뉴스 제목 1</li>
-                <li class="list-group-item">뉴스 제목 1</li>
+                <li class="list-group-item">ESG 경영 더는 두고볼 수 없...</li>
+                <li class="list-group-item">사회에 공헌하는 기업 포 스 코</li>
+                <li class="list-group-item">믓진 기업 포 스 코 ...</li>
               </ul>
           </div>
         </div>
@@ -80,11 +80,16 @@ export default {
   data:function(){
     return{
       esg_top: '',
-      e1: '',
-      e2: '',
-      s1: '',
-      s2: '',
-      s3: '',
+      // e1: '',
+      // e2: '',
+      // s1: '',
+      // s2: '',
+      // s3: '',
+      // g1:'',
+      // g2: '',
+      // g3:'',
+      // g4:'',
+      // g5:'',
       // 전체 순위
       rank: '',
       news_top: '포스코',
@@ -108,15 +113,13 @@ export default {
       })
         .then(res => {
           console.log('1위 esg 기업 정보', res.data)
-          // console.log(res.data.environment_evaluation)
           this.esg_top = res.data.name
           this.e1 = res.data.environment_evaluation[0].co2
           this.e2 = res.data.environment_evaluation[0].energy
           this.s1 = res.data.social_evaluation[0].woman_ratio
           this.s2 = res.data.social_evaluation[0].average_term
           this.s3 = res.data.social_evaluation[0].term_ratio
-          this.g1 = res.data.governance_evaluation[0].board_ration
-          // this.g2 = res.data.governance_evaluation[0].board_independency
+          this.g1 = res.data.governance_evaluation[0].board_ratio
           if (res.data.governance_evaluation[0].board_independency == true) {
             this.g2 = '일치'
           }
@@ -186,5 +189,11 @@ h1, h3 {
 }
 .card-title {
   color:#FABD02;
+}
+.list-group-item {
+  background-color: black;
+  color:white;
+  text-decoration: underline; 
+  text-underline-position:under;
 }
 </style>
