@@ -68,7 +68,11 @@
             <div style="display:flex;width:33%;">
             <!-- <h5 class="card-title"> ESG 성향 </h5> -->
 
-                <Graph/>
+                <Graph
+                :e_score="e_score"
+                :s_score="s_score"
+                :g_score="g_score"
+                 />
           <!-- </div> -->
         <!-- </div> -->
         <!-- ESG Chart 종료 -->
@@ -91,6 +95,12 @@ export default {
   components: {
     Profile,Graph
   },
+  data(){
+    return{
+      }
+  },
+    methods: {
+},
   }  
 </script>
 

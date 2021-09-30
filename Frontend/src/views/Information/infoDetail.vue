@@ -97,12 +97,13 @@
 import axios from 'axios'
 import Top from '../../components/Top.vue'
 import Graph from '../../components/graph_infodetail.vue' 
-
+// import Scrap from '../../components/scrap_infodetail.vue' 
 export default {
   name: 'infoDetail',
   components: {
     Graph,
     Top,
+    // Scrap,
   },  
   data() {
     return {
@@ -123,7 +124,6 @@ export default {
       return config
     },
     getDetail(pk) {
-
       axios({
         method: 'get',
         url: `http://127.0.0.1:8000/corporates/${pk}/detail/`,
