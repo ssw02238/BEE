@@ -63,14 +63,16 @@
         </table>
   
       <!-- ESG Chart 시작 -->
-        <div class="card" style="width: 30%;margin: auto" >
-          <div class="card-body">
-            <h5 class="card-title"> ESG 성향 </h5>
-            <p class="card-text">일단 뭐 쓸거 없어서 암거나 써놨음 </p>
+        <!-- <div class="card" style="width: 30%;margin: auto" > -->
+          <!-- <div class="card-body"> -->
+            <div style="display:flex;width:33%;">
+            <!-- <h5 class="card-title"> ESG 성향 </h5> -->
+
                 <Graph/>
-          </div>
-        </div>
+          <!-- </div> -->
+        <!-- </div> -->
         <!-- ESG Chart 종료 -->
+  </div>
   </div>
 
     <RouterLink class="routerLink" :to="{ name: 'test' }">

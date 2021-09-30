@@ -36,7 +36,7 @@
           <p class="nav-text2">{{nickname}}</p>
         </RouterLink>
 
-        <RouterLink @click.native="logout" class="routerLink">
+      <RouterLink @click.native="logout" to="#" class="routerLink">
           <p class="nav-text2">로그아웃</p>
         </RouterLink>
       </nav>
