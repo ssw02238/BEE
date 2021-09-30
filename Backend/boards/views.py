@@ -23,13 +23,30 @@ from django.db.models import Count
 
 #ESG 총점 랭킹 200개 출력 
 @api_view(['GET'])
-@authentication_classes([JSONWebTokenAuthentication])
-@permission_classes([IsAuthenticated])
 def esg_ranking(reqeust):
     corp_list = get_list_or_404(Corporate.objects.order_by('-ESG_rating'))
+    e_total = 0.0
+    s_total = 0.0
+    g_total = 0.0
+
+    for corp in corp_list:
+        e_total += corp.E_rating
+        s_total += corp.S_rating
+        g_total += corp.G_rating
+
+    e_average = e_total//len(corp_list)
+    s_average = s_total//len(corp_list)
+    g_average = g_total//len(corp_list)
     serializer = CorporateSerializer(corp_list, many=True)
+
+    data = {
+        'corp_data': serializer.data,
+        'e_average': e_average, 
+        's_average': s_average,
+        'g_average': g_average,
+    }
     
-    return Response(serializer.data)
+    return Response(data)
 
 @api_view(['GET'])
 @authentication_classes([JSONWebTokenAuthentication])

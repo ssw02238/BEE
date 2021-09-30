@@ -17,7 +17,7 @@ from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
-from django.db import connection
+# from django.db import connection
 import pandas as pd
 from sklearn.metrics.pairwise import euclidean_distances
 from sqlalchemy import create_engine
@@ -76,24 +76,41 @@ def search(request, corp_name):
 
 @api_view(['GET'])
 def similarity(request):
-    corp = Corporate.objects.all().values()
-    corp_df = pd.DataFrame(corp)
+    # DB 불러와서 유사도 분석 후 temp 테이블에 결과 저장
+    db_connection_str = 'mysql+pymysql://admin:1q2w3e4r5t!@bee.cjkrtt0iwcwz.ap-northeast-2.rds.amazonaws.com/BEE'
+    db_connection = create_engine(db_connection_str)
 
-    corp_rating = corp_df[['E_rating', 'S_rating', 'G_rating']]
+    query = "SELECT * FROM corporates_corporate"
+    df = pd.read_sql(query, db_connection)
 
+    corp_rating = df[['E_rating', 'S_rating', 'G_rating']]
     sim = euclidean_distances(corp_rating, corp_rating)
     sim = pd.DataFrame(sim.argsort()[:,1:4], columns=['first', 'second', 'third'])
     sim_df = sim + 1
 
-    corp_df['first'] = sim_df['first']
-    corp_df['second'] = sim_df['second']
-    corp_df['third'] = sim_df['third']
+    df['first'] = sim_df['first']
+    df['second'] = sim_df['second']
+    df['third'] = sim_df['third']
+    df.to_sql(name='temp', con=db_connection, if_exists='replace', index=False)
 
-    db_connection_str = 'mysql+pymysql://admin:1q2w3e4r5t!@bee.cjkrtt0iwcwz.ap-northeast-2.rds.amazonaws.com/BEE'
-    db_connection = create_engine(db_connection_str)
-    conn = db_connection.connect()
+    # DB 연결해서 temp 테이블에 저장한 결과를 corporate 테이블로 옮기기
+    db = pymysql.connect(
+        user='admin',
+        passwd='1q2w3e4r5t!',
+        host='bee.cjkrtt0iwcwz.ap-northeast-2.rds.amazonaws.com',
+        db='BEE',
+        charset='utf8'
+        )
 
-    # corp_df.to_sql('corporates_corporate', con=db_connection, if_exists='append', index=False)
-    corp_df.set_index('id', inplace=True)
-    conn.close()
-    return Response(corp_df)
+    cursor = db.cursor()
+    update_sql = """
+        UPDATE corporates_corporate, temp
+        SET corporates_corporate.first = temp.first, corporates_corporate.second = temp.second, corporates_corporate.third = temp.third
+        WHERE corporates_corporate.id = temp.id;
+        """
+
+    cursor.execute(update_sql)
+    db.commit()
+    db.close()
+
+    return Response(df)
