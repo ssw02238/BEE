@@ -65,6 +65,9 @@ export default {
   data() {
     return{
       rank: '',
+      e_avg:'',
+      s_avg:'',
+      g_avg:'',
     }
   },
   methods: {
@@ -83,9 +86,11 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          console.log(res.data)
-          this.rank = res.data.slice(0, 10)
-          console.log(this.rank)
+          // console.log(res.data)
+          this.rank = res.data.corp_data.slice(0, 10)
+          this.e_avg = res.data.e_average
+          this.s_avg = res.data.s_average
+          this.g_avg = res.data.g_average
         })
         .catch(err => {
           console.log('전체 순위 오류', err)
