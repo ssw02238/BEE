@@ -13,7 +13,7 @@ from django.http import JsonResponse
 #model
 from django.contrib.auth import get_user_model
 from .models import UserManager
-from .serializers import UserSerializer, PasswordSerializer
+from .serializers import UserSerializer, PasswordSerializer, MbtiSerializer
 from corporates.seiralizers import CorporateSerializer
 
 #Authentication & Authorization
@@ -93,10 +93,15 @@ def profile(request):
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
 def mbti(request):
-    User = get_user_model()
-    client = request.user
-    client.e_score = request.data.get('e_score')
-    client.s_score = request.data.get('s_score')
-    client.g_score = request.data.get('g_score')
-    client.save()
+    # User = get_user_model()
+    # client = request.user
+    # client.e_score = request.data.get('e_score')
+    # client.s_score = request.data.get('s_score')
+    # client.g_score = request.data.get('g_score')
+    # client.save()
+    serializer = MbtiSerializer(request.user, data=request.data)
 
+    if serializer.is_valid(raise_exception=True):
+        user = serializer.save()
+        user.save()
+        return Response({'message': '성공적으로 저장되었습니다.'}, status=status.HTTP_200_OK)
