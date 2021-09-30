@@ -12,7 +12,7 @@
               <div class="modal-body">
                 <slot name="body">
                   <form>
-                    <div class="mb-3">
+                    <div class="mb-3 form-text">
                       <label for="exampleInputEmail1" class="form-label"> Email id</label>
                       <input type="id" class="form-control" id="idInput" v-model="credentials.email" placeholder="name@example.com">
                     </div>
@@ -92,7 +92,14 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
+.form-text {
+  text-align: center;
+}
+.form-label {
+  color:black;
+  display: flex;
+}
 .modal-mask {
   position: fixed;
   z-index: 9998;

@@ -1,22 +1,40 @@
 <template>
   <div class="container">
-    <h1 class="corporate-name">삼성전자 </h1>
-    <p class="ps-2">E(★★★★) S(★★) G(★)</p>
+    <h1 class="corporate-name">{{ corporate.name }} </h1>
+    <div class="scrap-score">
+      <div class="ps-2">{{ corporate.ESG_rating }} / 100</div>
+      <div class="scrap-button">
+        ❤스❤크❤랩❤
+      </div>
+    </div>
     <!-- ESG evalutaion --> 
 
     <div class="card">
       <div class="row g-0">
 
         <div class="col-md-4">
-          <Graph/>
+          <Graph
+          :E_rating="E_rating"
+          :S_rating="S_rating"
+          :G_rating="G_rating"/>
         </div>
 
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">E: {score1}} | S: {score2} | G: {score3}</h5> 
+            <h5 class="card-title">E: {{ corporate.E_rating.toFixed(2) }} / S: {{ corporate.S_rating.toFixed(2) }} / G: {{ corporate.G_rating.toFixed(2) }}</h5> 
             <hr style="color:gold; height:5px;">
             <div>
-              <Top class="Top"/>
+              <Top class="Top"
+              :e1="e1"
+              :e2="e2"
+              :s1="s1"
+              :s2="s2"
+              :s3="s3"
+              :g1="g1"
+              :g2="g2"
+              :g3="g3"
+              :g4="g4"
+              :g5="g5"/>
             </div>
           </div>
         </div>
@@ -76,6 +94,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Top from '../../components/Top.vue'
 import Graph from '../../components/graph_infodetail.vue' 
 
@@ -85,6 +104,63 @@ export default {
     Graph,
     Top,
   },  
+  data() {
+    return {
+      pk: '',
+      corporate: [],
+      E_rating: '',
+      S_rating: '',
+      G_rating: '',
+
+    }
+  },
+  methods: {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+    getDetail(pk) {
+
+      axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/corporates/${pk}/detail/`,
+        headers: this.setToken()
+      })
+        .then(res => {
+          console.log('디테일 정보', res.data)
+          this.corporate = res.data
+          this.E_rating = this.corporate.E_rating
+          this.S_rating = this.corporate.S_rating
+          this.G_rating = this.corporate.G_rating
+          this.e1 = this.corporate.environment_evaluation[0].co2
+          this.e2 = this.corporate.environment_evaluation[0].energy
+          this.s1 = this.corporate.social_evaluation[0].woman_ratio
+          this.s2 = this.corporate.social_evaluation[0].average_term
+          this.s3 = this.corporate.social_evaluation[0].term_ratio
+          this.g1 = this.corporate.governance_evaluation[0].board_ratio
+          if (this.corporate.governance_evaluation[0].board_independency == true) {
+            this.g2 = '일치'
+          }
+          else{
+            this.g2 = '불일치'
+          }
+          this.g3 = this.corporate.governance_evaluation[0].largest_shareholder
+          this.g4 = this.corporate.governance_evaluation[0].salary_gap
+          this.g5 = this.corporate.governance_evaluation[0].dividen_ratio
+        })
+        .catch(err => {
+          console.log('정보 가져오기 오류', err)
+        })
+    },
+  },
+  async mounted() {
+    this.pk = this.$route.params.pk
+    console.log('pk번호 받아왔니?',this.pk)
+    this.getDetail(this.pk)
+  }
 }
 </script>
 
@@ -112,4 +188,12 @@ export default {
 a {
   width: 30%
 }
+.scrap-score {
+  color:#e6cb7c;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+  background-color:black;
+}
+
 </style>

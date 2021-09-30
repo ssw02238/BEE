@@ -1,6 +1,6 @@
 <template>
   <table class="table" style="font-size:15px; text-align:center">
-      <thead style="background-color:#1b1b1b; color:white; text-align:center">
+      <thead style="background-color:#1b1b1b;">
         <tr>
           <th scope="col">Rank</th>
           <th scope="col">기업</th>
@@ -10,7 +10,8 @@
           <th scope="col">총점</th>
         </tr>
       </thead>
-      <tbody v-for="(corporate, idx) in rank" :key="idx" style="background-color:black; text-align:center">
+      <tbody v-for="(corporate, idx) in rank" :key="idx"
+      @click="goDetail(corporate.pk)" style="background-color:black;">
         <tr id="font">
           <th>{{ idx+1 }}</th>
           <th>{{ corporate.name }}</th>
@@ -30,6 +31,12 @@ export default {
     name: 'table',
     props: {
       rank: Array,
+    },
+    methods: {
+      goDetail(pk) {
+        console.log('여기 pk', pk)
+      this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
+      },  
     }
 
 }
