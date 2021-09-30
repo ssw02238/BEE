@@ -1,6 +1,6 @@
 <template>
   <div>
- <!-- <form> -->
+ <!-- <form v-on:submit="submitForm"> -->
     <!-- 문제 1번 -->
     <label for="customRange1" class="form-label1 question">Q 1. 나는 제로 웨이스트를 실천하는 기업에 대해 2개 이상 알고 있다.</label>
     
@@ -191,7 +191,7 @@
         v-model="selected9"
 
         :aria-describedby="ariaDescribedby"
-        name="radio-options-slots2"
+        name="radio-options-slots9"
       >
         <!-- Radios in this slot will appear first -->
         <template #first>
@@ -230,14 +230,14 @@ export default {
         selected7: '',
         selected8: '',
         selected9: '',
-        esg_score:{
-          e_score:parseInt(this.selected1) + parseInt(this.selected4)+ parseInt(this.selected7),
-          s_score:parseInt(this.selected2) + parseInt(this.selected5)+ parseInt(this.selected8),
-          g_score:parseInt(this.selected3) + parseInt(this.selected6)+ parseInt(this.selected9)
+
+        e_score:parseFloat(this.selected1) + parseFloat(this.selected4)+ parseFloat(this.selected7),
+        s_score:parseFloat(this.selected2) + parseFloat(this.selected5)+ parseFloat(this.selected8),
+        g_score:parseFloat(this.selected3) + parseFloat(this.selected6)+ parseFloat(this.selected9)
         }
-      }
     },
     methods: {
+      
       setToken: function () {
       const token = localStorage.getItem('jwt')
       const config = {
@@ -247,14 +247,19 @@ export default {
     },
     submitForm: function () {
       const config = this.setToken()
+
      axios({
         method: 'post',
         url: 'http://127.0.0.1:8000/accounts/mbti/',
-        data: this.esg_score,
+        data: {e_score:parseFloat(this.selected1) + parseFloat(this.selected4)+ parseFloat(this.selected7),
+        s_score:parseFloat(this.selected2) + parseFloat(this.selected5)+ parseFloat(this.selected8),
+        g_score:parseFloat(this.selected3) + parseFloat(this.selected6)+ parseFloat(this.selected9)},
         headers: config
       })
         .then(res => {
           console.log('요청 제대로', res) 
+          this.$router.push({ name: 'mypage' })
+          this.$router.go()
         })
         .catch(err => {
           console.log('axios 오류', err)

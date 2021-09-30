@@ -1,6 +1,8 @@
 <!-- 레이더 차트 -->
 <template>
     <div id="chart">
+                  <h5 style="color:white;"> ESG 성향 </h5>
+
         <apexchart type="radar" height="250" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
