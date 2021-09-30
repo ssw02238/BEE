@@ -12,11 +12,11 @@
         <tbody>
             <tr>
                 <th scope="row">온실가스 배출량</th>
-                <td>{{ e1 }}</td>
+                <td>{{ e1.toFixed(2) }}</td>
             </tr>
             <tr>
                 <th scope="row">에너지 사용량</th>
-                <td>{{ e2 }}</td>
+                <td>{{ e2.toFixed(2) }}</td>
             </tr>
         </tbody>
         </table>
@@ -33,15 +33,15 @@
     <tbody>
         <tr>
             <th scope="row">임원 내 여성 비율</th>
-            <td>{{ s1 }}</td>
+            <td>{{ s1.toFixed(2) }}</td>
         </tr>
         <tr>
             <th scope="row">평균 근속 년수</th>
-            <td>{{ s2 }}</td>
+            <td>{{ s2.toFixed(2) }}</td>
         </tr>
         <tr>
             <th scope="row">기간제 근로자 비율</th>
-            <td>{{ s3 }}</td>
+            <td>{{ s3.toFixed(2) }}</td>
         </tr>
     </tbody>
     </table>
@@ -58,7 +58,7 @@
     <tbody>
         <tr>
             <th scope="row">사외이사 비율</th>
-            <td>{{ g1 }}</td>
+            <td>{{ g1.toFixed(2) }}</td>
         </tr>
         <tr>
             <th scope="row">대표이사와 이사회 의장 일치 여부</th>
@@ -66,15 +66,15 @@
         </tr>
         <tr>
             <th scope="row">최대주주 지분율</th>
-            <td>{{ g3 }}</td>
+            <td>{{ g3.toFixed(2) }}</td>
         </tr>
         <tr>
             <th scope="row">임원 / 직원 보수 비율</th>
-            <td>{{ g4 }}</td>
+            <td>{{ g4.toFixed(2) }}</td>
         </tr>
         <tr>
             <th scope="row">배당 성향</th>
-            <td>{{ g5 }}</td>
+            <td>{{ g5.toFixed(2) }}</td>
         </tr>
     </tbody>
     </table>
