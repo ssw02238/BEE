@@ -68,7 +68,11 @@
             <div style="display:flex;width:33%;">
             <!-- <h5 class="card-title"> ESG 성향 </h5> -->
 
-                <Graph/>
+                <Graph
+                :e_score="e_score"
+                :s_score="s_score"
+                :g_score="g_score"
+                 />
           <!-- </div> -->
         <!-- </div> -->
         <!-- ESG Chart 종료 -->
@@ -83,6 +87,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Profile from '../../components/Profile.vue';
 import Graph from '../../components/graph_mypage.vue';
 
@@ -91,6 +96,38 @@ export default {
   components: {
     Profile,Graph
   },
+  data(){
+    return{
+      e_score: '',
+      s_score: '',
+      g_score: '',
+    }
+  },
+    methods: {
+    setToken: function () {
+      const token = localStorage.getItem('jwt')
+      const config = {
+        Authorization: `JWT ${token}`
+      }
+      return config
+    },
+      get_esg() {
+      axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/accounts/profile_esg/`,
+        headers: this.setToken()
+      })
+        .then(res => {
+          this.e_score = res.data.e_score
+          this.s_score = res.data.s_score
+          this.g_score = res.data.g_score
+          console.log('디테일 정보', res.data)
+          
+          })
+        .catch(err => {
+          console.log('정보 가져오기 오류', err)
+        })
+  }}
   }  
 </script>
 

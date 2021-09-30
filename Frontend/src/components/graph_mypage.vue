@@ -12,7 +12,12 @@ export default {
   components: {
 
     apexchart: VueApexCharts,
-  },
+  },  
+  props: {
+    e_score: Number,
+    s_score: Number,
+    g_score: Number,
+  },  
     data () {
       return {
         chartOptions: {
@@ -25,7 +30,7 @@ export default {
         },
         series: [{
           name: 'series-1',
-          data: [60, 10, 45,]
+          data: [this.e_score, this.s_score, this.g_score],
         }]
       }
     },
@@ -33,6 +38,9 @@ export default {
       open (link) {
         this.$electron.shell.openExternal(link)
       }
+    },
+    async mounted(){
+      console.log(this.e_score)
     }
   }
           

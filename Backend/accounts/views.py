@@ -111,3 +111,25 @@ def mbti(request):
         user = serializer.save()
         user.save()
         return Response({'message': '성공적으로 저장되었습니다.'}, status=status.HTTP_200_OK)
+
+
+# 본인 esg 점수 불러오기
+
+
+@api_view(['GET'])
+@authentication_classes([JSONWebTokenAuthentication])
+@permission_classes([IsAuthenticated])
+def profile_esg(request):
+    User = get_user_model()
+    client = request.user
+    client_email = request.user.email
+
+    client_object = get_object_or_404(get_user_model(), email=client_email)
+    corporates_serializer = CorporateSerializer(
+        client.scrap_corporates.all(), many=True)
+    client_info = {
+        'e_score': client_object.e_score,
+        's_score': client_object.s_score,
+        'g_score': client_object.g_score,
+    }
+    return JsonResponse(client_info, status=status.HTTP_200_OK)
