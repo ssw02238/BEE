@@ -9,14 +9,19 @@
 <script>
 import VueApexCharts from 'vue-apexcharts'
 export default {
-    name: 'esg_mbti',
+    name: 'graph_rank',
     components: {
         apexchart: VueApexCharts,
+    },
+    props: {
+      e_avg: Number,
+      s_avg: Number,
+      g_avg: Number
     },
     data() {
         return {
             series: [{
-            data: [35, 14, 20]
+              data: [this.e_avg, this.s_avg, this.g_avg]
           }],
           chartOptions: {
 
@@ -43,7 +48,10 @@ export default {
             },
           },
         }
-    }       
+    },
+    // async mounted() {
+    //   console.log(this.e_avg, '평균 e')
+    // }   
 }
 </script>
 <style scoped>

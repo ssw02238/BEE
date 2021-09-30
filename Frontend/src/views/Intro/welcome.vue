@@ -1,14 +1,13 @@
 <template>
   <div class="container">
     <!-- welcome 상단 --> 
-    <div class="card text-center top-card">
-      <div class="card-header" style="font-size:2rem">
+    <div class="card text-center top-card" style="border:none">
+      <div class="card-header" style="font-size:2rem;">
         BEE
       </div>
 
       <div class="card-body">
-        <!-- <h2 class="card-title">BEE</h2> -->
-        <img src="@/assets/logo.png" width="250">
+        <img src="@/assets/logo.png" width="280">
         <p class="card-text" style="font-size:1.5rem;">Best ESG Enterprises</p>
       </div>
       <div class="card-footer">
@@ -63,25 +62,23 @@ export default {
 h4, p{
   text-align: center;
 }
-.card-header, .card-footer {
-  background-color: black;
-  color: #FABD02;
-}
-h2 {
+.card-header, .card-footer, h2 {
   color: #FABD02;
 }
 .card-title {
-  color:black;
+  color:rgb(206, 206, 206);
   font-weight: bold;
 }
 .top-card {
   margin-bottom:50px;
-  border: 2px solid black;
 }
 .moving-card {
   margin-bottom: 30px;
   display:flex;
   justify-content: space-around;
-  
+  border:solid 2px #FABD02
+}
+.card{
+  background-color:black;
 }
 </style>
