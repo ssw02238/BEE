@@ -83,6 +83,7 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
+          console.log(res.data)
           this.rank = res.data.slice(0, 10)
           console.log(this.rank)
         })
