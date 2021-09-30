@@ -20,6 +20,7 @@ class Environment(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
     co2 = models.IntegerField()
     energy = models.IntegerField()
+    total = models.FloatField()
     news_pos_cnt = models.IntegerField()
     news_neg_cnt = models.IntegerField()
 
@@ -28,6 +29,7 @@ class Social(models.Model):
     average_term = models.FloatField()
     term_ratio = models.FloatField()
     woman_ratio = models.FloatField()
+    total = models.FloatField()
     news_pos_cnt = models.IntegerField()
     news_neg_cnt = models.IntegerField()
     
@@ -38,7 +40,7 @@ class Governance(models.Model):
     salary_gap = models.FloatField()
     dividen_ratio = models.FloatField()
     largest_shareholder = models.FloatField()
-
+    total = models.FloatField()
     news_pos_cnt = models.IntegerField()
     news_neg_cnt = models.IntegerField()
     
