@@ -80,16 +80,16 @@ export default {
   data:function(){
     return{
       esg_top: '',
-      // e1: '',
-      // e2: '',
-      // s1: '',
-      // s2: '',
-      // s3: '',
-      // g1:'',
-      // g2: '',
-      // g3:'',
-      // g4:'',
-      // g5:'',
+      e1: '',
+      e2: '',
+      s1: '',
+      s2: '',
+      s3: '',
+      g1:'',
+      g2: '',
+      g3:'',
+      g4:'',
+      g5:'',
       // 전체 순위
       rank: '',
       news_top: '포스코',
@@ -144,7 +144,7 @@ export default {
       })
         .then(res => {
           // console.log('전체 순위 리스트', res)
-          this.rank = res.data.slice(0, 5)
+          this.rank = res.data.corp_data.slice(0, 5)
           console.log(this.rank)
         })
         .catch(err => {
@@ -165,6 +165,7 @@ export default {
           console.log('1위 뉴스 기업 오류', err)
         })
     },
+    
   },
   async mounted() {
     this.nickname = localStorage.getItem('nickname')
