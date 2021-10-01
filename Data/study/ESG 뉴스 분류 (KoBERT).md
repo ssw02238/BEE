@@ -341,7 +341,10 @@ weighted avg       0.92      0.92      0.92       385
 #### 모델 저장하고 불러오기
 
 - torch.save(object, path)
+  - torch.save(g_model.state_dict(), './drive/MyDrive/ESG/g_model.pt')
 - torch.load(path)
+  - g_model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
+  - g_model.load_state_dict(torch.load("./drive/MyDrive/ESG/g_model.pt", map_location=device))
 
 
 

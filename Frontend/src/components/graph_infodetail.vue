@@ -27,7 +27,7 @@ export default {
           }
         },
         series: [{
-          name: 'series-1',
+          name: 'score',
           data: [this.E_rating,this.S_rating, this.G_rating],
         }]
       }
@@ -37,11 +37,6 @@ export default {
         this.$electron.shell.openExternal(link)
       }
     },
-    computed: {
-    },
-    mounted() {
-      // console.log('받아온', this.E_rating)
-    }
 }
 </script>
 

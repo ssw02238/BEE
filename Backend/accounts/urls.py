@@ -5,10 +5,11 @@ from . import views
 
 urlpatterns = [
     path('signup/', views.signup),
-    #로그인
+    # 로그인
     path('api-token-auth/', obtain_jwt_token),
     path('password/', views.password),
     path('profile/', views.profile),
-    # mbti 점수 기록 
-    path('mbti/', views.mbti)
+    path('profile_esg/', views.profile_esg),
+    # mbti 점수 기록
+    path('mbti/', views.mbti),
 ]

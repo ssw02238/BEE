@@ -74,7 +74,7 @@ def g_ranking(reqeust):
 @api_view(['GET'])
 def bestcorp(request):
     corp = get_object_or_404(Corporate.objects.order_by('-ESG_rating')[:1])
-    print(corp)
+    # print(corp)
     serializer = CorporateDetailSerializer(corp)
 
     return Response(serializer.data)
