@@ -25,7 +25,16 @@
         :rank="rank"/>
       </div>
     <!-- pagination --> 
-
+    <b-pagination 
+     :total="totalPage" align="center"  @current-change="movePage" :page-size="10">
+     
+    </b-pagination>
+    <el-pagination
+        class="text-center mb-4 d-flex align-items-center justify-content-center "
+        background
+        layout="prev, pager, next">
+      </el-pagination>
+    
     <!-- 랭킹 테이블 끝 -->
     </div>
     <!-- rank div 끝 -->
@@ -68,6 +77,7 @@ export default {
     return{
       rank: [],
       // page
+      currentPage: 1,
       
     }
   },
@@ -78,6 +88,9 @@ export default {
         Authorization: `JWT ${token}`
       }
       return config
+    },
+    movePage(page){
+      this.page = page
     },
     // ESG 전체 순위 리스트 조회 
     getESGRank() {
@@ -100,7 +113,7 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          this.rank = res.data
+          this.rank = res.data.slice(0, 10)
           console.log('e순위', this.rank)
           // this.$router.go()
         })
@@ -115,7 +128,7 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          this.rank = res.data
+          this.rank = res.data.slice(0, 10)
           console.log('s순위', this.rank)
           // this.$router.go()
         })
@@ -130,7 +143,7 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          this.rank = res.data
+          this.rank = res.data.slice(0, 10)
           console.log('g순위', this.rank)
           // this.$router.go()
         })
@@ -141,6 +154,16 @@ export default {
   },
   async mounted() {
     this.getESGRank()
+  },
+  computed: {
+    paginated() {
+      const start = (this.page - 1 ) * 10,
+            end = start + 10;
+      return this.rank.slice(start, end);
+    },
+    totalPage: function() {
+      return this.rank.length
+    }
   }
 }
 </script>
