@@ -250,7 +250,7 @@ def search_news_data():
                 now_year = now.year
                 now_month = now.month
                 now_day = now.day
-                news_created = str(news_year) + '-' + str(news_month) + '-' + str(news_day)
+                news_created = str(news_year) + '-' + str(news_month).zfill(2) + '-' + str(news_day).zfill(2)
                 if (now_year != int(news_year)) or (news_month != now_month) or (now_day != news_day): # 하루 전날 기사만 수집
                     continue
                 title = temp['title'][idx].strip().replace('<b>','').replace('</b>','')\
@@ -276,7 +276,7 @@ def search_news_data():
                     if g:
                         category += 'G'
                     
-                    print(corp_id, title, link, content, news_date, category)
+                    print(corp_id, title, link, content, news_created, category)
                     print("e:", e, "s:", s, "g:", g,"v:", v)
         
 
