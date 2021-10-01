@@ -221,7 +221,7 @@ def check_v(title):
             return 2
 
 
-months = ['', 'Jan', 'Fab', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 def search_news_data():
     corps = pd.read_excel("./data/기업정보.xlsx")
@@ -236,12 +236,18 @@ def search_news_data():
         'X-Naver-Client-Id':id,
         'X-Naver-Client-Secret':pwd
     }
-    for corp_name in range(len(corp_names)):
-        cnt = 0
-        keyword = corp_names[corp_name]
+    today_corp = []
+    for corp_id in range(len(corp_names)):
+        total_cnt = 0
+        e_negative_cnt = e_positive_cnt = 0
+        s_negative_cnt = s_positive_cnt = 0
+        g_negative_cnt = g_positive_cnt = 0
+
+        keyword = corp_names[corp_id]
         url = f'https://openapi.naver.com/v1/search/news.json?query={keyword}&display={display}&start={start}&sort=sim'
         res = requests.get(url, headers=headers)
         if res.status_code == 200:
+            corp = Corporate.objects.get(id=corp_id+1)
             datas = res.json()
             if datas['total'] == 0:
                 continue
@@ -261,36 +267,85 @@ def search_news_data():
                 title = temp['title'][idx].strip().replace('<b>','').replace('</b>','')\
                     .replace('&quot;','"').replace('&lt;','>').replace('&gt;','<').replace('&amp;','&')
                 temp['title'][idx] = title
+
+                # esg 분류
                 e = check_e(title)
                 s = check_s(title)
                 g = check_g(title)
-                v = check_v(title)
+                evaluation = check_v(title)
+
+                # ESG 관련 기사면
                 if e or s or g:
-                    cnt += 1
-                    print(title)
-                    corp_id = corps['종목코드'][corp_name]
+                    # 전체 갯수 증가
+                    total_cnt += 1
                     link = temp['originallink'][idx]
                     content = temp['description'][idx].strip().replace('<b>','').replace('</b>','')\
                         .replace('&quot;','"').replace('&lt;','>').replace('&gt;','<').replace('&amp;','&')
-                    news_date = temp['pubDate'][idx]
                     category = ''
                     if e:
                         category += 'E'
+                        # 부정이면 부정 count
+                        if evaluation == 2:
+                            e_negative_cnt += 1
+                        # 긍정이면 긍정 count
+                        elif evaluation == 1:
+                            e_positive_cnt += 1
                     if s:
                         category += 'S'
+                        if evaluation == 2:
+                            s_negative_cnt += 1
+                        elif evaluation == 1:
+                            s_positive_cnt += 1
                     if g:
                         category += 'G'
+                        if evaluation == 2:
+                            g_negative_cnt += 1
+                        elif evaluation == 1:
+                            g_positive_cnt += 1
+
                     
-                    corp = Corporate(corp_id = corp_name)
-                    news_data = News(corporate_id=corp_name, title=title, url=link, content=content, date=news_created, category=category,
-                    evaluation=v)
-                    if not News.objects.filter(Q(title=title) & Q(corporate_id=corp.pk)).exists():
+
+                    news_data = News(corporate=corp, title=title, url=link, content=content, date=news_created, category=category,
+                    evaluation=evaluation)
+                    if not News.objects.filter(Q(title=title) & Q(corporate=corp)).exists():
                         news_data.save()
 
-                    print(corp_name, title, link, content, news_created, category)
-                    print("e:", e, "s:", s, "g:", g,"v:", v)
-            break
-        break
+                    print()
+                    print(corp_id, title, link, content, news_created, category, evaluation)
+                    print("e:", e, "s:", s, "g:", g,"v:", evaluation)
+                    print("e_positive_cnt:", e_positive_cnt, "e_negative_cnt:", e_negative_cnt)
+                    print("s_positive_cnt:", s_positive_cnt, "s_negative_cnt:", s_negative_cnt)
+                    print("g_positive_cnt:", g_positive_cnt, "g_negative_cnt:", g_negative_cnt)
+                    print("total_cnt:", total_cnt)
+                    print("===========================================================")
+                    print()
+            # E 업데이트
+            envirnoment = Environment.objects.get(corporate=corp)
+            # 부정적인 기사가 있으면 부정 + 1
+            if e_negative_cnt:
+                envirnoment.news_neg_cnt = envirnoment.news_neg_cnt + 1
+            # 긍정 기사가 있으면 긍정 + 1
+            if e_positive_cnt:
+                envirnoment.news_pos_cnt = envirnoment.news_pos_cnt + 1
+            envirnoment.save()
 
+            # S 업데이트
+            social = Social.objects.get(corporate=corp)
+            if s_negative_cnt:
+                social.news_neg_cnt = social.news_neg_cnt + 1
+            if s_positive_cnt:
+                social.news_pos_cnt = social.news_pos_cnt + 1
+            social.save()
+
+            # G 업데이트
+            gov = Governance.objects.get(corporate=corp)
+            if g_negative_cnt:
+                gov.news_neg_cnt = gov.news_neg_cnt + 1
+            if g_positive_cnt:
+                gov.news_pos_cnt = gov.news_pos_cnt + 1
+            gov.save()
+
+            corp.today_cnt = total_cnt
+            corp.save()
 
 search_news_data()
