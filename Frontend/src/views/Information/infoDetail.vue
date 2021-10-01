@@ -2,7 +2,7 @@
   <div class="container">
     <h1 class="corporate-name">{{ corporate.name }} </h1>
     <div class="scrap-score">
-      <div class="ps-2">{{ corporate.ESG_rating }} / 100</div>
+      <div class="ps-2">Total: {{ corporate.ESG_rating.toFixed(0) }} / 300</div>
       <div class="scrap-button">
         ❤스❤크❤랩❤
       </div>

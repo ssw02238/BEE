@@ -10,10 +10,10 @@
           <th scope="col">총점</th>
         </tr>
       </thead>
-      <tbody v-for="(corporate, idx) in rank" :key="idx"
+      <tbody v-for="(corporate, idx) in paginated" :key="idx"
       @click="goDetail(corporate.pk)" style="background-color:black;">
         <tr id="font">
-          <th>{{ idx+1 }}</th>
+          <th>{{ 10 * (page - 1) + idx + 1 }}</th>
           <th>{{ corporate.name }}</th>
           <th>{{ corporate.E_rating.toFixed(2) }}</th>
           <th>{{ corporate.S_rating.toFixed(2) }}</th>
@@ -30,7 +30,8 @@
 export default {
     name: 'table',
     props: {
-      rank: Array,
+      paginated: Array,
+      page: Number,
     },
     methods: {
       goDetail(pk) {

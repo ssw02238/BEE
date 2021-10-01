@@ -22,24 +22,30 @@
     <!-- 랭킹 테이블 시작 -->
       <div class="card-body" style="background-color: black;">
         <Table
-        :rank="rank"/>
+        :page = "page"
+        :paginated="paginated"/>
       </div>
     <!-- pagination --> 
-    <b-pagination 
-     :total="totalPage" align="center"  @current-change="movePage" :page-size="10">
-     
-    </b-pagination>
-    <el-pagination
-        class="text-center mb-4 d-flex align-items-center justify-content-center "
-        background
-        layout="prev, pager, next">
-      </el-pagination>
+    <nav aria-label="Page navigation example" style="margin: auto">
+      <ul class="pagination">
+        <li class="page-item">
+          <button type="button" class="page-link" v-if="page > 1" @click="page--"> Previous </button>
+        </li>
+        <li class="page-item disabled">
+          <button type="button" class="page-link" v-if="page == 1" @click="page--" style="background-color: black;"> Previous </button>
+        </li>
+        <li class="page-item">
+          <button type="button" class="page-link" v-for="pageNumber in pages.slice(page-1, page+5)" :key="pageNumber" @click="page = pageNumber"> {{pageNumber}} </button>
+        </li>
+        <li class="page-item">
+          <button type="button" @click="page++" v-if="page < pages.length" class="page-link"> Next </button>
+        </li>
+      </ul>
+    </nav>  
     
     <!-- 랭킹 테이블 끝 -->
     </div>
     <!-- rank div 끝 -->
-
-
 
 <!-- Graph div 시작 -->
     <div class="card text-center top-card" style="background-color: black; margin: auto;">
@@ -77,7 +83,9 @@ export default {
     return{
       rank: [],
       // page
-      currentPage: 1,
+      page: 1,
+      perPage: 10,
+      pages: []
       
     }
   },
@@ -89,9 +97,6 @@ export default {
       }
       return config
     },
-    movePage(page){
-      this.page = page
-    },
     // ESG 전체 순위 리스트 조회 
     getESGRank() {
       axios({
@@ -100,11 +105,27 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          this.rank = res.data.corp_data.slice(0, 10)
+          this.rank = res.data.corp_data
         })
         .catch(err => {
           console.log('전체 순위 오류', err)
         })
+    },
+    setPages() {
+      let numberOfPages = Math.ceil(this.rank.length / this.perPage);
+      for (let index = 1; index <= numberOfPages; index ++) {
+        this.pages.push(index);
+        // console.log(this.pages, '페이지 세팅')
+      }
+    },
+    paginate(rank) {
+      let page = this.page
+      let perPage = this.perPage
+      let from = (page * perPage) - perPage;
+      let to = (page * perPage);
+      console.log('잘린 애들', rank.slice(from, to))
+      console.log('현재 페이지', page)
+      return  rank.slice(from, to)
     },
     getErank() {
       axios({
@@ -113,9 +134,8 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          this.rank = res.data.slice(0, 10)
           console.log('e순위', this.rank)
-          // this.$router.go()
+          this.rank = res.data
         })
         .catch(err => {
           console.log('E 순위 오류', err)
@@ -128,9 +148,8 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          this.rank = res.data.slice(0, 10)
+          this.rank = res.data
           console.log('s순위', this.rank)
-          // this.$router.go()
         })
         .catch(err => {
           console.log('s 순위 오류', err)
@@ -143,28 +162,28 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          this.rank = res.data.slice(0, 10)
+          this.rank = res.data
           console.log('g순위', this.rank)
-          // this.$router.go()
         })
         .catch(err => {
           console.log('G 순위 오류', err)
         })
     }
   },
-  async mounted() {
+  async mounted () {
     this.getESGRank()
   },
   computed: {
     paginated() {
-      const start = (this.page - 1 ) * 10,
-            end = start + 10;
-      return this.rank.slice(start, end);
-    },
-    totalPage: function() {
-      return this.rank.length
+      return this.paginate(this.rank)
     }
-  }
+  },
+  watch: {
+    rank () {
+      this.setPages();
+      
+    }
+  },
 }
 </script>
 
@@ -173,5 +192,15 @@ export default {
   background-color: black;  
   display: flex;
   justify-content: space-around;
+}
+button.page-link {
+  display: inline-block;
+}
+button.page-link {
+    font-size: 20px;
+    color: #FABD02;
+    font-weight: 500;
+    background-color: black;  
+
 }
 </style>

@@ -49,8 +49,6 @@ def esg_ranking(reqeust):
     return Response(data)
 
 @api_view(['GET'])
-@authentication_classes([JSONWebTokenAuthentication])
-@permission_classes([IsAuthenticated])
 def e_ranking(reqeust):
     corp_list = get_list_or_404(Corporate.objects.order_by('-E_rating'))
     serializer = CorporateSerializer(corp_list, many=True)
@@ -58,8 +56,6 @@ def e_ranking(reqeust):
     return Response(serializer.data)
 
 @api_view(['GET'])
-@authentication_classes([JSONWebTokenAuthentication])
-@permission_classes([IsAuthenticated])
 def s_ranking(reqeust):
     corp_list = get_list_or_404(Corporate.objects.order_by('-S_rating'))
     serializer = CorporateSerializer(corp_list, many=True)
@@ -67,8 +63,6 @@ def s_ranking(reqeust):
     return Response(serializer.data)
 
 @api_view(['GET'])
-@authentication_classes([JSONWebTokenAuthentication])
-@permission_classes([IsAuthenticated])
 def g_ranking(reqeust):
     corp_list = get_list_or_404(Corporate.objects.order_by('-G_rating'))
     serializer = CorporateSerializer(corp_list, many=True)
@@ -84,8 +78,6 @@ def bestcorp(request):
     
 #신문 기사에서 가장 많이 언급된 기업
 @api_view(['GET'])
-@authentication_classes([JSONWebTokenAuthentication])
-@permission_classes([IsAuthenticated])
 def hottestcorp(request):
     #어제부터 오늘
     startdate = date.today() - timedelta(days=1)
@@ -102,8 +94,6 @@ def hottestcorp(request):
 
 #유저 스크랩 수가 가장 많은 기업
 @api_view(['GET'])
-@authentication_classes([JSONWebTokenAuthentication])
-@permission_classes([IsAuthenticated])
 def popularcorp(request):
     corp = get_object_or_404(Corporate.objects.order_by('-scrap_cnt')[:1])
     serializer = CorporateSerializer(corp)

@@ -66,7 +66,7 @@ export default {
               this.series[0].data.push(this.e_avg)
               this.series[0].data.push(this.s_avg)
               this.series[0].data.push(this.g_avg)
-              console.log(this.series[0].data)
+              // console.log(this.series[0].data)
             })
             .catch(err => {
               console.log('전체 순위 오류', err)
