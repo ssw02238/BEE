@@ -29,7 +29,12 @@ from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
 from sqlalchemy import create_engine
 import pymysql
 
+# Swagger
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
+
+@swagger_auto_schema(methods=['post'], request_body=UserSerializer, responses={201: '성공', 400: '비밀번호 불일치', 409: '이메일 중복'})
 @api_view(['POST'])
 def signup(request):
     User = get_user_model()
@@ -61,6 +66,9 @@ def signup(request):
 # password 변경
 
 
+@swagger_auto_schema(methods=['put'], request_body=PasswordSerializer, 
+                        manual_parameters=[openapi.Parameter('header_test', openapi.IN_HEADER, 
+                            description="a header for  test", type=openapi.TYPE_STRING)])
 @api_view(['PUT'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -102,6 +110,7 @@ def profile(request):
 
 
 # mbti 점수 저장 & 추천 기업 저장
+@swagger_auto_schema(methods=['post', 'put'], request_body=MbtiSerializer)
 @api_view(['POST', 'PUT',])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])

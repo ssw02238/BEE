@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-x89i0(zt2-8z6iy-*f_r)q39^%mrmsf%9o7(_gk*#ykq!@x^wi
 # SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_jwt',
     "corsheaders",
+    'drf_yasg',
 
     'django.contrib.admin',
     'django.contrib.auth',

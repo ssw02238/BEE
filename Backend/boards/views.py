@@ -87,7 +87,6 @@ def bestcorp(request):
 def hottestcorp(request):
     corp = get_object_or_404(Corporate.objects.order_by('-today_cnt')[:1])
     serializer = HottestCorpSerializer(corp)
-    
     return Response(serializer.data)
 
 

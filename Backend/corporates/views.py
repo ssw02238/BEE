@@ -22,6 +22,10 @@ from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
 from sqlalchemy import create_engine
 import pymysql
 
+# Swagger
+from drf_yasg.utils import swagger_auto_schema, no_body
+from drf_yasg import openapi
+
 # import time
 # import schedule
 
@@ -53,6 +57,7 @@ def similar_corp(request, corp_id):
 
     return JsonResponse(sim_corps)
 
+@swagger_auto_schema(methods=['post'], request_body=no_body, responses={204: '스크랩 취소', 200: '스크랩 성공'})
 @api_view(['POST'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])

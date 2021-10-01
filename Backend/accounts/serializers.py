@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'nickname')
+        fields = ('email', 'password', 'nickname',)
 
 
 class PasswordSerializer(serializers.ModelSerializer):
