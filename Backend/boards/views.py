@@ -10,7 +10,7 @@ from django.http import JsonResponse
 
 #model & serializing
 from corporates.models import Corporate, News
-from corporates.seiralizers import CorporateSerializer, CorporateDetailSerializer, NewsSerializer
+from corporates.seiralizers import CorporateSerializer, CorporateDetailSerializer, NewsSerializer, HottestCorpSerializer
 
 #Authentication & Authorization
 from rest_framework.decorators import authentication_classes, permission_classes
@@ -82,19 +82,12 @@ def bestcorp(request):
 
 
 
-#신문 기사에서 가장 많이 언급된 기업
+#신문 기사에서 가장 많이 언급된 기업 = 오늘의기업
 @api_view(['GET'])
 def hottestcorp(request):
-    #어제부터 오늘
-    startdate = date.today() - timedelta(days=1)
-    enddate = date.today()
-    news = get_object_or_404(
-        News.objects.filter(date__range=[startdate, enddate]).annotate(count=Count('corporate_id')).order_by('-count')[:1]
-    )
-    corp_id = news.corporate_id
-    corp = get_object_or_404(Corporate, pk=corp_id)
-    serializer = CorporateSerializer(corp)
-
+    corp = get_object_or_404(Corporate.objects.order_by('-today_cnt')[:1])
+    serializer = HottestCorpSerializer(corp)
+    
     return Response(serializer.data)
 
 
