@@ -1,6 +1,13 @@
 from decouple import config
 import pandas as pd
 
+from bs4 import BeautifulSoup
+from pprint import pprint
+import datetime
+import requests
+from .models import News, Corporate, Environment, Social, Governance
+from django.db.models import Q
+
 import torch
 from torch import nn
 import torch.nn.functional as F
@@ -211,12 +218,6 @@ def check_v(title):
             return 2
 
 
-from bs4 import BeautifulSoup
-from pprint import pprint
-import datetime
-import requests
-from .models import News, Corporate, Environment, Social, Governance
-
 months = ['', 'Jan', 'Fab', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 def search_news_data():
@@ -277,10 +278,14 @@ def search_news_data():
                     if g:
                         category += 'G'
                     
+                    news_data = News(corp_id=corp_name, title=title, link=link, content=content, date=news_created, category=category)
+                    if not News.objects.filter(Q(title=title) & Q(corp_id=corp_name)).exists():
+                        news_data.save()
 
                     print(corp_name, title, link, content, news_created, category)
                     print("e:", e, "s:", s, "g:", g,"v:", v)
-        
+            break
+        break
 
 
 search_news_data()
