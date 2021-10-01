@@ -3,6 +3,8 @@ from django.db.models import fields
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
+from Backend.accounts.models import MBTI
+
 User = get_user_model()
 
 
@@ -28,7 +30,7 @@ class MbtiSerializer(serializers.ModelSerializer):
     g_score = serializers.FloatField(write_only=True)
 
     class Meta:
-        model = User
+        model = MBTI
         fields = ('e_score', 's_score', 'g_score',)
         read_only_fields = ('email', 'nickname', 'password')
 

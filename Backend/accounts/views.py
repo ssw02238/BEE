@@ -12,7 +12,7 @@ from django.http import JsonResponse
 
 # model
 from django.contrib.auth import get_user_model
-from .models import UserManager
+from .models import MBTI, UserManager
 from .serializers import UserSerializer, PasswordSerializer, MbtiSerializer
 from corporates.seiralizers import CorporateSerializer
 
@@ -95,26 +95,46 @@ def profile(request):
 
 
 # mbti 점수 저장
-@api_view(['POST'])
+@api_view(['POST', 'PUT',])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
 def mbti(request):
-    # User = get_user_model()
+    User = get_user_model()
     # client = request.user
     # client.e_score = request.data.get('e_score')
     # client.s_score = request.data.get('s_score')
     # client.g_score = request.data.get('g_score')
     # client.save()
-    serializer = MbtiSerializer(request.user, data=request.data)
+    # serializer = MbtiSerializer(request.user, data=request.data)
 
-    if serializer.is_valid(raise_exception=True):
-        user = serializer.save()
-        user.save()
-        return Response({'message': '성공적으로 저장되었습니다.'}, status=status.HTTP_200_OK)
+    # if serializer.is_valid(raise_exception=True):
+    #     user = serializer.save()
+    #     user.save()
+    #     return Response({'message': '성공적으로 저장되었습니다.'}, status=status.HTTP_200_OK)
+    client = get_object_or_404(User, pk=request.data.get('user_id'))
+
+    if request.method == 'POST':
+        timetable = get_object_or_404(Timetable, classroom=request.user.classroom)
+        serializer = TimetableDetailSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(timetable=timetable)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+    elif request.method == 'PUT':
+        timetable = get_object_or_404(Timetable, classroom=request.user.classroom)
+        serializer = TimetableSerializer(timetable, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-# 본인 esg 점수 불러오기
+    if MBTI.objects.filter(user=client):
 
+        client.e_score = request.data.get('e_score')
+        client.s_score = request.data.get('s_score')
+        client.g_score = request.data.get('g_score')
+
+    return Response({'message': '성공적으로 저장되었습니다.'}, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 @authentication_classes([JSONWebTokenAuthentication])
