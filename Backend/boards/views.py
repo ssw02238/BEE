@@ -84,8 +84,6 @@ def bestcorp(request):
 
 #신문 기사에서 가장 많이 언급된 기업
 @api_view(['GET'])
-@authentication_classes([JSONWebTokenAuthentication])
-@permission_classes([IsAuthenticated])
 def hottestcorp(request):
     #어제부터 오늘
     startdate = date.today() - timedelta(days=1)
@@ -102,8 +100,6 @@ def hottestcorp(request):
 
 #유저 스크랩 수가 가장 많은 기업
 @api_view(['GET'])
-@authentication_classes([JSONWebTokenAuthentication])
-@permission_classes([IsAuthenticated])
 def popularcorp(request):
     corp = get_object_or_404(Corporate.objects.order_by('-scrap_cnt')[:1])
     serializer = CorporateSerializer(corp)

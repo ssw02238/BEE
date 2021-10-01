@@ -18,7 +18,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 import pandas as pd
-from sklearn.metrics.pairwise import euclidean_distances
+from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
 from sqlalchemy import create_engine
 import pymysql
 
@@ -38,7 +38,7 @@ def corp_news(request, corp_id):
     serializers = NewsSerializer(news, many=True)
     return Response(serializers.data)
 
-#유사 기업
+#유사 기업 (기업간 기업)
 @api_view(['GET'])
 def similar_corp(request, corp_id):
     corp = get_object_or_404(Corporate, id=corp_id)
@@ -108,7 +108,33 @@ def similarity(request):
     df[['first', 'second', 'third']] = sim_df[['first', 'second', 'third']]
     df.to_sql(name='temp_corp', con=db_connection, if_exists='replace', index=False)
 
-    # DB 연결해서 temp 테이블에 저장한 결과를 corporate 테이블로 옮기기
+
+
+    # mbti 결과 기반 추천 DB 업데이트
+    mbti_query = "SELECT * FROM accounts_mbti"
+    mbti_df = pd.read_sql(mbti_query, db_connection)
+    user_mbti = mbti_df[['e_score', 's_score', 'g_score']]
+    corp_df = df[['E_rating', 'S_rating', 'G_rating']]
+
+    # 코사인 유사도가 높은 20개 기업 순서대로 출력
+    cos_sim = cosine_similarity(user_mbti, corp_df)
+    cos_sim_rank = cos_sim.argsort()[:,:-21:-1]
+
+    # 각 사용자마다 코사인 유사도 상위 20개 기업에 대해 유클리디안 거리 비교 및 상위 3개 출력
+    for i in range(len(cos_sim_rank)):
+        rank = cos_sim_rank[i]
+        cos_sim_corps = corp_df.iloc[rank]
+    
+        sim_dist = euclidean_distances(user_mbti.iloc[i:i+1], cos_sim_corps)
+        dist_sim_rank = sim_dist.argsort()[0][:3]
+        dist_sim_corps = cos_sim_corps.index[dist_sim_rank]
+        mbti_df.loc[i,['first', 'second', 'third']] = dist_sim_corps
+
+    mbti_df.to_sql(name='temp_mbti', con=db_connection, if_exists='replace', index=False)
+
+
+
+    # DB 연결해서 temp 테이블에 저장한 결과를 원하는 테이블로 옮기기
     db = pymysql.connect(
         user='admin',
         passwd='1q2w3e4r5t!',
@@ -131,7 +157,17 @@ def similarity(request):
         WHERE corporates_corporate.id = temp_corp.id;
         """
 
+    mbti_sql = """
+        UPDATE accounts_mbti, temp_mbti
+        SET
+        accounts_mbti.first = temp_mbti.first,
+        accounts_mbti.second = temp_mbti.second,
+        accounts_mbti.third = temp_mbti.third
+        WHERE accounts_mbti.id = temp_mbti.id;
+        """
+
     cursor.execute(update_sql)
+    cursor.execute(mbti_sql)
     db.commit()
     db.close()
 
