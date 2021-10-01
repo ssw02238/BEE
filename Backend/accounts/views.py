@@ -114,8 +114,6 @@ def mbti(request):
 
 
 # 본인 esg 점수 불러오기
-
-
 @api_view(['GET'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])

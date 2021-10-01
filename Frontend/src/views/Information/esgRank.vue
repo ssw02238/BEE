@@ -12,9 +12,9 @@
           필터링
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">E 점수 순</a></li>
-          <li><a class="dropdown-item" href="#">S 점수 순</a></li>
-          <li><a class="dropdown-item" href="#">G 점수 순</a></li>
+          <li><a class="dropdown-item" href="#" @click="getErank()">E 점수 순</a></li>
+          <li><a class="dropdown-item" href="#" @click="getSrank()">S 점수 순</a></li>
+          <li><a class="dropdown-item" href="#" @click="getGrank()">G 점수 순</a></li>
         </ul>
       </div>
     <!-- 드롭다운 끝 -->
@@ -24,6 +24,8 @@
         <Table
         :rank="rank"/>
       </div>
+    <!-- pagination --> 
+
     <!-- 랭킹 테이블 끝 -->
     </div>
     <!-- rank div 끝 -->
@@ -65,6 +67,8 @@ export default {
   data() {
     return{
       rank: [],
+      // page
+      
     }
   },
   methods: {
@@ -89,6 +93,51 @@ export default {
           console.log('전체 순위 오류', err)
         })
     },
+    getErank() {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/boards/e-ranking/',
+        headers: this.setToken()
+      })
+        .then(res => {
+          this.rank = res.data
+          console.log('e순위', this.rank)
+          // this.$router.go()
+        })
+        .catch(err => {
+          console.log('E 순위 오류', err)
+        })
+    },
+    getSrank() {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/boards/s-ranking/',
+        headers: this.setToken()
+      })
+        .then(res => {
+          this.rank = res.data
+          console.log('s순위', this.rank)
+          // this.$router.go()
+        })
+        .catch(err => {
+          console.log('s 순위 오류', err)
+        })
+    },
+    getGrank() {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/boards/g-ranking/',
+        headers: this.setToken()
+      })
+        .then(res => {
+          this.rank = res.data
+          console.log('g순위', this.rank)
+          // this.$router.go()
+        })
+        .catch(err => {
+          console.log('G 순위 오류', err)
+        })
+    }
   },
   async mounted() {
     this.getESGRank()

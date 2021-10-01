@@ -38,7 +38,7 @@ def corp_news(request, corp_id):
     serializers = NewsSerializer(news, many=True)
     return Response(serializers.data)
 
-#유사 기업
+#유사 기업 (기업간 기업)
 @api_view(['GET'])
 def similar_corp(request, corp_id):
     corp = get_object_or_404(Corporate, id=corp_id)
