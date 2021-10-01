@@ -61,12 +61,14 @@
       <Graphmain/>
     </div>
 
-    <div class="mbti" v-else style="width: 50%;">
+    <div class="mbti d-flex flex-column justify-content-center" v-else style="width: 50%;">
       <RouterLink class="routerLink" :to="{ name: 'test' }">
+        <div>
           <button class="btn btn-lg btn-block" 
           style="width:100%; background-color:#FABD01;">
             ESG mbti 확인하기
           </button>
+        </div>
       </RouterLink>
     </div>
 
