@@ -50,14 +50,21 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
-    # mbti 필드
-    e_score = models.FloatField(default=0)
-    s_score = models.FloatField(default=0)
-    g_score = models.FloatField(default=0)
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nickname']
 
 
 # ESG 성향 테스트 추가
-class Survey(models.Model):
-    pass
+class MBTI(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    # mbti 점수
+    e_score = models.FloatField(default=0)
+    s_score = models.FloatField(default=0)
+    g_score = models.FloatField(default=0)
+
+    # mbti 기반 추천 기업
+    first = models.IntegerField()
+    second = models.IntegerField()
+    third = models.IntegerField()

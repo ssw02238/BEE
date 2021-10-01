@@ -11,5 +11,5 @@ urlpatterns = [
     path('profile/', views.profile),
     path('profile_esg/', views.profile_esg),
     # mbti 점수 기록
-    path('mbti/', views.mbti)
+    path('mbti/', views.mbti),
 ]
