@@ -1,3 +1,7 @@
+import django, os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bee.settings')
+django.setup()
+from corporates.models import News, Corporate, Environment, Social, Governance
 from decouple import config
 import pandas as pd
 
@@ -5,7 +9,6 @@ from bs4 import BeautifulSoup
 from pprint import pprint
 import datetime
 import requests
-from .models import News, Corporate, Environment, Social, Governance
 from django.db.models import Q
 
 import torch
@@ -126,10 +129,10 @@ g_model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
 v_model = BERTClassifier2(bertmodel, dr_rate=0.5).to(device)
 
 # 모델 로드
-e_model.load_state_dict(torch.load("../data/model/e_model.pt", map_location=device))
-s_model.load_state_dict(torch.load("../data/model/s_model.pt", map_location=device))
-g_model.load_state_dict(torch.load("../data/model/g_model.pt", map_location=device))
-v_model.load_state_dict(torch.load("../data/model/v_model.pt", map_location=device))
+e_model.load_state_dict(torch.load("./data/model/e_model.pt", map_location=device))
+s_model.load_state_dict(torch.load("./data/model/s_model.pt", map_location=device))
+g_model.load_state_dict(torch.load("./data/model/g_model.pt", map_location=device))
+v_model.load_state_dict(torch.load("./data/model/v_model.pt", map_location=device))
 e_model.eval()
 s_model.eval()
 g_model.eval()
@@ -221,7 +224,7 @@ def check_v(title):
 months = ['', 'Jan', 'Fab', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 def search_news_data():
-    corps = pd.read_excel("../data/기업정보.xlsx")
+    corps = pd.read_excel("./data/기업정보.xlsx")
     corp_names = corps["종목명"]
     keyword = ''
     display = 100
@@ -278,8 +281,10 @@ def search_news_data():
                     if g:
                         category += 'G'
                     
-                    news_data = News(corp_id=corp_name, title=title, link=link, content=content, date=news_created, category=category)
-                    if not News.objects.filter(Q(title=title) & Q(corp_id=corp_name)).exists():
+                    corp = Corporate(corp_id = corp_name)
+                    news_data = News(corporate_id=corp_name, title=title, url=link, content=content, date=news_created, category=category,
+                    evaluation=v)
+                    if not News.objects.filter(Q(title=title) & Q(corporate_id=corp.pk)).exists():
                         news_data.save()
 
                     print(corp_name, title, link, content, news_created, category)
