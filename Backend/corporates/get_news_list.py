@@ -1,13 +1,5 @@
 from decouple import config
-from pprint import pprint
-from bs4 import BeautifulSoup
-from urllib.request import urlopen
-import datetime
-import requests
 import pandas as pd
-import pickle
-import re
-import time
 
 import torch
 from torch import nn
@@ -16,7 +8,7 @@ import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 import gluonnlp as nlp
 import numpy as np
-from tqdm import tqdm as tqdm, tqdm_notebook
+from tqdm import tqdm as tqdm
 
 #kobert
 from kobert.utils import get_tokenizer
@@ -60,7 +52,7 @@ class BERTDataset(Dataset):
     def __len__(self):
         return (len(self.labels))
 
-
+# 이진분류모델
 class BERTClassifier(nn.Module):
     def __init__(self,
                  bert,
@@ -90,6 +82,7 @@ class BERTClassifier(nn.Module):
             out = self.dropout(pooler)
         return self.classifier(out)
 
+# 다중분류모델
 class BERTClassifier2(nn.Module):
     def __init__(self,
                  bert,
@@ -119,11 +112,13 @@ class BERTClassifier2(nn.Module):
             out = self.dropout(pooler)
         return self.classifier(out)
 
+# 모델 설정
 e_model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
 s_model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
 g_model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
 v_model = BERTClassifier2(bertmodel, dr_rate=0.5).to(device)
 
+# 모델 로드
 e_model.load_state_dict(torch.load("../data/model/e_model.pt", map_location=device))
 s_model.load_state_dict(torch.load("../data/model/s_model.pt", map_location=device))
 g_model.load_state_dict(torch.load("../data/model/g_model.pt", map_location=device))
@@ -216,6 +211,12 @@ def check_v(title):
             return 2
 
 
+from bs4 import BeautifulSoup
+from pprint import pprint
+import datetime
+import requests
+from .models import News, Corporate, Environment, Social, Governance
+
 months = ['', 'Jan', 'Fab', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 def search_news_data():
@@ -276,7 +277,8 @@ def search_news_data():
                     if g:
                         category += 'G'
                     
-                    print(corp_id, title, link, content, news_created, category)
+
+                    print(corp_name, title, link, content, news_created, category)
                     print("e:", e, "s:", s, "g:", g,"v:", v)
         
 
