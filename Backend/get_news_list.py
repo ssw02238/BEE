@@ -1,13 +1,15 @@
+import django, os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bee.settings')
+django.setup()
+from corporates.models import News, Corporate, Environment, Social, Governance
 from decouple import config
-from pprint import pprint
+import pandas as pd
+
 from bs4 import BeautifulSoup
-from urllib.request import urlopen
+from pprint import pprint
 import datetime
 import requests
-import pandas as pd
-import pickle
-import re
-import time
+from django.db.models import Q
 
 import torch
 from torch import nn
@@ -16,7 +18,7 @@ import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 import gluonnlp as nlp
 import numpy as np
-from tqdm import tqdm as tqdm, tqdm_notebook
+from tqdm import tqdm as tqdm
 
 #kobert
 from kobert.utils import get_tokenizer
@@ -60,7 +62,7 @@ class BERTDataset(Dataset):
     def __len__(self):
         return (len(self.labels))
 
-
+# 이진분류모델
 class BERTClassifier(nn.Module):
     def __init__(self,
                  bert,
@@ -90,6 +92,7 @@ class BERTClassifier(nn.Module):
             out = self.dropout(pooler)
         return self.classifier(out)
 
+# 다중분류모델
 class BERTClassifier2(nn.Module):
     def __init__(self,
                  bert,
@@ -119,15 +122,17 @@ class BERTClassifier2(nn.Module):
             out = self.dropout(pooler)
         return self.classifier(out)
 
+# 모델 설정
 e_model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
 s_model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
 g_model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
 v_model = BERTClassifier2(bertmodel, dr_rate=0.5).to(device)
 
-e_model.load_state_dict(torch.load("../data/model/e_model.pt", map_location=device))
-s_model.load_state_dict(torch.load("../data/model/s_model.pt", map_location=device))
-g_model.load_state_dict(torch.load("../data/model/g_model.pt", map_location=device))
-v_model.load_state_dict(torch.load("../data/model/v_model.pt", map_location=device))
+# 모델 로드
+e_model.load_state_dict(torch.load("./data/model/e_model.pt", map_location=device))
+s_model.load_state_dict(torch.load("./data/model/s_model.pt", map_location=device))
+g_model.load_state_dict(torch.load("./data/model/g_model.pt", map_location=device))
+v_model.load_state_dict(torch.load("./data/model/v_model.pt", map_location=device))
 e_model.eval()
 s_model.eval()
 g_model.eval()
@@ -219,7 +224,7 @@ def check_v(title):
 months = ['', 'Jan', 'Fab', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 def search_news_data():
-    corps = pd.read_excel("../data/기업정보.xlsx")
+    corps = pd.read_excel("./data/기업정보.xlsx")
     corp_names = corps["종목명"]
     keyword = ''
     display = 100
@@ -276,9 +281,16 @@ def search_news_data():
                     if g:
                         category += 'G'
                     
-                    print(corp_id, title, link, content, news_created, category)
+                    corp = Corporate(corp_id = corp_name)
+                    news_data = News(corporate_id=corp_name, title=title, url=link, content=content, date=news_created, category=category,
+                    evaluation=v)
+                    if not News.objects.filter(Q(title=title) & Q(corporate_id=corp.pk)).exists():
+                        news_data.save()
+
+                    print(corp_name, title, link, content, news_created, category)
                     print("e:", e, "s:", s, "g:", g,"v:", v)
-        
+            break
+        break
 
 
 search_news_data()

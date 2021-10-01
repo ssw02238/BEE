@@ -51,3 +51,4 @@ class News(models.Model):
     content = models.TextField()
     date = models.CharField(max_length=50)
     category = models.CharField(max_length=10)
+    evaluation = models.IntegerField(default=0)
