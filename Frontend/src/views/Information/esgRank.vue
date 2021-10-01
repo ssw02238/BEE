@@ -6,6 +6,7 @@
       <div class="card-header" style="font-size:2rem; color:white; text-align:left;">
         Ranks
       </div>
+      <searchBar/>
       <!-- 드롭다운 -->
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="float: right;">
@@ -57,10 +58,11 @@ import Table from '../../components/table.vue'
 import Graph from '../../components/graph_rank.vue'
 import Graph2 from '../../components/graph_rank2.vue'
 import Scrap from '../../components/scrap_rank.vue'
+import SearchBar from '../../components/SearchBar.vue'
 export default {
   name: 'esgRank',
   components: {
-  Table,Graph,Graph2,Scrap
+  Table,Graph,Graph2,Scrap,SearchBar
   },
   data() {
     return{
