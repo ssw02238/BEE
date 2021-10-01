@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
+from django.conf import settings
 
 
 class UserManager(BaseUserManager):
@@ -57,7 +58,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 # ESG 성향 테스트 추가
 class MBTI(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     # mbti 점수
     e_score = models.FloatField(default=0)
@@ -65,6 +66,6 @@ class MBTI(models.Model):
     g_score = models.FloatField(default=0)
 
     # mbti 기반 추천 기업
-    first = models.IntegerField()
-    second = models.IntegerField()
-    third = models.IntegerField()
+    first = models.IntegerField(blank=True, null=True)
+    second = models.IntegerField(blank=True, null=True)
+    third = models.IntegerField(blank=True, null=True)
