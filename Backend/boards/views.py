@@ -49,17 +49,13 @@ def esg_ranking(reqeust):
     return Response(data)
 
 @api_view(['GET'])
-@authentication_classes([JSONWebTokenAuthentication])
-@permission_classes([IsAuthenticated])
 def e_ranking(reqeust):
     corp_list = get_list_or_404(Corporate.objects.order_by('-E_rating'))
     serializer = CorporateSerializer(corp_list, many=True)
-    
+    # print(serializer)
     return Response(serializer.data)
 
 @api_view(['GET'])
-@authentication_classes([JSONWebTokenAuthentication])
-@permission_classes([IsAuthenticated])
 def s_ranking(reqeust):
     corp_list = get_list_or_404(Corporate.objects.order_by('-S_rating'))
     serializer = CorporateSerializer(corp_list, many=True)
@@ -67,21 +63,25 @@ def s_ranking(reqeust):
     return Response(serializer.data)
 
 @api_view(['GET'])
-@authentication_classes([JSONWebTokenAuthentication])
-@permission_classes([IsAuthenticated])
 def g_ranking(reqeust):
     corp_list = get_list_or_404(Corporate.objects.order_by('-G_rating'))
     serializer = CorporateSerializer(corp_list, many=True)
     
     return Response(serializer.data)
 
+
 #ESG 랭킹 1등
 @api_view(['GET'])
 def bestcorp(request):
     corp = get_object_or_404(Corporate.objects.order_by('-ESG_rating')[:1])
+    # print(corp)
     serializer = CorporateDetailSerializer(corp)
+
     return Response(serializer.data)
     
+
+
+
 #신문 기사에서 가장 많이 언급된 기업
 @api_view(['GET'])
 @authentication_classes([JSONWebTokenAuthentication])
