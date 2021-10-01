@@ -66,30 +66,22 @@
     <!-- 유사기업 보여주기 --> 
     <h2 class="corporate-name">Recommendations</h2>
     
-      <div class="row recom">
-        <!-- <div v-for="(recommend, idx) in recommends" :key="idx" @click="goDetail(article.movieId)""> -->
-        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+    <div class="d-flex justify-content-around">
+    <div v-for="corporate in recommends" :key="corporate.pk" @click="goDetail(corporate.pk)">
+      <div class="recomd card" >
+
+        <div class="card-body" style="width: 250px; height: 140px;">       
           <div class="d-flex justify-content-between">
-            <h5 class="mb-1">현대 모비스 ✓8 </h5>
+            <h5 class="mb-1">{{ corporate.name }} </h5>
             <small>스크랩 담기 ▲</small>
           </div>
-        <p class="mb-1" style="color:black;">E: 60 S:40 G:10</p>
-      </a>
-      <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-          <div class="d-flex justify-content-between">
-            <h5 class="mb-1">현대 모비스 ✓8 </h5>
-            <small>스크랩 담기 ▲</small>
-          </div>
-        <p class="mb-1" style="color:black;">E: 60 S:40 G:10</p>
-      </a>
-      <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-          <div class="d-flex justify-content-between">
-            <h5 class="mb-1">현대 모비스 ✓8 </h5>
-            <small>스크랩 담기 ▲</small>
-          </div>
-        <p class="mb-1" style="color:black;">E: 60 S:40 G:10</p>
-      </a>
+          <p class="card-text mt-4" style="color:black;">E: {{ corporate.E_rating.toFixed(2)}} S:{{ corporate.S_rating.toFixed(2) }} G:{{ corporate.G_rating.toFixed(2) }}</p>
+        </div>
+
+      </div>
     </div>
+  </div>
+        
   </div>
 </template>
 
@@ -112,6 +104,7 @@ export default {
       E_rating: '',
       S_rating: '',
       G_rating: '',
+      recommends:[],
 
     }
   },
@@ -155,11 +148,26 @@ export default {
           console.log('정보 가져오기 오류', err)
         })
     },
+    getRecom(pk) {
+      axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/corporates/${pk}/similarcorp/`,
+        headers: this.setToken()
+      })
+        .then(res => {
+          console.log('추천 기업 정보', res.data.corporates)
+          this.recommends = res.data.corporates
+        })
+        .catch(err => {
+          console.log('추천 기업 정보 가져오기 오류', err)
+        })
+    }
   },
   async mounted() {
     this.pk = this.$route.params.pk
     console.log('pk번호 받아왔니?',this.pk)
     this.getDetail(this.pk)
+    this.getRecom(this.pk)
   }
 }
 </script>
@@ -180,14 +188,13 @@ export default {
 .card {
   background-color:black;
 }
-.recom {
+.recomd {
   margin-bottom: 50px;
   display:flex;
   justify-content: space-around;
+  background-color:white;
 }
-a {
-  width: 30%
-}
+
 .scrap-score {
   color:#e6cb7c;
   display: flex;
