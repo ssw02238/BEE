@@ -22,8 +22,8 @@ from sklearn.metrics.pairwise import euclidean_distances
 from sqlalchemy import create_engine
 import pymysql
 
-import time
-import schedule
+# import time
+# import schedule
 
 #기업 디테일 모든 정보를 다 넣어놓음
 @api_view(['GET'])
