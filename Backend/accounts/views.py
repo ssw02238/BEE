@@ -23,6 +23,13 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 
+# mbti
+import pandas as pd
+from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
+from sqlalchemy import create_engine
+import pymysql
+
+
 @api_view(['POST'])
 def signup(request):
     User = get_user_model()
@@ -94,47 +101,58 @@ def profile(request):
     return JsonResponse(client_info, status=status.HTTP_200_OK)
 
 
-# mbti 점수 저장
+# mbti 점수 저장 & 추천 기업 저장
 @api_view(['POST', 'PUT',])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
 def mbti(request):
     User = get_user_model()
-    # client = request.user
-    # client.e_score = request.data.get('e_score')
-    # client.s_score = request.data.get('s_score')
-    # client.g_score = request.data.get('g_score')
-    # client.save()
-    serializer = MbtiSerializer(request.user, data=request.data)
-
-    if serializer.is_valid(raise_exception=True):
-        user = serializer.save()
-        user.save()
-        return Response({'message': '성공적으로 저장되었습니다.'}, status=status.HTTP_200_OK)
-    # client = get_object_or_404(User, pk=request.data.get('user_id'))
-
-    # if request.method == 'POST':
-    #     timetable = get_object_or_404(Timetable, classroom=request.user.classroom)
-    #     serializer = TimetableDetailSerializer(data=request.data)
-    #     if serializer.is_valid(raise_exception=True):
-    #         serializer.save(timetable=timetable)
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    user = request.user
     
-    # elif request.method == 'PUT':
-    #     timetable = get_object_or_404(Timetable, classroom=request.user.classroom)
-    #     serializer = TimetableSerializer(timetable, data=request.data)
-    #     if serializer.is_valid(raise_exception=True):
-    #         serializer.save()
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    # 처음 했을 때 새로 저장
+    if request.method == 'POST':
+        serializer = MbtiSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=user)
+    
+    # 다시 했을 때 수정해서 저장
+    elif request.method == 'PUT':
+        test = get_object_or_404(MBTI, user=user)
+        serializer = MbtiSerializer(test, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
 
+    # DB 불러와서 유사도 분석 후 temp 테이블에 결과 저장
+    db_connection_str = 'mysql+pymysql://admin:1q2w3e4r5t!@bee.cjkrtt0iwcwz.ap-northeast-2.rds.amazonaws.com/BEE'
+    db_connection = create_engine(db_connection_str)
 
-    # if MBTI.objects.filter(user=client):
+    corp_query = "SELECT E_rating, S_rating, G_rating FROM corporates_corporate"
+    corp_df = pd.read_sql(corp_query, db_connection)
 
-    #     client.e_score = request.data.get('e_score')
-    #     client.s_score = request.data.get('s_score')
-    #     client.g_score = request.data.get('g_score')
+    # user_query = f'SELECT e_score, s_score, g_score FROM accounts_mbti WHERE user_id={request.user.id}'
+    user_query = f'SELECT e_score, s_score, g_score FROM accounts_mbti WHERE user_id={user.id}'
+    user_df = pd.read_sql(user_query, db_connection)
+    print(user_df)
 
-    # return Response({'message': '성공적으로 저장되었습니다.'}, status=status.HTTP_200_OK)
+    # 코사인 유사도가 높은 20개 기업 순서대로 출력
+    cos_sim = cosine_similarity(user_df, corp_df)
+    cos_sim_rank = cos_sim.argsort()[0,::-1][:20]
+    cos_sim_corps = corp_df.iloc[cos_sim_rank]
+
+    # 코사인 유사도 상위 20개 기업에 대해 유클리디안 거리 비교 및 상위 3개 출력
+    sim_dist = euclidean_distances(user_df, cos_sim_corps)
+    dist_sim_rank = sim_dist.argsort()[0][:3]
+    dist_sim_corps = cos_sim_corps.index[dist_sim_rank]
+    
+    # 결과 저장
+    user_mbti = user.mbti
+    user_mbti.first = dist_sim_corps[0]
+    user_mbti.second = dist_sim_corps[1]
+    user_mbti.third = dist_sim_corps[2]
+    user_mbti.save()
+    
+    return Response(status=status.HTTP_200_OK)
+
 
 @api_view(['GET'])
 @authentication_classes([JSONWebTokenAuthentication])
