@@ -36,7 +36,7 @@ class Social(models.Model):
 class Governance(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
     board_ratio = models.FloatField()
-    board_independency = models.BooleanField()
+    board_independency = models.FloatField()
     salary_gap = models.FloatField()
     dividen_ratio = models.FloatField()
     largest_shareholder = models.FloatField()
