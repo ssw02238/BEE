@@ -49,9 +49,5 @@ class News(models.Model):
     url = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     content = models.TextField()
-    date = models.DateTimeField(auto_now=False, auto_now_add=False)
-    publisher = models.CharField(max_length=50)
-    keyword = models.CharField(max_length=20)
+    date = models.CharField(max_length=50)
     category = models.CharField(max_length=10)
-
-
