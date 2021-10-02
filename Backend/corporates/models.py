@@ -46,7 +46,7 @@ class Governance(models.Model):
     
 class News(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
-    url = models.CharField(max_length=50)
+    url = models.CharField(max_length=300)
     title = models.CharField(max_length=50)
     content = models.TextField()
     date = models.CharField(max_length=50)
