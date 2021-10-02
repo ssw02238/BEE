@@ -42,14 +42,16 @@
     <!-- 오늘의 기업 --> 
     <div class="todaycorp" style="display:flex; align-items:center">
       <div style="width: 30%">
-        <h4 class="card-title mt-4 mb-4">오늘의 기업 <br> {{ news_top }}</h4>
+        <h4 class="card-title mt-4 mb-4">오늘의 기업 <br> {{ todayCorp }}</h4>
         <p id="font">*오늘의 기업이란,<br> 하루 ESG 기사 언급량<br> 1위 기업을 의미합니다.</p>
       </div>
       <div style="width: 70%">
         <ul class="list-group card-text" id="font">
-          <li class="list-group-item">ESG 경영 더는 두고볼 수 없다구여ㅛ!!!!!!!!!!!!</li>
-          <li class="list-group-item">사회에 공헌하는 기업 포 스 코!!!!포스코!!!!!!!!!!!1</li>
-          <li class="list-group-item">믓진 기업 포 스 코 ...포 스 코 ...포 스 코 ...</li>
+          <div v-for="(news, idx) in todayCorpNews" :key="idx">
+            <li class="list-group-item">
+              <a :href="news.url" class="news-link">{{ news.title }}</a>
+            </li>
+          </div>
         </ul>
         <button class="btn btn-lg btn-block mt-2" style="width:80%; background-color:#FABD01">회사 정보 확인</button>
       </div>
@@ -108,7 +110,8 @@ export default {
       // 전체 순위
       paginated: '',
       page: 1,
-      news_top: '포스코',
+      todayCorp: '포스코', // 오늘의 기업
+      todayCorpNews: [], // 오늘의 기업 뉴스
       nickname: '',
     };
   },
@@ -175,10 +178,13 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          console.log('1위 뉴스 기업 정보', res)
+          console.log('오늘의 기업 정보', res)
+          console.log(res.data)
+          this.todayCorp = res.data.name
+          this.todayCorpNews = res.data.news.slice(0, 3)
         })
         .catch(err => {
-          console.log('1위 뉴스 기업 오류', err)
+          console.log('오늘의 기업 오류', err)
         })
     },
     
@@ -193,6 +199,15 @@ export default {
 </script>
 
 <style scoped>
+.news-link {
+  color: white;
+  white-space: normal;
+  overflow: hidden;
+  text-align: left;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
 .main-div {
   width: 75%;
   margin: auto;
