@@ -89,6 +89,7 @@ def profile(request):
     client_info = {
         'nickname': client_object.nickname,
         'email': client_email,
+        'id': client.pk,
         'corporates': corporates_serializer.data,
     }
     return JsonResponse(client_info, status=status.HTTP_200_OK)

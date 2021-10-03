@@ -59,15 +59,22 @@ def similar_corp(request, corp_id):
 def add_scrap(request, corp_id):
     corp = get_object_or_404(Corporate, pk=corp_id)
 
+    scrap_flag = {
+        'is_scrap': False,
+        'messages': '',
+    }
     #스크랩 취소 (이미 스크랩한 유저)
     if corp.scrap_user.filter(pk=request.user.pk).exists():
         corp.scrap_user.remove(request.user)
-        return Response({'messages': '스크랩 취소'}, status=status.HTTP_204_OK)
+        scrap_flag['messages'] = '스크랩 취소'
+        return JsonResponse(scrap_flag, status=status.HTTP_204_NO_CONTENT)
 
     #스크랩 추가
     else:
         corp.scrap_user.add(request.user)
-        return Response({'messages': '스크랩 성공'}, status=status.HTTP_200_OK)
+        scrap_flag['is_scrap'] = True
+        scrap_flag['messages'] = '스크랩 성공'
+        return JsonResponse(scrap_flag, status=status.HTTP_201_CREATED)
 
 @api_view(['GET'])
 def search(request, corp_name):

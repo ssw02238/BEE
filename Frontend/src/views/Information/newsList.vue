@@ -73,7 +73,7 @@ export default {
             console.log('오류', err)
           })
       },
-      // scrap 하기 
+      // scrap 하기 ??
       getScrap() {
         axios({
           method: 'post',

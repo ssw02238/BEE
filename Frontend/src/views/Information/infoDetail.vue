@@ -1,17 +1,16 @@
 <template>
   <div class="container">
-    <h1 class="corporate-name">{{ corporate.name }} </h1>
+    <h1 class="corporate-name" style="display:inline">{{ corporate.name }} </h1>
+    <!-- scrap list에 따른 분기 처리 진행할 것... -->
+    <b-icon icon="star-fill" variant="warning" font-scale="2" @click="addScrap" type="button" v-if="is_scrap"></b-icon>
+    <b-icon icon="star" font-scale="2" @click="addScrap" type="button" v-else></b-icon>
     <div class="scrap-score">
-      <div class="ps-2">{{ corporate.ESG_rating }} / 100</div>
-      <div class="scrap-button">
-        ❤스❤크❤랩❤
-      </div>
+      <div class="ps-2">{{ corporate.ESG_rating }} / 300</div>
     </div>
     <!-- ESG evalutaion --> 
 
     <div class="card">
       <div class="row g-0">
-
         <div class="col-md-4">
           <Graph
           :E_rating="E_rating"
@@ -97,7 +96,8 @@
 import axios from 'axios'
 import Top from '../../components/Top.vue'
 import Graph from '../../components/graph_infodetail.vue' 
-// import Scrap from '../../components/scrap_infodetail.vue' 
+// import { mdiBookmarkOutline } from '@mdi/js';
+
 export default {
   name: 'infoDetail',
   components: {
@@ -112,7 +112,7 @@ export default {
       E_rating: '',
       S_rating: '',
       G_rating: '',
-
+      is_scrap: false,
     }
   },
   methods: {
@@ -123,6 +123,24 @@ export default {
       }
       return config
     },
+    addScrap: function () {
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/corporates/${this.pk}/scrap/`,
+        headers: this.setToken()
+      })
+      .then(res => {
+        // console.log(res)
+        if (res.status == 201) {
+          this.is_scrap = true
+        } else {
+          this.is_scrap = false
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
     getDetail(pk) {
       axios({
         method: 'get',
@@ -132,6 +150,9 @@ export default {
         .then(res => {
           console.log('디테일 정보', res.data)
           this.corporate = res.data
+          if (this.corporate.scrap_user.includes(localStorage.getItem('uid'))) {
+            this.is_scrap = true
+          }
           this.E_rating = this.corporate.E_rating
           this.S_rating = this.corporate.S_rating
           this.G_rating = this.corporate.G_rating
@@ -158,7 +179,7 @@ export default {
   },
   async mounted() {
     this.pk = this.$route.params.pk
-    console.log('pk번호 받아왔니?',this.pk)
+    // console.log('pk번호 받아왔니?',this.pk)
     this.getDetail(this.pk)
   }
 }
