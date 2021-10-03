@@ -53,12 +53,10 @@
           <th scope="col">Date</th>
         </tr>
       </thead>
-      <tbody>
-        <tr id="font">
-          <th scope="row">1</th>
-          <td>삼성전자... 에너지 배출량 개선 결과 발표</td>
-          <td>2021-08-14</td>
-        </tr>
+      <tbody id="font" v-for="(news, idx) in newsList" :key="idx">
+          <th scope="row"><span class="table-text">{{ idx + 1 }}</span></th>
+          <td><a :href="news.url" class="news-link">{{ news.title }}</a></td>
+          <td><span class="table-text">{{ news.date }}</span></td>
       </tbody>
     </table>
     <hr style="color:gold; height:8px;">
@@ -105,7 +103,7 @@ export default {
       S_rating: '',
       G_rating: '',
       recommends:[],
-
+      newsList: [],
     }
   },
   methods: {
@@ -143,6 +141,7 @@ export default {
           this.g3 = this.corporate.governance_evaluation[0].largest_shareholder
           this.g4 = this.corporate.governance_evaluation[0].salary_gap
           this.g5 = this.corporate.governance_evaluation[0].dividen_ratio
+          this.newsList = this.corporate.news
         })
         .catch(err => {
           console.log('정보 가져오기 오류', err)
@@ -201,6 +200,24 @@ export default {
   justify-content: space-between;
   font-size: 1.3rem;
   background-color:black;
+}
+.news-link {
+  color: white;
+  background: transparent;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.table-text {
+  color: white;
+  background: transparent;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 </style>
