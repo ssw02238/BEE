@@ -8,12 +8,12 @@ Vue.config.productionTip = false
 // for bootstrap 5
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-import { BootstrapVue, } from 'bootstrap-vue'
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 
 Vue.use(BootstrapVue)
-
+Vue.use(BootstrapVueIcons)
 
 new Vue({
   router,

@@ -69,7 +69,6 @@ def g_ranking(reqeust):
     
     return Response(serializer.data)
 
-
 #ESG 랭킹 1등
 @api_view(['GET'])
 def bestcorp(request):
