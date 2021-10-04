@@ -43,8 +43,9 @@
 
     <!-- 뉴스 목록 --> 
     <h2 class="corporate-name">News</h2>
-    <p class="ps-2">클릭 후 해당 뉴스를 확인해보세요</p>
-    <table class="table table-dark table-hover">
+    <p v-if="newsList.length > 0" class="ps-2">클릭 후 해당 뉴스를 확인해보세요</p>
+    
+    <table v-if="newsList.length > 0" class="table table-dark table-hover">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -58,6 +59,7 @@
           <td><span class="table-text">{{ news.date }}</span></td>
       </tbody>
     </table>
+    <p v-else class="ps-2 text-center no-news">{{ corporate.name }}의 ESG 관련 뉴스가 없습니다. </p>
     <hr style="color:gold; height:8px;">
 
     <!-- 유사기업 보여주기 --> 
@@ -198,6 +200,13 @@ export default {
   color: #FABD02;
   background-color:rgb(0, 0, 0);
   padding: 8px;
+}
+.no-news {
+  color: #FABD02;
+  padding-top: 8px;
+  padding-bottom: 6px;
+  font-size: 17px;
+  word-spacing: 2.8px;
 }
 #chart {
   margin-top: 30px;
