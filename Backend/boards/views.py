@@ -94,3 +94,14 @@ def popularcorp(request):
     serializer = CorporateSerializer(corp_list, many=True)
     
     return Response(serializer.data)
+
+#200개 news 불러오기
+@api_view(['GET'])
+def news(request):
+    news_list = get_list_or_404(News.objects.order_by('-date')[:200])
+    # print(news_list)
+    serializer = NewsSerializer(news_list, many=True)
+    # print(serializer)
+
+    return Response(serializer.data)
+    
