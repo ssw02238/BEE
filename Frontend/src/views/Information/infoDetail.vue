@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <h1 class="corporate-name" style="display:inline">{{ corporate.name }} </h1>
+    <h1 class="corporate-name" style="display:inline">{{ corporate.name }}</h1>
     <!-- scrap list에 따른 분기 처리 진행할 것... -->
+    <!-- render 될 때 scrap 여부 확인할 수 있는 방법 강구할 것 -->
     <b-icon icon="star-fill" variant="warning" font-scale="2" @click="addScrap" type="button" v-if="is_scrap"></b-icon>
     <b-icon icon="star" font-scale="2" @click="addScrap" type="button" v-else></b-icon>
     <div class="scrap-score">
@@ -106,7 +107,7 @@ export default {
       G_rating: '',
       recommends:[],
       newsList: [],
-      is_scrap: false,
+      is_scrap: true,
     }
   },
   methods: {
@@ -127,8 +128,10 @@ export default {
         // console.log(res)
         if (res.status == 201) {
           this.is_scrap = true
+          // console.log(this.is_scrap)
         } else {
           this.is_scrap = false
+          // console.log(this.is_scrap)
         }
       })
       .catch(err => {
@@ -143,10 +146,12 @@ export default {
       })
         .then(res => {
           console.log('디테일 정보', res.data)
-          this.corporate = res.data
-          if (this.corporate.scrap_user.includes(localStorage.getItem('uid'))) {
+          if (res.data.scrap_user.includes(localStorage.getItem('uid'))) {
             this.is_scrap = true
+          } else {
+            this.is_scrap = false
           }
+          this.corporate = res.data
           this.E_rating = this.corporate.E_rating
           this.S_rating = this.corporate.S_rating
           this.G_rating = this.corporate.G_rating
@@ -191,6 +196,7 @@ export default {
     // console.log('pk번호 받아왔니?',this.pk)
     this.getDetail(this.pk)
     this.getRecom(this.pk)
+    // console.log(this.is_scrap)
   }
 }
 </script>

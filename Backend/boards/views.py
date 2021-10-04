@@ -77,8 +77,6 @@ def bestcorp(request):
     serializer = CorporateDetailSerializer(corp)
 
     return Response(serializer.data)
-    
-
 
 
 #신문 기사에서 가장 많이 언급된 기업 = 오늘의기업
@@ -92,7 +90,7 @@ def hottestcorp(request):
 #유저 스크랩 수가 가장 많은 기업
 @api_view(['GET'])
 def popularcorp(request):
-    corp = get_object_or_404(Corporate.objects.order_by('-scrap_cnt')[:1])
-    serializer = CorporateSerializer(corp)
+    corp_list = get_list_or_404(Corporate.objects.order_by('-scrap_cnt')[:3])
+    serializer = CorporateSerializer(corp_list, many=True)
     
     return Response(serializer.data)
