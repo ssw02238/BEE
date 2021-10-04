@@ -107,7 +107,7 @@ export default {
       G_rating: '',
       recommends:[],
       newsList: [],
-      is_scrap: true,
+      is_scrap: false,
     }
   },
   methods: {
@@ -145,8 +145,11 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          console.log('디테일 정보', res.data)
-          if (res.data.scrap_user.includes(localStorage.getItem('uid'))) {
+          // console.log('디테일 정보', res.data)
+          // console.log(typeof(res.data.scrap_user[0]))
+          // console.log(typeof(localStorage.getItem('uid')))
+          const uid = parseInt(localStorage.getItem('uid'))
+          if (res.data.scrap_user.includes(uid)) {
             this.is_scrap = true
           } else {
             this.is_scrap = false
