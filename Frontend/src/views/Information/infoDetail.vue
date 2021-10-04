@@ -56,7 +56,7 @@
       </thead>
       <tbody id="font" v-for="(news, idx) in newsList" :key="idx">
           <th scope="row"><span class="table-text">{{ idx + 1 }}</span></th>
-          <td><a :href="news.url" class="news-link">{{ news.title }}</a></td>
+          <td><span class="news-link" @click="goPage(news.url)">{{ news.title }}</span></td>
           <td><span class="table-text">{{ news.date }}</span></td>
       </tbody>
     </table>
@@ -121,6 +121,9 @@ export default {
     goDetail(pk) {
       this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
       },  
+      goPage(url){
+        window.open(url, "_blank")
+      },
     addScrap: function () {
       axios({
         method: 'post',
@@ -259,6 +262,8 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  text-decoration: underline; 
+  text-underline-position:under;
 }
 
 .table-text {

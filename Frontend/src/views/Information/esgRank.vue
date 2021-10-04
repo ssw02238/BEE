@@ -203,6 +203,5 @@ button.page-link {
     color: #FABD02;
     font-weight: 500;
     background-color: black;  
-
 }
 </style>
