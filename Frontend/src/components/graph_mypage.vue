@@ -27,8 +27,9 @@ export default {
         },
         series: [{
           name: 'series-1',
-          data: [],
-        }]
+          data: [0, 0, 0],
+        }],
+        recommend: [],
       }
     },
     methods: {
@@ -46,12 +47,15 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-              this.e_score = res.data.e_score
-              this.s_score = res.data.s_score
-              this.g_score = res.data.g_score
+              if (res.data.mbti) {
+                this.series[0].data[0] = res.data.mbti.e_score
+                this.series[0].data[1] = res.data.mbti.s_score
+                this.series[0].data[2] = res.data.mbti.g_score
+              }
               this.series[0].data.push(this.e_score)
               this.series[0].data.push(this.s_score)
               this.series[0].data.push(this.g_score)
+              this.recommend = res.data.recommend
               console.log(this.series[0].data)
 
           })

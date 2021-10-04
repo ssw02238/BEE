@@ -58,10 +58,10 @@
               <th scope="row">3</th>
               <td> CJ ENM </td>
             </tr>
-            <tr>
+            <!-- <tr>
               <th scope="row">4</th>
               <td> 녹십자 </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
   
@@ -103,6 +103,8 @@ export default {
   data: function () {
     return {
       corporates: [],
+      recommend: [],
+      mbti: [],
     }
   },
   methods: {

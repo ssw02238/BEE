@@ -60,7 +60,7 @@
     </div>
 
   <!-- ESG 성향 --> 
-    <div v-if="nickname" style="width: 50%; min-width:200px;">
+    <div v-if="mbti" style="width: 50%; min-width:200px;">
       <h4>{{ nickname }} 님의 ESG 성향</h4>  
       <Graphmain/>
     </div>
@@ -116,6 +116,7 @@ export default {
       todayCorpPk: '',
       todayCorpNews: [], // 오늘의 기업 뉴스
       nickname: '',
+      mbti: '',
     };
   },
   methods: {
@@ -199,6 +200,7 @@ export default {
   },
   async mounted() {
     this.nickname = localStorage.getItem('nickname')
+    this.mbti = localStorage.getItem('mbti')
     this.getBestCorp()
     this.getNewsTop()
     this.getESGRank()

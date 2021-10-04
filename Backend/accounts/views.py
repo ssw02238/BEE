@@ -13,6 +13,7 @@ from django.http import JsonResponse
 # model
 from django.contrib.auth import get_user_model
 from .models import MBTI, UserManager
+from corporates.models import Corporate
 from .serializers import UserSerializer, PasswordSerializer, MbtiSerializer
 from corporates.seiralizers import CorporateSerializer
 
@@ -98,6 +99,11 @@ def profile(request):
     client = request.user
     client_email = request.user.email
 
+    if MBTI.objects.filter(user=client):
+        mbti_score = [client.mbti.e_score, client.mbti.s_score, client.mbti.g_score]
+    else:
+        mbti_score = []
+
     client_object = get_object_or_404(get_user_model(), email=client_email)
     corporates_serializer = CorporateSerializer(
         client.scrap_corporates.all(), many=True)
@@ -106,6 +112,7 @@ def profile(request):
         'email': client_email,
         'id': client.pk,
         'corporates': corporates_serializer.data,
+        'mbti': mbti_score,
     }
     return JsonResponse(client_info, status=status.HTTP_200_OK)
 
@@ -170,14 +177,26 @@ def mbti(request):
 def profile_esg(request):
     User = get_user_model()
     client = request.user
-    client_email = request.user.email
 
-    client_object = get_object_or_404(get_user_model(), email=client_email)
-    corporates_serializer = CorporateSerializer(
-        client.scrap_corporates.all(), many=True)
+    if MBTI.objects.filter(user=client):
+        mbti_score = {
+            'e_score': client.mbti.e_score,
+            's_score': client.mbti.s_score,
+            'g_score': client.mbti.g_score,
+        }
+        recommend = [
+            CorporateSerializer(get_object_or_404(Corporate, id=client.mbti.first)).data,
+            CorporateSerializer(get_object_or_404(Corporate, id=client.mbti.second)).data,
+            CorporateSerializer(get_object_or_404(Corporate, id=client.mbti.third)).data,
+        ]
+    else:
+        mbti_score = []
+        recommend = CorporateSerializer(Corporate.objects.order_by('-ESG_rating')[:3], many=True).data
+
+    # corporates_serializer = CorporateSerializer(
+    #     client.scrap_corporates.all(), many=True)
     client_info = {
-        'e_score': client_object.e_score,
-        's_score': client_object.s_score,
-        'g_score': client_object.g_score,
+        'mbti': mbti_score,
+        'recommend': recommend,
     }
     return JsonResponse(client_info, status=status.HTTP_200_OK)

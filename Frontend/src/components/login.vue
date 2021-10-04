@@ -80,6 +80,7 @@ export default {
         localStorage.setItem('uid', res.data.id)
         localStorage.setItem('nickname', res.data.nickname)
         localStorage.setItem('email', res.data.email)
+        localStorage.setItem('mbti', res.data.mbti)
         // 스크랩 리스트 넣기 (기업 디테일 페이지 이동 시 스크랩 분기 처리를 위해)
         this.$router.push({ name: 'main'})
         this.$router.go()

@@ -45,7 +45,10 @@ export default {
             },
           },
         }
-    }       
+    },
+    async mounted() {
+    this.series[0].data = localStorage.getItem('mbti')
+  }      
 }
 </script>
 <style scoped>
