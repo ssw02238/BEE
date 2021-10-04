@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <h1 class="corporate-name" style="display:inline">{{ corporate.name }} </h1>
+    <h1 class="corporate-name" style="display:inline">{{ corporate.name }}</h1>
     <!-- scrap list에 따른 분기 처리 진행할 것... -->
+    <!-- render 될 때 scrap 여부 확인할 수 있는 방법 강구할 것 -->
     <b-icon icon="star-fill" variant="warning" font-scale="2" @click="addScrap" type="button" v-if="is_scrap"></b-icon>
     <b-icon icon="star" font-scale="2" @click="addScrap" type="button" v-else></b-icon>
     <div class="scrap-score">
@@ -43,8 +44,9 @@
 
     <!-- 뉴스 목록 --> 
     <h2 class="corporate-name">News</h2>
-    <p class="ps-2">클릭 후 해당 뉴스를 확인해보세요</p>
-    <table class="table table-dark table-hover">
+    <p v-if="newsList.length > 0" class="ps-2">클릭 후 해당 뉴스를 확인해보세요</p>
+    
+    <table v-if="newsList.length > 0" class="table table-dark table-hover">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -58,6 +60,7 @@
           <td><span class="table-text">{{ news.date }}</span></td>
       </tbody>
     </table>
+    <p v-else class="ps-2 text-center no-news">{{ corporate.name }}의 ESG 관련 뉴스가 없습니다. </p>
     <hr style="color:gold; height:8px;">
 
     <!-- 유사기업 보여주기 --> 
@@ -128,8 +131,10 @@ export default {
         // console.log(res)
         if (res.status == 201) {
           this.is_scrap = true
+          // console.log(this.is_scrap)
         } else {
           this.is_scrap = false
+          // console.log(this.is_scrap)
         }
       })
       .catch(err => {
@@ -143,11 +148,16 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          console.log('디테일 정보', res.data)
-          this.corporate = res.data
-          if (this.corporate.scrap_user.includes(localStorage.getItem('uid'))) {
+          // console.log('디테일 정보', res.data)
+          // console.log(typeof(res.data.scrap_user[0]))
+          // console.log(typeof(localStorage.getItem('uid')))
+          const uid = parseInt(localStorage.getItem('uid'))
+          if (res.data.scrap_user.includes(uid)) {
             this.is_scrap = true
+          } else {
+            this.is_scrap = false
           }
+          this.corporate = res.data
           this.E_rating = this.corporate.E_rating
           this.S_rating = this.corporate.S_rating
           this.G_rating = this.corporate.G_rating
@@ -166,7 +176,7 @@ export default {
           this.g3 = this.corporate.governance_evaluation[0].largest_shareholder
           this.g4 = this.corporate.governance_evaluation[0].salary_gap
           this.g5 = this.corporate.governance_evaluation[0].dividen_ratio
-          this.newsList = this.corporate.news
+          this.newsList = this.corporate.news.reverse()
         })
         .catch(err => {
           console.log('정보 가져오기 오류', err)
@@ -208,6 +218,13 @@ export default {
   color: #FABD02;
   background-color:rgb(0, 0, 0);
   padding: 8px;
+}
+.no-news {
+  color: #FABD02;
+  padding-top: 8px;
+  padding-bottom: 6px;
+  font-size: 17px;
+  word-spacing: 2.8px;
 }
 #chart {
   margin-top: 30px;

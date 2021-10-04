@@ -30,7 +30,7 @@ class NewsSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = News
-        fields = ('title', 'content', 'url', 'date')
+        fields = ('title', 'content', 'url', 'date', 'corporate',)
         read_only_fields = ('corporate',)
 
 # 기업 Detail
