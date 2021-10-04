@@ -53,7 +53,9 @@
             </li>
           </div>
         </ul>
-        <button class="btn btn-lg btn-block mt-2" style="width:80%; background-color:#FABD01">회사 정보 확인</button>
+        <button class="btn btn-lg btn-block mt-2" 
+        style="width:80%; background-color:#FABD01"
+        @click="goDetail(todayCorpPk)">회사 정보 확인</button>
       </div>
     </div>
 
@@ -111,6 +113,7 @@ export default {
       paginated: '',
       page: 1,
       todayCorp: '포스코', // 오늘의 기업
+      todayCorpPk: '',
       todayCorpNews: [], // 오늘의 기업 뉴스
       nickname: '',
     };
@@ -181,12 +184,17 @@ export default {
           console.log('오늘의 기업 정보', res)
           console.log(res.data)
           this.todayCorp = res.data.name
+          this.todayCorpPk = res.data.pk
           this.todayCorpNews = res.data.news.slice(0, 3)
         })
         .catch(err => {
           console.log('오늘의 기업 오류', err)
         })
     },
+    goDetail(pk) {
+       console.log('여기 pk', pk)
+      this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
+      },  
     
   },
   async mounted() {

@@ -64,13 +64,13 @@
     <h2 class="corporate-name">Recommendations</h2>
     
     <div class="d-flex justify-content-around">
-    <div v-for="corporate in recommends" :key="corporate.pk" @click="goDetail(corporate.pk)">
+    <div v-for="corporate in recommends" :key="corporate.pk">
       <div class="recomd card" >
 
-        <div class="card-body" style="width: 250px; height: 140px;">       
+        <div class="card-body" style="width: 250px; height: 140px;" @click="goDetail(corporate.pk)">       
           <div class="d-flex justify-content-between">
             <h5 class="mb-1">{{ corporate.name }} </h5>
-            <small>스크랩 담기 ▲</small>
+            <!-- <small>스크랩 담기 ▲</small> -->
           </div>
           <p class="card-text mt-4" style="color:black;">E: {{ corporate.E_rating.toFixed(2)}} S:{{ corporate.S_rating.toFixed(2) }} G:{{ corporate.G_rating.toFixed(2) }}</p>
         </div>
@@ -115,6 +115,9 @@ export default {
       }
       return config
     },
+    goDetail(pk) {
+      this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
+      },  
     addScrap: function () {
       axios({
         method: 'post',
@@ -186,7 +189,6 @@ export default {
   },
   async mounted() {
     this.pk = this.$route.params.pk
-    // console.log('pk번호 받아왔니?',this.pk)
     this.getDetail(this.pk)
     this.getRecom(this.pk)
   }

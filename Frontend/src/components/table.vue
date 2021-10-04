@@ -37,6 +37,7 @@ export default {
       goDetail(pk) {
        console.log('여기 pk', pk)
       this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
+      this.$router.go()
       },  
     }
 
