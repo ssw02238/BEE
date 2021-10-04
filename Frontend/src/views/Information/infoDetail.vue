@@ -165,7 +165,7 @@ export default {
           this.g3 = this.corporate.governance_evaluation[0].largest_shareholder
           this.g4 = this.corporate.governance_evaluation[0].salary_gap
           this.g5 = this.corporate.governance_evaluation[0].dividen_ratio
-          this.newsList = this.corporate.news
+          this.newsList = this.corporate.news.reverse()
         })
         .catch(err => {
           console.log('정보 가져오기 오류', err)
