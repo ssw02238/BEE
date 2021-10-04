@@ -50,7 +50,6 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          console.log('받아온 뉴스', res)
           this.news = res.data
           console.log('받아온 뉴스', this.news)
         })

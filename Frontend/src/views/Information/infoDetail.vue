@@ -191,6 +191,14 @@ export default {
     this.pk = this.$route.params.pk
     this.getDetail(this.pk)
     this.getRecom(this.pk)
+  },
+   watch: {
+    '$route.params.pk': function() {
+      this.pk = this.$route.params.pk
+      this.getDetail(this.pk)
+      this.getRecom(this.pk)
+      window.scrollTo(0, 0)
+    }
   }
 }
 </script>
