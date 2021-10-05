@@ -168,7 +168,7 @@ def mbti(request):
     user_mbti.third = dist_sim_corps[2]
     user_mbti.save()
     
-    return Response(status=status.HTTP_200_OK)
+    return Response({'mbti':request.data.values()}, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
