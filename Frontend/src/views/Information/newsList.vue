@@ -1,25 +1,23 @@
 <template>
-  <div>
+  <div style="margin-bottom: 100px;">
     <div class="mb-4">
-        <p style="font-size:2rem; color:white;margin-left:150px">News</p>
-        <p style="font-soze: 1.2rem; margin-left:150px;background-color:black;">Kospi 200개 기업의 ESG관련 뉴스를 확인해보세요</p>
+        <p style="font-size:2rem; color:#f3c438; margin-left:180px">News</p>
+        <p style="font-soze: 1.2rem; margin-left:180px;">Kospi 200개 기업의 ESG관련 뉴스를 확인해보세요</p>
     </div>
     <table class="table" style="width: 75%;margin:auto;">
-    <thead>
+    <thead style="background-color: rgb(27, 27, 27);">
       <tr>
         <th scope="col">No</th>
         <th scope="col">기사 제목</th>
-        <th scope="col">기업</th>
         <th scope="col">날짜</th>
       </tr>
     </thead>
 
     <tbody v-for="(content, idx) in paginated" :key="idx">
-      <tr>
+      <tr style="height:50px;">
         <!-- <th scope="row">1</th> -->
         <td>{{ 10 * (page - 1) + idx + 1 }} </td>
-        <td class="news-link" @click="goPage(content.url)">{{ content.title }} </td>
-        <td>{{ content.corporate}}</td>            
+        <td class="news-link text-decoration-none" @click="goPage(content.url)">{{ content.title }} </td>
         <td>{{ content.date }} </td>
       </tr>
     </tbody>
@@ -140,8 +138,9 @@ th,td{
   text-underline-position:under;
 }
 .table {
+  /* border: 1px solid whitesmoke; */
   color:white;
-  background-color:black;
+  background-color: black;
 }
 td {
   font-family: 'Pretendard-Regular';
