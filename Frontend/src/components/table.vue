@@ -13,13 +13,12 @@
       <tbody v-for="(corporate, idx) in paginated" :key="idx"
       @click="goDetail(corporate.pk)" style="background-color:black;">
         <tr id="font">
-          <th>{{ 10 * (page - 1) + idx + 1 }}</th>
-          <th>{{ corporate.name }}</th>
-          <th>{{ corporate.E_rating.toFixed(2) }}</th>
-          <th>{{ corporate.S_rating.toFixed(2) }}</th>
-          <th>{{ corporate.G_rating.toFixed(2) }}</th>
-          <th>{{ corporate.ESG_rating.toFixed(2) }}</th>
-
+          <th><div type="button">{{ 10 * (page - 1) + idx + 1 }}</div></th>
+          <th><div type="button">{{ corporate.name }}</div></th>
+          <th><div type="button">{{ corporate.E_rating.toFixed(2) }}</div></th>
+          <th><div type="button">{{ corporate.S_rating.toFixed(2) }}</div></th>
+          <th><div type="button">{{ corporate.G_rating.toFixed(2) }}</div></th>
+          <th><div type="button">{{ corporate.ESG_rating.toFixed(2) }}</div></th>
         </tr>
       </tbody>
 
