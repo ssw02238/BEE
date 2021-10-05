@@ -1,11 +1,11 @@
 <template>
   <div id="back">
 
-    <!-- nav bar --> 
-    <nav-bar />
+    <!-- nav bar -->
+    <nav-bar v-if="$route.name !== 'welcome'"/>
     
     <router-view />
-    <footer-bar />
+    <footer-bar v-if="$route.name !== 'welcome'"/>
   </div>
 </template>
 
