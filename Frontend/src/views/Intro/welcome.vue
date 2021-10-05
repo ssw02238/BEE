@@ -100,4 +100,7 @@ h4, p{
   margin:auto;
   margin-top: 30px
 }
+.card-body {
+  color: #FABD02;
+}
 </style>

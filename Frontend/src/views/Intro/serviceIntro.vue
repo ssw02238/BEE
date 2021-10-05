@@ -115,9 +115,9 @@ img{
   min-height: 300px;
   color:white;
   margin-top: 10px;
-  margin-left: 5px;
-  margin-bottom: 7rem;
-  padding: 10px;
+  margin-left: 3px;
+  margin-bottom: 8rem;
+  padding: 3px;
 }
 .nav-link {
   background-color: #FABD02;
