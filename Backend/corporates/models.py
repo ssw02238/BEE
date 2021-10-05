@@ -20,36 +20,35 @@ class Environment(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
     co2 = models.IntegerField()
     energy = models.IntegerField()
-    news_score = models.FloatField()
-    news_cnt = models.IntegerField()
+    total = models.FloatField()
+    news_pos_cnt = models.IntegerField()
+    news_neg_cnt = models.IntegerField()
 
 class Social(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
     average_term = models.FloatField()
     term_ratio = models.FloatField()
     woman_ratio = models.FloatField()
-    news_score = models.FloatField()
-    news_cnt = models.IntegerField()
+    total = models.FloatField()
+    news_pos_cnt = models.IntegerField()
+    news_neg_cnt = models.IntegerField()
     
 class Governance(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
     board_ratio = models.FloatField()
-    board_independency = models.BooleanField()
+    board_independency = models.FloatField()
     salary_gap = models.FloatField()
     dividen_ratio = models.FloatField()
     largest_shareholder = models.FloatField()
-
-    news_score = models.FloatField()
-    news_cnt = models.IntegerField()
+    total = models.FloatField()
+    news_pos_cnt = models.IntegerField()
+    news_neg_cnt = models.IntegerField()
     
 class News(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
-    url = models.CharField(max_length=50)
+    url = models.CharField(max_length=300)
     title = models.CharField(max_length=50)
     content = models.TextField()
-    date = models.DateTimeField(auto_now=False, auto_now_add=False)
-    publisher = models.CharField(max_length=50)
-    keyword = models.CharField(max_length=20)
+    date = models.CharField(max_length=50)
     category = models.CharField(max_length=10)
-
-
+    evaluation = models.IntegerField(default=0)

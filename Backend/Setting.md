@@ -38,6 +38,12 @@
 - 라이브러리 설치
 
   ```
+  # bert 관련 - 처음에만 필요
+  pip install mxnet
+  pip install git+https://git@github.com/SKTBrain/KoBERT.git@master
+  ```
+
+  ```
   pip install -r requirements.txt
   ```
 

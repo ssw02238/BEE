@@ -12,7 +12,7 @@
               <div class="modal-body">
                 <slot name="body">
                   <form>
-                    <div class="mb-3">
+                    <div class="mb-3 form-text">
                       <label for="exampleInputEmail1" class="form-label"> Email id</label>
                       <input type="id" class="form-control" id="idInput" v-model="credentials.email" placeholder="name@example.com">
                     </div>
@@ -77,8 +77,10 @@ export default {
         })
       .then(res => {
         console.log('닉네임 받기', res.data)
+        localStorage.setItem('uid', res.data.id)
         localStorage.setItem('nickname', res.data.nickname)
         localStorage.setItem('email', res.data.email)
+        // 스크랩 리스트 넣기 (기업 디테일 페이지 이동 시 스크랩 분기 처리를 위해)
         this.$router.push({ name: 'main'})
         this.$router.go()
        })
@@ -92,7 +94,14 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
+.form-text {
+  text-align: center;
+}
+.form-label {
+  color:black;
+  display: flex;
+}
 .modal-mask {
   position: fixed;
   z-index: 9998;

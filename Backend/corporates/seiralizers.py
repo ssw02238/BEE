@@ -30,7 +30,7 @@ class NewsSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = News
-        fields = ('title', 'content', 'url',)
+        fields = ('title', 'content', 'url', 'date', 'corporate',)
         read_only_fields = ('corporate',)
 
 # 기업 Detail
@@ -43,6 +43,15 @@ class CorporateDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Corporate
         fields = '__all__'
+
+
+class HottestCorpSerializer(serializers.ModelSerializer):
+    news = NewsSerializer(many=True, read_only=True, source="news_set")
+    
+    class Meta:
+        model = Corporate
+        fields = ('name', 'pk', 'E_rating', 'S_rating', 'G_rating', 'ESG_rating', 'news')
+
 
 # ESG 랭킹, 유사 기업 & 기업 검색 등 기업의 대략적인 정보만
 class CorporateSerializer(serializers.ModelSerializer):

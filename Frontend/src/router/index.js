@@ -28,7 +28,7 @@ const routes = [
     component: serviceIntro,
 },
 {
-    path: '/infoDetail',
+    path: '/infoDetail/:pk',
     name: 'infoDetail',
     component: infoDetail,
 },

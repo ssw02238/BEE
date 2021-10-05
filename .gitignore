@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/jupyternotebooks,windows,macos,python,visualstudiocode,vuejs,django
 # Edit at https://www.toptal.com/developers/gitignore?templates=jupyternotebooks,windows,macos,python,visualstudiocode,vuejs,django
 
+### model ###
+*.pt
+
 ### Django ###
 *.log
 *.pot

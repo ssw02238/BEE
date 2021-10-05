@@ -2,6 +2,7 @@
 <template>
     <div id="chart">
   <apexchart class="chart mt-5" type="radar" height="350" :options="chartOptions" :series="series"></apexchart>    </div>
+  
 </template>
 
 <script>
@@ -10,6 +11,11 @@ export default {
   components: {
     apexchart: VueApexCharts,
   },
+  props: {
+    E_rating: Number,
+    S_rating: Number,
+    G_rating: Number,
+  },  
   data () {
       return {
         chartOptions: {
@@ -21,8 +27,8 @@ export default {
           }
         },
         series: [{
-          name: 'series-1',
-          data: [60, 10, 45,]
+          name: 'score',
+          data: [this.E_rating,this.S_rating, this.G_rating],
         }]
       }
     },
@@ -30,7 +36,7 @@ export default {
       open (link) {
         this.$electron.shell.openExternal(link)
       }
-    }
+    },
 }
 </script>
 

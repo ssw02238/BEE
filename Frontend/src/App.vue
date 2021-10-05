@@ -3,6 +3,7 @@
 
     <!-- nav bar --> 
     <nav-bar />
+    
     <router-view />
     <footer-bar />
   </div>
@@ -68,9 +69,7 @@ export default {
   padding:0;
   background-size: cover;
 }
-.logo {
-  width: 15%;
-}
+
 #font {
   font-family: 'Pretendard-Regular';
 }

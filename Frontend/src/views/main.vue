@@ -9,7 +9,7 @@
         <h2 class="accordion-header" id="flush-headingOne">
           <button class="accordion-button collapsed" id="font" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
             ESG TOP 1 {{ esg_top }}
-            <span class="ms-5" style="color:yellow"><b>Click!</b></span>
+            <span class="ms-5"><b>▷ 확인하기</b></span>
           </button>
         </h2>
         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -34,33 +34,50 @@
     <hr style="color:yellow">
     <!-- 기업 순위 --> 
     <h3 class="my-4">Monthly Ranking</h3>  
-    <rankTable id="font" :rank="rank"/> 
+    <rankTable id="font" :paginated="paginated" :page="page"/> 
 
     <hr style="color:yellow">
+    <div class="todaytest mt-4" style="display:flex; justify-content: space-between;">
+
     <!-- 오늘의 기업 --> 
-    <div class="card mb-3" style="background-color:black;">
-      <div class="row g-0">
-        <div class="col-md-4" style="display:flex">
-          <img src="@/assets/esg_char.jpg" class="img-fluid rounded-start" alt="esg character" style="align-items:center">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title mb-4">오늘의 기업 🎉 {{ news_top }}</h5>
-              <ul class="list-group card-text" id="font">
-                <li class="list-group-item">뉴스 제목 1</li>
-                <li class="list-group-item">뉴스 제목 1</li>
-                <li class="list-group-item">뉴스 제목 1</li>
-              </ul>
+    <div class="todaycorp" style="display:flex; align-items:center">
+      <div style="width: 30%">
+        <h4 class="card-title mt-4 mb-4">오늘의 기업 <br> {{ todayCorp }}</h4>
+        <p id="font">*오늘의 기업이란,<br> 하루 ESG 기사 언급량<br> 1위 기업을 의미합니다.</p>
+      </div>
+      <div style="width: 70%">
+        <ul class="list-group card-text" id="font">
+          <div v-for="(news, idx) in todayCorpNews" :key="idx">
+            <li class="list-group-item">
+              <a :href="news.url" class="news-link">{{ news.title }}</a>
+            </li>
           </div>
-        </div>
+        </ul>
+        <button class="btn btn-lg btn-block mt-2" style="width:80%; background-color:#FABD01">회사 정보 확인</button>
       </div>
     </div>
+
+  <!-- ESG 성향 --> 
+    <div v-if="nickname" style="width: 50%; min-width:200px;">
+      <h4>{{ nickname }} 님의 ESG 성향</h4>  
+      <Graphmain/>
+    </div>
+
+    <div class="mbti d-flex flex-column justify-content-center" v-else style="width: 50%;">
+      <RouterLink class="routerLink" :to="{ name: 'test' }">
+        <div>
+          <button class="btn btn-lg btn-block" 
+          style="width:100%; background-color:#FABD01;">
+            ESG mbti 확인하기
+          </button>
+        </div>
+      </RouterLink>
+    </div>
+
+  </div>
+
     <hr style="color:yellow">
 
-
-    <!-- ESG 성향 --> 
-    <h3 class="my-4">{{ nickname }} 님의 ESG 성향</h3>  
-    <Graphmain/>
   </div>
 </template>
 
@@ -85,9 +102,16 @@ export default {
       s1: '',
       s2: '',
       s3: '',
+      g1:'',
+      g2: '',
+      g3:'',
+      g4:'',
+      g5:'',
       // 전체 순위
-      rank: '',
-      news_top: '포스코',
+      paginated: '',
+      page: 1,
+      todayCorp: '포스코', // 오늘의 기업
+      todayCorpNews: [], // 오늘의 기업 뉴스
       nickname: '',
     };
   },
@@ -108,15 +132,13 @@ export default {
       })
         .then(res => {
           console.log('1위 esg 기업 정보', res.data)
-          // console.log(res.data.environment_evaluation)
           this.esg_top = res.data.name
           this.e1 = res.data.environment_evaluation[0].co2
           this.e2 = res.data.environment_evaluation[0].energy
           this.s1 = res.data.social_evaluation[0].woman_ratio
           this.s2 = res.data.social_evaluation[0].average_term
           this.s3 = res.data.social_evaluation[0].term_ratio
-          this.g1 = res.data.governance_evaluation[0].board_ration
-          // this.g2 = res.data.governance_evaluation[0].board_independency
+          this.g1 = res.data.governance_evaluation[0].board_ratio
           if (res.data.governance_evaluation[0].board_independency == true) {
             this.g2 = '일치'
           }
@@ -141,8 +163,8 @@ export default {
       })
         .then(res => {
           // console.log('전체 순위 리스트', res)
-          this.rank = res.data.slice(0, 5)
-          console.log(this.rank)
+          this.paginated = res.data.corp_data.slice(0, 5)
+          console.log(this.paginated)
         })
         .catch(err => {
           console.log('전체 순위 오류', err)
@@ -156,12 +178,16 @@ export default {
         headers: this.setToken()
       })
         .then(res => {
-          console.log('1위 뉴스 기업 정보', res)
+          console.log('오늘의 기업 정보', res)
+          console.log(res.data)
+          this.todayCorp = res.data.name
+          this.todayCorpNews = res.data.news.slice(0, 3)
         })
         .catch(err => {
-          console.log('1위 뉴스 기업 오류', err)
+          console.log('오늘의 기업 오류', err)
         })
     },
+    
   },
   async mounted() {
     this.nickname = localStorage.getItem('nickname')
@@ -173,18 +199,39 @@ export default {
 </script>
 
 <style scoped>
+.news-link {
+  color: white;
+  white-space: normal;
+  overflow: hidden;
+  text-align: left;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
 .main-div {
   width: 75%;
   margin: auto;
 }
-h1, h3 {
+h1, h3, h4, .mbti {
   color:#FABD02;
 }
 .accordion-button {
   background-color: #1b1b1b;
   color: white;
 }
-.card-title {
-  color:#FABD02;
+
+.list-group-item {
+  background-color: black;
+  color:white;
+  text-decoration: underline; 
+  text-underline-position:under;
+}
+.todaycorp {
+  background-color:black;
+  border: 1px solid rgb(224, 222, 222);
+  text-align:center;
+  padding: 10px;
+  width:45%;
+  min-width:200px;
 }
 </style>

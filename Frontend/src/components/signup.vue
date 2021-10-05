@@ -80,7 +80,11 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
+.form-label {
+  color:black;
+  display: flex;
+}
 .modal-mask {
   position: fixed;
   z-index: 9998;

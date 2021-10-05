@@ -3,7 +3,7 @@
     <div id="chart">
         
       <p class="card-text" style="font-size:1.5rem;">스크랩 순위</p>
-<table class="table table" style="width: 300px;">
+<table class="table table" style="width:150px">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -14,15 +14,15 @@
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td>녹십자</td>
+      <td>{{ corporates[0].name }}</td>
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td>LG전자</td>
+      <td>{{ corporates[1].name }}</td>
     </tr>
     <tr>
       <th scope="row">3</th>
-      <td>포스코</td>
+      <td>{{ corporates[2].name }}</td>
     </tr>
   </tbody>
 </table>
@@ -30,11 +30,36 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
+  name: 'scrap_rank',
+  data: function () {
+    return {
+      corporates: [],
+    }
+  },
+  methods: {
+    getRank: function () {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/boards/popularcorp/',
+      })
+      .then(res => {
+        // console.log(res)
+        this.corporates = res.data
+      }) 
+      .catch(err => {
+        console.log(err)
+      })
+    }
+  },
+  async mounted() {
+    this.getRank()
+  }
 }
 </script>
 <style scoped>
-th,td{
-    color: yellow;
+th, td {
+  color:#f3c438
 }
 </style>

@@ -24,8 +24,7 @@
   - Ububtu 20.04 LTS
   - SSH 접속 계정 : ubuntu@j5a302.p.ssafy.io
   - 인증키 : J5A302T.pem
-
-  - public IP : 3.35.25.101
+  - public IP : 3.34.142.234
   - port : 22
 - url : http://j5a302.p.ssafy.io/
 
@@ -91,8 +90,18 @@
     - `sudo apt-get python3-pip`
   - mysql install
     - sudo apt-get update
+    
     - sudo apt-get install mysql-server
+    
     - sudo ufw allow mysql
+    
+    - ```swift
+      sudo apt-get install python-dev libmysqlclient-dev
+      ```
+    
+    - ```swift
+      sudo apt-get install python3.8-dev
+      ```
 
 - git clone 
 
@@ -107,16 +116,120 @@
 
 - 가상환경
   - `sudo apt-get install python3-venv`
-  - `python3 -m venv myvenv`
+  - `python3 -m venv venv`
   - `source venv/bin/activate`
   - `pip install -r requirements.txt`
   - `sudo apt install libmysqlclient-dev`
   - `pip install wheel`
-- wsgi 
-  - pip install wsgi
+  
+- wsgi (웹 서버 소프트웨어와 파이썬으로 작성된 웹 응용 프로그램 간의 표준 인터페이스입니다) 설치
+  - pip install uwsgi
     - 문제시 python-dev 설치
     - `sudo apt-get install python3.8-dev`
-  - 
+    
+  - uwsgi initialize 파일 생성 
+
+    > uwsgi는 wsgi와 python project 연결 시켜줌
+
+    - manage.py 경로에 .config/uwsgi 폴더(2개) 생성
+
+    - 해당 폴더 안에 {project_name}.ini 파일 생성
+
+    - 파일 내용은 다음과 같다
+
+      ```
+      [uwsgi]
+      chdir = /srv/S05P21A302/Backend/
+      module = bee.wsgi:application
+      home = /home/ubuntu/srv/S05P21A302/Backend/venv/
+      
+      uid = deploy
+      gid = deploy
+      
+      http = :8000
+      
+      enable-threads = true
+      master = true
+      vacuum = true
+      pidfile = /tmp/bee.pid
+      logto = /var/log/uwsgi/bee/@(exec://date +%%Y-%%m-%%d).log
+      log-reopen = true
+      ```
+
+  - uwsgi routing error
+
+    ```
+    python -m pip install --upgrade pip
+    // pip가 최신 버전이 아닌 경우 실행
+    
+    sudo apt-get install libpcre3 libpcre3-dev
+    // 필요 패키지 설치
+    
+    pip install uwsgi -I --no-cache-dir
+    ```
+
+    
+
+  - uwsgi를 통해 서버 실행
+
+    - test ()
+
+      `uwsgi --http :8000 --home /home/ubuntu/srv/S05P21A302/Backend/venv/ --chdir /srv/S05P21A302/Backend/ -w bee.wsgi` 
+
+    - config (설정 저장?)
+
+      `sudo /home/ubuntu/srv/S05P21A302/Backend/venv/bin/uwsgi -i /home/ubuntu/srv/S05P21A302/Backend/.config/uwsgi/bee.ini`
+
+    - wsgi를 통한 서버 실행
+
+      `uwsgi --http :8000 --home /home/ubuntu/srv/S05P21A302/Backend/venv --chdir /srv/S05P21A302/Backend --module bee.wsgi`
+
+- nginx 연결
+
+  - nginx 설치
+
+    `sudo apt-get nginx`
+
+  - nginx 설정
+
+    - `cd /etc/nginx/sites-available`
+
+    - `touch {project_name}`
+
+      ```
+      upstream withthai-django {
+          server unix:/home/ubuntu/srv/S05P21A302/Backend/run/uwsgi.sock;
+      }
+      
+      server {
+              listen 80;
+              server_name 3.35.25.101;
+      
+              location = /favicon.ico { access_log off; log_not_found off; }
+      
+              location / {
+                  include         /etc/nginx/uwsgi_params;
+                  uwsgi_pass      django;
+              }
+      }
+      ```
+
+  - 사이트 추가
+
+    - `cd /etc/nginx/sites-enabled`
+    - `sudo ln -s /etc/nginx/sites-available/bee /etc/nginx/sites-enabled`
+
+  - nginx 문법 검사 및 재가동
+
+    - sudo nginx -t
+    - sudo systemctl restart nginx
+
+  - 방화벽 해제
+
+    - **sudo** ufw delete allow 8000
+    - **sudo** ufw allow 'Nginx Full'
+
+
 
 #### FE (vue)
 
@@ -142,8 +255,6 @@
     - `cd /etc/nginx/sites-available`
     - `sudo vi default`
 
-  - frontend 설정
-
     ```unix
     server {
         listen 80 default_server;
@@ -158,6 +269,7 @@
         }
     }
     ```
+  
 
 
 
@@ -182,3 +294,4 @@
   - nginx 재시작
 
     - `sudo systemctl start nginx`
+
