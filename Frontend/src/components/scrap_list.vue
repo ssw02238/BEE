@@ -1,5 +1,5 @@
 <template>
-  <table class="table" style="width: 20%;margin: auto">
+  <table class="table" style="width: 25%; margin-left: 20%;">
     <thead>
       <tr>
         <th scope="col">No</th>

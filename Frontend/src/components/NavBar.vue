@@ -102,7 +102,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .routerLink {
   text-decoration: none;
 }

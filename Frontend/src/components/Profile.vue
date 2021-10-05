@@ -2,10 +2,16 @@
   <div class="container">
     <div class="card mb-3" style="width: 70%; margin: auto">
       <div class="row g-0">
-        <div class="col-md-4">
-          <img src="@/assets/logo.png" class="img-fluid rounded-start" alt="profile">
+        <div class="col">
+          <!-- <img src="@/assets/logo.png" class="img-fluid rounded-start" alt="profile"> -->
+                        <Graph
+                :e_score="e_score"
+                :s_score="s_score"
+                :g_score="g_score"
+                 />
+
         </div>
-        <div class="col-md-8">
+        <div class="col">
           <div class="card-body">
             <h5 class="card-title">{{ nickname }} 님의 마이페이지</h5>
             <p class="card-text">Email: {{ email }}</p>
@@ -18,8 +24,12 @@
 </template>
 
 <script>
+import Graph from '../components/graph_mypage.vue';
 export default {
   name: 'Profile',
+  components:{ 
+    Graph
+    },
   data:function(){
     return{
       nickname: '',

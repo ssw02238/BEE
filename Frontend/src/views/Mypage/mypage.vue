@@ -3,6 +3,17 @@
     <div class="mb-5">
       <Profile />
     </div>
+
+
+      <RouterLink class="routerLink" :to="{ name: 'test' }">
+        <div>
+          <button class="btn btn-lg btn-block" 
+          style="width:100%; background-color:#FABD01;">
+            ESG mbti 확인하기
+          </button>
+        </div>
+      </RouterLink>
+    
   <div class="mypage row">
     <scrapList
     :corporates="corporates"
@@ -38,7 +49,7 @@
       <!-- 테이블 종료 -->
 
       <!-- 추천 기업 --> 
-      <table class="table" style="width: 20%;margin: auto">
+      <table class="table" style="width: 25%; margin-right: 20%;">
           <thead>
             <tr>
               <th scope="col">No</th>
@@ -68,18 +79,7 @@
       <!-- ESG Chart 시작 -->
         <!-- <div class="card" style="width: 30%;margin: auto" > -->
           <!-- <div class="card-body"> -->
-            <div style="display:flex;width:33%;">
-            <!-- <h5 class="card-title"> ESG 성향 </h5> -->
 
-                <Graph
-                :e_score="e_score"
-                :s_score="s_score"
-                :g_score="g_score"
-                 />
-          <!-- </div> -->
-        <!-- </div> -->
-        <!-- ESG Chart 종료 -->
-  </div>
   </div>
 
     <RouterLink class="routerLink" :to="{ name: 'test' }">
@@ -91,14 +91,14 @@
 
 <script>
 import Profile from '../../components/Profile.vue';
-import Graph from '../../components/graph_mypage.vue';
+// import Graph from '../../components/graph_mypage.vue';
 import scrapList from '../../components/scrap_list.vue';
 import axios from 'axios';
 
 export default {
   name: 'mypage',
   components: {
-    Profile,Graph, scrapList,
+    Profile,scrapList,
   },
   data: function () {
     return {
