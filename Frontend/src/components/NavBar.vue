@@ -76,6 +76,9 @@ export default {
       this.isLogin = false
       localStorage.removeItem('jwt')
       localStorage.removeItem('nickname')
+      localStorage.removeItem('email')
+      localStorage.removeItem('mbti')
+      localStorage.removeItem('uid')
       console.log('logout 성공')
 
       this.$router.push({ name: 'welcome' })
