@@ -75,7 +75,7 @@ export default {
 h4, p{
   text-align: center;
 }
-.card-header, .card-footer, h2 {
+.card-header, .card-footer, h2, p {
   color: #FABD02;
 }
 .card-title {
