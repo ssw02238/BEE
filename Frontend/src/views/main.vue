@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import rest from '../js/httpCommon.js'
 import axios from 'axios'
 import rankTable from '../components/table.vue'
 import Top from '../components/Top.vue'
@@ -129,9 +130,9 @@ export default {
     },
     // ESG 1위 기업 출력 
     getBestCorp: function () {
-      axios({
+      rest.axios({
         method: 'get',
-        url: 'http://127.0.0.1:8000/boards/bestcorp/',
+        url: 'boards/bestcorp/',
         headers: this.setToken()
       })
         .then(res => {
@@ -160,9 +161,9 @@ export default {
     },
     // ESG 전체 순위 리스트 조회 
     getESGRank() {
-      this.axios({
+      axios({
         method: 'get',
-        url: 'boards/esg-ranking/',
+        url: 'http://127.0.0.1:8000/boards/esg-ranking/',
         headers: this.setToken()
       })
         .then(res => {
