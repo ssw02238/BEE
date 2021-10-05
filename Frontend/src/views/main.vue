@@ -217,6 +217,7 @@ export default {
 .main-div {
   width: 75%;
   margin: auto;
+  margin-bottom: 100px;
 }
 h1, h3, h4, .mbti {
   color:#FABD02;

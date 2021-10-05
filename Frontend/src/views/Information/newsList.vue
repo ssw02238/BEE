@@ -137,7 +137,6 @@ th,td{
   text-underline-position:under;
 }
 .table {
-  /* border: 1px solid whitesmoke; */
   color:white;
   background-color: black;
 }
