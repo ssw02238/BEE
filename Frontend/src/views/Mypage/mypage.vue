@@ -7,34 +7,9 @@
       <scrapList
       :corporates="corporates"
       />
-        <!-- 추천 기업 --> 
-        <table class="table" style="width: 20%;margin: auto">
-            <thead>
-              <tr>
-                <th scope="col">No</th>
-                <th scope="col">추천 기업</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td> 삼성전자 </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td> LG 디스플레이 </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td> CJ ENM </td>
-              </tr>
-              <!-- <tr>
-                <th scope="row">4</th>
-                <td> 녹십자 </td>
-              </tr> -->
-            </tbody>
-          </table>
-    
+      <recommendList
+      :corporates="recommend"
+      />
         <!-- ESG Chart 시작 -->
           <!-- <div class="card" style="width: 30%;margin: auto" > -->
             <!-- <div class="card-body"> -->
@@ -63,12 +38,14 @@
 import Profile from '../../components/Profile.vue';
 import Graph from '../../components/graph_mypage.vue';
 import scrapList from '../../components/scrap_list.vue';
+import recommendList from '../../components/recommend_list.vue';
+
 import axios from 'axios';
 
 export default {
   name: 'mypage',
   components: {
-    Profile,Graph, scrapList,
+    Profile,Graph, scrapList, recommendList,
   },
   data: function () {
     return {
@@ -86,7 +63,6 @@ export default {
       return config
     },
     getScrap: function () {
-      console.log(1)
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/accounts/profile/',
@@ -103,9 +79,24 @@ export default {
         console.log(err)
       })
     },
+    getRecommend: function () {
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/accounts/profile_esg/',
+        headers: this.setToken()
+      })
+      .then(res => {
+        this.recommend = res.data.corporates
+        console.log(this.recommend)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
   },
   created: function () {
     this.getScrap()
+    this.getRecommend()
   }
 }
 </script>

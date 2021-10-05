@@ -9,10 +9,6 @@
       <tr>
         <th scope="col">No</th>
         <th scope="col">기사 제목</th>
-<<<<<<< HEAD
-        <!-- <th scope="col">기업</th> -->
-=======
->>>>>>> feat/fe/rank
         <th scope="col">날짜</th>
       </tr>
     </thead>
@@ -21,12 +17,7 @@
       <tr style="height:50px;">
         <!-- <th scope="row">1</th> -->
         <td>{{ 10 * (page - 1) + idx + 1 }} </td>
-<<<<<<< HEAD
-        <td class="news-link" @click="goPage(content.url)">{{ content.title }} </td>
-        <!-- <td>{{ content.corporate}}</td>             -->
-=======
         <td class="news-link text-decoration-none" @click="goPage(content.url)">{{ content.title }} </td>
->>>>>>> feat/fe/rank
         <td>{{ content.date }} </td>
       </tr>
     </tbody>
@@ -147,7 +138,6 @@ th,td{
   text-underline-position:under;
 }
 .table {
-  /* border: 1px solid whitesmoke; */
   color:white;
   background-color: black;
 }
