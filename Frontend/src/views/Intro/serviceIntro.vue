@@ -49,9 +49,6 @@
           <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">서비스 소개</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">서비스 목표</button>
-        </li>
-        <li class="nav-item" role="presentation">
           <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">ESG 란?</button>
         </li>
         <li class="nav-item" role="presentation">
@@ -68,11 +65,7 @@
           <b>BEE</b>는 기업이 사회, 환경, 지배구조 부분에서 가치를 실현하는지 다각도에서 평가한 후, <b>비재무적 정보</b>를 활용하여 <b>지속 가능 경영</b>에 대한 정보를 제공하고자 합니다. 
           <b>BEE와 함께 새로운 투자 가치를 실현해보세요!</b>
             </div>
-          </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <div id="font"> 
-           </div>
-           </div>
+        </div>
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
           <div id="font"> 
           <b>ESG 경영</b>이란 무엇일까요? <br><br>
