@@ -2,7 +2,12 @@
   <div>
     <div class="mb-4">
         <p style="font-size:2rem; color:white;margin-left:150px">News</p>
-        <p style="font-soze: 1.2rem; margin-left:150px;background-color:black;">Kospi 200개 기업의 ESG관련 뉴스를 확인해보세요</p>
+        <p style="font-soze: 1.2rem; 
+        margin-left:150px;
+        background-color:black;
+        color: #FABD02">
+        Kospi 200개 기업의 ESG관련 뉴스를 확인해보세요
+        </p>
     </div>
     <table class="table" style="width: 75%;margin:auto;">
     <thead>
@@ -68,11 +73,8 @@ export default {
     },
     // 뉴스 리스트 출력 
     getNews() {
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/boards/news/',
-        headers: this.setToken()
-      })
+      axios.get('boards/news/', {headers:this.setToken()})
+      
         .then(res => {
           this.news = res.data
           console.log('받아온 뉴스', this.news)
@@ -100,19 +102,16 @@ export default {
     },
 
     // scrap 하기 ??
-    getScrap() {
-      axios({
-        method: 'post',
-        url: 'http://127.0.0.1:8000/api/corporates/${corp_id}/scrap/',
-        headers: this.setToken()
-      })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log('오류', err)
-        })
-    }
+    // getScrap() {
+    //   axios.post('corporates/${corp_id}/scrap/', {headers:this.setToken()})
+      
+    //     .then(res => {
+    //       console.log(res)
+    //     })
+    //     .catch(err => {
+    //       console.log('오류', err)
+    //     })
+    // }
   },
   async mounted() {
     this.getNews()

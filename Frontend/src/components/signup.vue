@@ -61,11 +61,7 @@ export default {
   },
   methods: {
     signup: function () {
-      axios({
-        method: 'post',
-        url: 'http://127.0.0.1:8000/accounts/signup/',
-        data: this.credentials,
-      })
+      axios.post('accounts/signup/',this.credentials)
         .then(res => {
           console.log(res)
 

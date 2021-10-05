@@ -32,9 +32,7 @@ export default {
   name: 'FooterBar',
   // 몰래 노션 걸어두기 
   methods: {
-      goPage(){
-        window.open("https://www.notion.so/PJT-d183573c915b4f12a8ca99840df72f0e", "_blank")
-      }
+      
     }
 }
 </script>

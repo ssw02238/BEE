@@ -103,11 +103,8 @@ export default {
     },
     // ESG 전체 순위 리스트 조회 
     getESGRank() {
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/boards/esg-ranking/',
-        headers: this.setToken()
-      })
+      axios.get('boards/esg-ranking/', {headers:this.setToken()})
+
         .then(res => {
           this.rank = res.data.corp_data
         })
@@ -132,11 +129,8 @@ export default {
       return  rank.slice(from, to)
     },
     getErank() {
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/boards/e-ranking/',
-        headers: this.setToken()
-      })
+      axios.get('boards/e-ranking/', {headers:this.setToken()})
+
         .then(res => {
           console.log('e순위', this.rank)
           this.rank = res.data
@@ -146,11 +140,8 @@ export default {
         })
     },
     getSrank() {
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/boards/s-ranking/',
-        headers: this.setToken()
-      })
+      axios.get('boards/s-ranking/', {headers:this.setToken()})
+
         .then(res => {
           this.rank = res.data
           console.log('s순위', this.rank)
@@ -160,11 +151,8 @@ export default {
         })
     },
     getGrank() {
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/boards/g-ranking/',
-        headers: this.setToken()
-      })
+        axios.get('boards/g-ranking/', {headers:this.setToken()})
+
         .then(res => {
           this.rank = res.data
           console.log('g순위', this.rank)

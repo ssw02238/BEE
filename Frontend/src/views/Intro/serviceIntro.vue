@@ -112,7 +112,9 @@ img{
   background-color: #FABD02;
   color:black;
 }
-
+p {
+  color: #FABD02
+}
 .carousel-item {
   height:500px;
 }
