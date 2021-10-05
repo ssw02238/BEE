@@ -9,7 +9,7 @@
       <tr>
         <th scope="col">No</th>
         <th scope="col">기사 제목</th>
-        <th scope="col">기업</th>
+        <!-- <th scope="col">기업</th> -->
         <th scope="col">날짜</th>
       </tr>
     </thead>
@@ -19,7 +19,7 @@
         <!-- <th scope="row">1</th> -->
         <td>{{ 10 * (page - 1) + idx + 1 }} </td>
         <td class="news-link" @click="goPage(content.url)">{{ content.title }} </td>
-        <td>{{ content.corporate}}</td>            
+        <!-- <td>{{ content.corporate}}</td>             -->
         <td>{{ content.date }} </td>
       </tr>
     </tbody>

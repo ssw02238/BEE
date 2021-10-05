@@ -160,9 +160,9 @@ export default {
     },
     // ESG 전체 순위 리스트 조회 
     getESGRank() {
-      axios({
+      this.axios({
         method: 'get',
-        url: 'http://127.0.0.1:8000/boards/esg-ranking/',
+        url: 'boards/esg-ranking/',
         headers: this.setToken()
       })
         .then(res => {

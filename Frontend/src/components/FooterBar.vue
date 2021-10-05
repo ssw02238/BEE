@@ -1,7 +1,7 @@
 <template>
     <!-- footer --> 
     <footer class="py-3">
-      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <!-- <ul class="nav justify-content-center border-bottom pb-3 mb-3">
         <li class="nav-item me-2">
           <RouterLink :to="{ name: 'main' }" class="routerLink">
             Home
@@ -17,7 +17,7 @@
             My Page
           </RouterLink>
         </li>
-      </ul>
+      </ul> -->
 
       <div @click="goPage">
         <p class="text-center text-muted">김예찬 · 김윤서 · 방지환 · 이규정 · 정희진</p>
