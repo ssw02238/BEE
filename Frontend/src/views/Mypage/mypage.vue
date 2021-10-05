@@ -1,90 +1,45 @@
 <template>
   <div class="container">
-    <div class="mb-5">
+    <div >
       <Profile />
     </div>
 
-
       <RouterLink class="routerLink" :to="{ name: 'test' }">
-        <div>
-          <button class="btn btn-lg btn-block" 
-          style="width:100%; background-color:#FABD01;">
+        <div class="d-flex justify-content-center mb-5" >
+          <button class="btn btn-lg" 
+          style="width:20%; background-color:#FABD01;">
             ESG mbti 확인하기
           </button>
         </div>
       </RouterLink>
     
-  <div class="mypage row">
-    <scrapList
-    :corporates="corporates"
-    />
-        <!-- 테이블 시작 -->
-        <!-- <table class="table" style="width: 20%;margin: auto">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">스크랩 기업</th>
-            </tr>
-          </thead>
-          <tbody>
-
-            <tr v-for="(corporate, idx) in corporates" :key="idx">
-              <th scope="row">1</th>
-              <td> {{ corporate.name }} </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td> {{ corporate.name }} </td>
-            </tr>
-            <tr v-if="coporates.length > 3">
-              <th scope="row">3</th>
-              <td> {{ corporate.name }} </td>
-            </tr>
-            <tr v-if="corporates.length > 4">
-              <th scope="row">4</th>
-              <td> {{ corporate.name }} </td>
-            </tr>
-          </tbody>
-        </table> -->
-      <!-- 테이블 종료 -->
-
-      <!-- 추천 기업 --> 
-      <table class="table" style="width: 25%; margin-right: 20%;">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">추천 기업</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td> 삼성전자 </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td> LG 디스플레이 </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td> CJ ENM </td>
-            </tr>
-            <!-- <tr>
-              <th scope="row">4</th>
-              <td> 녹십자 </td>
-            </tr> -->
-          </tbody>
-        </table>
-  
-      <!-- ESG Chart 시작 -->
-        <!-- <div class="card" style="width: 30%;margin: auto" > -->
-          <!-- <div class="card-body"> -->
-
+    <div class="mypage row mb-5">
+      <scrapList
+      :corporates="corporates"
+      />
+      <recommendList
+      :corporates="recommend"
+      />
+        <!-- ESG Chart 시작 -->
+          <!-- <div class="card" style="width: 30%;margin: auto" > -->
+            <!-- <div class="card-body"> -->
+              <!-- <div style="display:flex;width:33%;"> -->
+              <!-- <h5 class="card-title"> ESG 성향 </h5> -->
+<!-- 
+                  <Graph
+                  :e_score="e_score"
+                  :s_score="s_score"
+                  :g_score="g_score"
+                  /> -->
+            <!-- </div> -->
+          <!-- </div> -->
+          <!-- ESG Chart 종료 -->
+    <!-- </div> -->
   </div>
 
-    <RouterLink class="routerLink" :to="{ name: 'test' }">
+    <!-- <RouterLink class="routerLink" :to="{ name: 'test' }">
       <p>ESG Mbti</p>
-    </RouterLink>
+    </RouterLink> -->
 
   </div>
 </template>
@@ -93,12 +48,14 @@
 import Profile from '../../components/Profile.vue';
 // import Graph from '../../components/graph_mypage.vue';
 import scrapList from '../../components/scrap_list.vue';
+import recommendList from '../../components/recommend_list.vue';
+
 import axios from 'axios';
 
 export default {
   name: 'mypage',
   components: {
-    Profile,scrapList,
+    Profile, scrapList, recommendList,
   },
   data: function () {
     return {
@@ -116,12 +73,7 @@ export default {
       return config
     },
     getScrap: function () {
-      console.log(1)
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/accounts/profile/',
-        headers: this.setToken()
-      })
+      axios.get('accounts/profile/', {headers:this.setToken()})
       .then(res => {
         this.corporates = res.data.corporates
         console.log(this.corporates)
@@ -133,9 +85,21 @@ export default {
         console.log(err)
       })
     },
+    getRecommend: function () {
+      axios.get('accounts/profile_esg/', {headers:this.setToken()})
+      .then(res => {
+        this.recommend = res.data.recommend
+        console.log(this.recommend)
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
   },
   created: function () {
     this.getScrap()
+    this.getRecommend()
   }
 }
 </script>

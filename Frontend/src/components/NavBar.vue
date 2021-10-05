@@ -5,23 +5,17 @@
     <!-- logo image --> 
     <div class="logo ms-5">
       <RouterLink :to="{ name: 'main' }">
-          <img src="@/assets/logo.png" width="170" class="pt-2">
+          <img src="@/assets/logo.png" width="170">
       </RouterLink>
     </div>
 
     <!-- 글씨만 있는 네브 --> 
-    <div class="letter-nav">
+    <div class="letter-nav mt-4 d-flex justify-content-around">
 
       <nav class="nav main-nav">
         <RouterLink class="routerLink" :to="{ name: 'serviceIntro' }">
           <p class="nav-text">About</p>
         </RouterLink>
-        <!-- <RouterLink class="routerLink" :to="{ name: 'infoDetail' }">
-          <p class="nav-text">infoDetail</p>
-        </RouterLink> -->
-        <!-- <RouterLink class="routerLink" :to="{ name: 'welcome' }">
-          <p class="nav-text">welcome</p>
-        </RouterLink> -->
         <RouterLink class="routerLink" :to="{ name: 'esgRank' }">
           <p class="nav-text">Rank</p>
         </RouterLink>
@@ -51,7 +45,7 @@
           <h3 slot="header">Sign Up </h3>
         </modal2> 
       </nav>
-  </div>
+    </div>
 
   <!-- 전체 네브바 닫기--> 
   </div>
@@ -82,6 +76,9 @@ export default {
       this.isLogin = false
       localStorage.removeItem('jwt')
       localStorage.removeItem('nickname')
+      localStorage.removeItem('email')
+      localStorage.removeItem('mbti')
+      localStorage.removeItem('uid')
       console.log('logout 성공')
 
       this.$router.push({ name: 'welcome' })
@@ -115,43 +112,46 @@ export default {
 p {
   color:#FABD02;
 }
-.logo {
-  width: 20%;
-  min-width: 15%
-}
-.nav {
-  width: 95%;
-  display: contents;
-  margin-left: 10px;
-}
-.letter-nav {
-  margin: auto;
-  display:contents;
+/* 전체 네브 바 */
+.navbar {
+ 
 }
 
+/*00. 글씨 네브바  */
+.letter-nav {
+  width: 70%;
+  /* margin-top: 12px */
+}
+
+/* 01. 로고 */
+.logo {
+  width: 15%;
+  min-width:100px;
+}
+
+/* 02. 3개 메뉴 */
 .main-nav {
   width: 40%;
-  min-width: 200px;
-  justify-content: space-around;
+  min-width: 250px;
+  justify-content: space-between;
 }
 
+/* 03. 로그인 회원가입 */
 .sub-nav {
-  width: 15%;
+  width: 20%;
+  min-width: 100px; 
   align-content: center;
   text-align: end;
   justify-content: space-around;
-  min-width: 80px;
 }
 
 .nav-text {
   font-size: 1.5rem;
-  margin-bottom: 0px;
   padding: 5px;
 }
 
 .nav-text2 {
   font-size: 1.2rem;
-  margin-bottom: 0px;
   padding: 5px;
 }
 

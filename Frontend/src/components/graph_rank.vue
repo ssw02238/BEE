@@ -54,11 +54,7 @@ export default {
       return config
     },
     getESGRank() {
-          axios({
-            method: 'get',
-            url: 'http://127.0.0.1:8000/boards/esg-ranking/',
-            headers: this.setToken()
-          })
+      axios.get('boards/esg-ranking/', {headers:this.setToken()})
             .then(res => {
               this.e_avg = res.data.e_average
               this.s_avg = res.data.s_average
@@ -79,4 +75,7 @@ export default {
 }
 </script>
 <style scoped>
+p{
+  color: #FABD02
+}
 </style>

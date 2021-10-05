@@ -39,6 +39,7 @@ class CorporateDetailSerializer(serializers.ModelSerializer):
     social_evaluation = SocialSerializer(many=True, read_only=True, source="social_set")
     governance_evaluation = GovernanceSerializer(many=True, read_only=True, source="governance_set")
     news = NewsSerializer(many=True, read_only=True, source="news_set")
+    # scrap_cnt = serializers.IntegerField(source='scrap_users.count', read_only=True) 
 
     class Meta:
         model = Corporate

@@ -33,7 +33,12 @@
 
     <hr style="color:yellow">
     <!-- 기업 순위 --> 
-    <h3 class="my-4">Monthly Ranking</h3>  
+    <div class="d-flex justify-content-between">
+      <h3 class="my-4">Monthly Ranking</h3>
+      <RouterLink :to="{ name: 'esgRank' }" class="routerLink">
+        <div type=button class="mt-4 pt-2 px-2" style="color:#FABD02;">더보기</div>
+      </RouterLink>
+    </div>
     <rankTable id="font" :paginated="paginated" :page="page"/> 
 
     <hr style="color:yellow">
@@ -43,7 +48,7 @@
     <div class="todaycorp" style="display:flex; align-items:center">
       <div style="width: 30%">
         <h4 class="card-title mt-4 mb-4">오늘의 기업 <br> {{ todayCorp }}</h4>
-        <p id="font">*오늘의 기업이란,<br> 하루 ESG 기사 언급량<br> 1위 기업을 의미합니다.</p>
+        <p id="font" style="color:#FABD02">*오늘의 기업이란,<br> 하루 ESG 기사 언급량<br> 1위 기업을 의미합니다.</p>
       </div>
       <div style="width: 70%">
         <ul class="list-group card-text" id="font">
@@ -129,11 +134,7 @@ export default {
     },
     // ESG 1위 기업 출력 
     getBestCorp: function () {
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/boards/bestcorp/',
-        headers: this.setToken()
-      })
+      axios.get('boards/bestcorp/', {headers:this.setToken()})
         .then(res => {
           console.log('1위 esg 기업 정보', res.data)
           this.esg_top = res.data.name
@@ -160,11 +161,7 @@ export default {
     },
     // ESG 전체 순위 리스트 조회 
     getESGRank() {
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/boards/esg-ranking/',
-        headers: this.setToken()
-      })
+      axios.get('boards/esg-ranking/', {headers:this.setToken()})
         .then(res => {
           // console.log('전체 순위 리스트', res)
           this.paginated = res.data.corp_data.slice(0, 5)
@@ -176,11 +173,7 @@ export default {
     },
     // 오늘의 기업 출력 
     getNewsTop: function () {
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/boards/hottestcorp/',
-        headers: this.setToken()
-      })
+      axios.get('boards/hottestcorp/', {headers:this.setToken()})
         .then(res => {
           console.log('오늘의 기업 정보', res)
           console.log(res.data)
@@ -196,6 +189,9 @@ export default {
        console.log('여기 pk', pk)
       this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
       },  
+    goRank: function() {
+
+    }
     
   },
   async mounted() {
@@ -221,6 +217,7 @@ export default {
 .main-div {
   width: 75%;
   margin: auto;
+  margin-bottom: 100px;
 }
 h1, h3, h4, .mbti {
   color:#FABD02;

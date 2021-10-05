@@ -1,9 +1,9 @@
 <template>
-  <table class="table" style="width: 25%; margin-left: 23%;">
+  <table class="table" style="width: 25%;margin-right: 25%;">
     <thead>
       <tr>
         <th scope="col">No</th>
-        <th scope="col">스크랩 기업</th>
+        <th scope="col">추천 기업</th>
       </tr>
     </thead>
     <tbody>
@@ -17,10 +17,10 @@
 
 <script>
 export default {
-  name: 'scrap_list',
+  name: 'recommend_list',
   props: {
     corporates: Array,
-  },
+  }  
 }
 </script>
 

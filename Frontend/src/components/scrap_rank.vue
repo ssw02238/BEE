@@ -12,15 +12,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr @click="moveToDetail(corporates[0].pk)">
       <th scope="row">1</th>
       <td>{{ corporates[0].name }}</td>
     </tr>
-    <tr>
+    <tr @click="moveToDetail(corporates[1].pk)">
       <th scope="row">2</th>
       <td>{{ corporates[1].name }}</td>
     </tr>
-    <tr>
+    <tr @click="moveToDetail(corporates[2].pk)">
       <th scope="row">3</th>
       <td>{{ corporates[2].name }}</td>
     </tr>
@@ -40,10 +40,7 @@ export default {
   },
   methods: {
     getRank: function () {
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/boards/popularcorp/',
-      })
+        axios.get('boards/popularcorp/')
       .then(res => {
         // console.log(res)
         this.corporates = res.data
@@ -51,6 +48,9 @@ export default {
       .catch(err => {
         console.log(err)
       })
+    },
+    moveToDetail: function (id) {
+      console.log(id)
     }
   },
   async mounted() {
@@ -61,5 +61,8 @@ export default {
 <style scoped>
 th, td {
   color:#f3c438
+}
+p {
+  color: #FABD02
 }
 </style>

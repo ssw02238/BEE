@@ -1,19 +1,20 @@
 <template>
   <div class="container">
     <!-- welcome 상단 --> 
-    <div class="card text-center top-card" style="border:none">
-      <div class="card-header" style="font-size:2rem;">
+    <div class="card text-center top-card">
+      <!-- <div class="card-header" style="font-size:2rem;">
         BEE
-      </div>
-
+      </div> -->
       <div class="card-body">
         <img src="@/assets/logo.png" width="280">
         <p class="card-text" style="font-size:1.5rem;">Best ESG Enterprises</p>
       </div>
       <div class="card-footer">
-        <RouterLink :to="{ name: 'main' }" class="routerLink">
-          <h2>이 용 하 기 </h2>
-        </RouterLink>
+        <button type="button" class="btn btn-transparent enter-btn">
+          <RouterLink :to="{ name: 'main' }" id="use-button" class="routerLink">
+            <h2>입 장 하 기</h2>
+          </RouterLink>
+        </button>
       </div>
     </div>
     
@@ -24,10 +25,10 @@
           <img width="30" src="@/assets/welcome1.png" class="card-img-top">
           <div class="card-body">
             <h4 class="card-title">Information</h4>
-            <p id="font" class="card-text">기업 정보를 분석하여 BEE만의 ESG 점수를 안내합니다. <br> 해당 점수로 좋은 투자 가치를 실현해보세요!</p>
+            <p id="font" class="card-text">기업 정보를 분석하여 BEE만의 <br>ESG 점수를 안내합니다. <br> 해당 점수로 좋은 투자 가치를 <br>실현해보세요!</p>
           </div>
         </div>
-
+        
         <div class="card" style="width: 20rem;">
           <img src="@/assets/welcome2.png" class="card-img-top me-5">
           <div class="card-body">
@@ -56,6 +57,18 @@ export default {
 </script>
 
 <style scoped>
+.enter-btn {
+  width: 25%;
+  background: rgb(206, 206, 206, 0.2);
+}
+.enter-btn:hover {
+  width: 25%;
+  background: rgb(206, 206, 206, 0.5);
+}
+.container {
+    width: 100vw;
+    height: 100vh;
+}
 .routerLink {
   text-decoration: none;
 }
@@ -70,16 +83,17 @@ h4, p{
   font-weight: bold;
 }
 .top-card {
-  margin-bottom:50px;
+  top: 15%;
 }
 .moving-card {
+  margin-top: 166px;
   margin-bottom: 30px;
   display:flex;
   justify-content: space-around;
-  border:solid 2px #FABD02
+  /* border:solid 0.5px #FABD02 */
 }
 .card{
-  background-color:black;
+  background-color:rgba(0,0,0,0.4);
 }
 .card-img-top {
   width: 180px;

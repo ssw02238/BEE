@@ -57,12 +57,7 @@ export default {
       return config 
     },
     login: function () {
-      console.log('login 확인')
-      axios({
-        method:'post',
-        url:'http://127.0.0.1:8000/accounts/api-token-auth/',
-        data: this.credentials
-      })
+        axios.post('accounts/api-token-auth/', this.credentials)
       .then(res => {
         console.log('결과', res)
         localStorage.setItem('jwt', res.data.token)
@@ -70,11 +65,7 @@ export default {
       })
       .then(res => {
         console.log(res)
-        axios({
-          method:'get',
-          url: 'http://127.0.0.1:8000/accounts/profile/',
-          headers: this.setToken()
-        })
+        axios.get( 'accounts/profile/', {headers:this.setToken()})
       .then(res => {
         console.log('닉네임 받기', res.data)
         localStorage.setItem('uid', res.data.id)

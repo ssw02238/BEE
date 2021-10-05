@@ -4,7 +4,7 @@
     <!-- scrap list에 따른 분기 처리 진행할 것... -->
     <!-- render 될 때 scrap 여부 확인할 수 있는 방법 강구할 것 -->
     <b-icon icon="star-fill" variant="warning" font-scale="2" @click="addScrap" type="button" v-if="is_scrap"></b-icon>
-    <b-icon icon="star" font-scale="2" @click="addScrap" type="button" v-else></b-icon>
+    <b-icon icon="star" variant="warning" font-scale="2" @click="addScrap" type="button" v-else></b-icon>
     <div class="scrap-score">
       <div class="ps-2">Total: {{ corporate.ESG_rating.toFixed(0) }} / 300</div>
     </div>
@@ -44,7 +44,7 @@
 
     <!-- 뉴스 목록 --> 
     <h2 class="corporate-name">News</h2>
-    <p v-if="newsList.length > 0" class="ps-2">클릭 후 해당 뉴스를 확인해보세요</p>
+    <p style="color:#FABD02" v-if="newsList.length > 0" class="ps-2">클릭 후 해당 뉴스를 확인해보세요</p>
     
     <table v-if="newsList.length > 0" class="table table-dark table-hover">
       <thead>
@@ -125,11 +125,8 @@ export default {
         window.open(url, "_blank")
       },
     addScrap: function () {
-      axios({
-        method: 'post',
-        url: `http://127.0.0.1:8000/corporates/${this.pk}/scrap/`,
-        headers: this.setToken()
-      })
+      axios.post(`corporates/${this.pk}/scrap/`, {headers:this.setToken()})
+
       .then(res => {
         // console.log(res)
         if (res.status == 201) {
@@ -145,15 +142,9 @@ export default {
       })
     },
     getDetail(pk) {
-      axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/corporates/${pk}/detail/`,
-        headers: this.setToken()
-      })
+      axios.get(`corporates/${pk}/detail/`, {headers:this.setToken()})
+      
         .then(res => {
-          // console.log('디테일 정보', res.data)
-          // console.log(typeof(res.data.scrap_user[0]))
-          // console.log(typeof(localStorage.getItem('uid')))
           const uid = parseInt(localStorage.getItem('uid'))
           if (res.data.scrap_user.includes(uid)) {
             this.is_scrap = true
@@ -186,11 +177,8 @@ export default {
         })
     },
     getRecom(pk) {
-      axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/corporates/${pk}/similarcorp/`,
-        headers: this.setToken()
-      })
+      axios.get(`corporates/${pk}/similarcorp/`, {headers:this.setToken()})
+
         .then(res => {
           console.log('추천 기업 정보', res.data.corporates)
           this.recommends = res.data.corporates

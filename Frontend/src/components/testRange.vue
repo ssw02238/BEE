@@ -249,14 +249,12 @@ export default {
       const config = this.setToken()
       
       if (localStorage.getItem('mbti')){
-     axios({
-        method: 'put',
-        url: 'http://127.0.0.1:8000/accounts/mbti/',
-        data: {e_score:parseFloat(this.selected1) + parseFloat(this.selected4)+ parseFloat(this.selected7),
+      axios.put('accounts/mbti/', 
+      {e_score:parseFloat(this.selected1) + parseFloat(this.selected4)+ parseFloat(this.selected7),
         s_score:parseFloat(this.selected2) + parseFloat(this.selected5)+ parseFloat(this.selected8),
         g_score:parseFloat(this.selected3) + parseFloat(this.selected6)+ parseFloat(this.selected9)},
-        headers: config
-      })      
+       {headers: config}
+       )    
         .then(res => {
           console.log('요청 제대로', res)         
           localStorage.setItem('mbti', res.data.mbti)
@@ -268,14 +266,12 @@ export default {
         }) }
 
       else {
-     axios({
-        method: 'post',
-        url: 'http://127.0.0.1:8000/accounts/mbti/',
-        data: {e_score:parseFloat(this.selected1) + parseFloat(this.selected4)+ parseFloat(this.selected7),
+      axios.post('accounts/mbti/', 
+      {e_score:parseFloat(this.selected1) + parseFloat(this.selected4)+ parseFloat(this.selected7),
         s_score:parseFloat(this.selected2) + parseFloat(this.selected5)+ parseFloat(this.selected8),
         g_score:parseFloat(this.selected3) + parseFloat(this.selected6)+ parseFloat(this.selected9)},
-        headers: config
-      })      
+       {headers: config}
+       )
         .then(res => {
           console.log('요청 제대로', res)           
           localStorage.setItem('mbti', res.data.mbti)
