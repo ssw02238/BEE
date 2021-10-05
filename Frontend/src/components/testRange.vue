@@ -247,32 +247,46 @@ export default {
     },
     submitForm: function () {
       const config = this.setToken()
+      
+      if (localStorage.getItem('mbti')){
+      axios.put('accounts/mbti/', 
+      {e_score:parseFloat(this.selected1) + parseFloat(this.selected4)+ parseFloat(this.selected7),
+        s_score:parseFloat(this.selected2) + parseFloat(this.selected5)+ parseFloat(this.selected8),
+        g_score:parseFloat(this.selected3) + parseFloat(this.selected6)+ parseFloat(this.selected9)},
+       {headers: config}
+       )    
+        .then(res => {
+          console.log('요청 제대로', res)         
+          localStorage.setItem('mbti', res.data.mbti)
+          this.$router.push({ name: 'mypage' })
+          this.$router.go()
+        })
+        .catch(err => {
+          console.log('axios 오류', err)
+        }) }
+
+      else {
       axios.post('accounts/mbti/', 
       {e_score:parseFloat(this.selected1) + parseFloat(this.selected4)+ parseFloat(this.selected7),
         s_score:parseFloat(this.selected2) + parseFloat(this.selected5)+ parseFloat(this.selected8),
         g_score:parseFloat(this.selected3) + parseFloat(this.selected6)+ parseFloat(this.selected9)},
        {headers: config}
        )
-    
-    //  axios({
-    //     method: 'post',
-    //     url: 'http://127.0.0.1:8000/accounts/mbti/',
-    //     data: {e_score:parseFloat(this.selected1) + parseFloat(this.selected4)+ parseFloat(this.selected7),
-    //     s_score:parseFloat(this.selected2) + parseFloat(this.selected5)+ parseFloat(this.selected8),
-    //     g_score:parseFloat(this.selected3) + parseFloat(this.selected6)+ parseFloat(this.selected9)},
-    //     headers: config
-    //   })
         .then(res => {
-          console.log('요청 제대로', res) 
+          console.log('요청 제대로', res)           
+          localStorage.setItem('mbti', res.data.mbti)
           this.$router.push({ name: 'mypage' })
           this.$router.go()
         })
         .catch(err => {
           console.log('axios 오류', err)
-        })
+        })}
+
     },
   }
 }
+// 현재 사용자한테 mbti 결과가 있으면 put 요청
+// 없으면 post요청 
 </script>
 
 <style scoped>

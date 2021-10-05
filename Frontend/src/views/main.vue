@@ -47,19 +47,20 @@
     <!-- 오늘의 기업 --> 
     <div class="todaycorp" style="display:flex; align-items:center">
       <div style="width: 30%">
-        <h4 class="card-title mt-4 mb-4">오늘의 기업 <br> {{ todayCorp }}</h4>
+        <h4 class="card-title mt-3 mb-3">오늘의 기업</h4>
+        <h4 class="mb-4">{{ todayCorp }}</h4>
         <p id="font" style="color:#FABD02">*오늘의 기업이란,<br> 하루 ESG 기사 언급량<br> 1위 기업을 의미합니다.</p>
       </div>
       <div style="width: 70%">
         <ul class="list-group card-text" id="font">
           <div v-for="(news, idx) in todayCorpNews" :key="idx">
             <li class="list-group-item">
-              <a :href="news.url" class="news-link">{{ news.title }}</a>
+              <div @click="goPage(news.url)" class="news-link">{{ news.title }}</div>
             </li>
           </div>
         </ul>
-        <button class="btn btn-lg btn-block mt-2" 
-        style="width:80%; background-color:#FABD01"
+        <button class="btn btn-lg btn-block mt-2 detail-btn" 
+        style="width:95%;"
         @click="goDetail(todayCorpPk)">회사 정보 확인</button>
       </div>
     </div>
@@ -131,6 +132,9 @@ export default {
         Authorization: `JWT ${token}`
       }
       return config
+    },
+    goPage(url){
+      window.open(url, "_blank")
     },
     // ESG 1위 기업 출력 
     getBestCorp: function () {
@@ -205,6 +209,21 @@ export default {
 </script>
 
 <style scoped>
+.routerLink {
+  font-size: 19px;
+  text-decoration: none;
+}
+.routerLink:hover {
+  text-decoration: underline;
+  text-decoration-color: #FABD02;
+  text-underline-position: under;
+}
+.detail-btn {
+  background-color:#FABD02;
+}
+.detail-btn:hover {
+  background-color: rgba(250,189,2, 0.8);
+}
 .news-link {
   color: white;
   white-space: normal;
@@ -213,6 +232,12 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  text-decoration: none;
+}
+.news-link:hover {
+  text-decoration: underline;
+  text-underline-position:under;
+  cursor: pointer;
 }
 .main-div {
   width: 75%;
@@ -230,8 +255,6 @@ h1, h3, h4, .mbti {
 .list-group-item {
   background-color: black;
   color:white;
-  text-decoration: underline; 
-  text-underline-position:under;
 }
 .todaycorp {
   background-color:black;

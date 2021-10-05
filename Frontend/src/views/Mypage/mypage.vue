@@ -1,9 +1,19 @@
 <template>
   <div class="container">
-    <div class="mb-5">
+    <div >
       <Profile />
     </div>
-    <div class="mypage row">
+
+      <RouterLink class="routerLink" :to="{ name: 'test' }">
+        <div class="d-flex justify-content-center mb-5" >
+          <button class="btn btn-lg" 
+          style="width:20%; background-color:#FABD01;">
+            ESG mbti 확인하기
+          </button>
+        </div>
+      </RouterLink>
+    
+    <div class="mypage row mb-5">
       <scrapList
       :corporates="corporates"
       />
@@ -13,30 +23,30 @@
         <!-- ESG Chart 시작 -->
           <!-- <div class="card" style="width: 30%;margin: auto" > -->
             <!-- <div class="card-body"> -->
-              <div style="display:flex;width:33%;">
+              <!-- <div style="display:flex;width:33%;"> -->
               <!-- <h5 class="card-title"> ESG 성향 </h5> -->
-
+<!-- 
                   <Graph
                   :e_score="e_score"
                   :s_score="s_score"
                   :g_score="g_score"
-                  />
+                  /> -->
             <!-- </div> -->
           <!-- </div> -->
           <!-- ESG Chart 종료 -->
-    </div>
+    <!-- </div> -->
   </div>
 
-    <RouterLink class="routerLink" :to="{ name: 'test' }">
+    <!-- <RouterLink class="routerLink" :to="{ name: 'test' }">
       <p>ESG Mbti</p>
-    </RouterLink>
+    </RouterLink> -->
 
   </div>
 </template>
 
 <script>
 import Profile from '../../components/Profile.vue';
-import Graph from '../../components/graph_mypage.vue';
+// import Graph from '../../components/graph_mypage.vue';
 import scrapList from '../../components/scrap_list.vue';
 import recommendList from '../../components/recommend_list.vue';
 
@@ -45,7 +55,7 @@ import axios from 'axios';
 export default {
   name: 'mypage',
   components: {
-    Profile,Graph, scrapList, recommendList,
+    Profile, scrapList, recommendList,
   },
   data: function () {
     return {
@@ -78,8 +88,9 @@ export default {
     getRecommend: function () {
       axios.get('accounts/profile_esg/', {headers:this.setToken()})
       .then(res => {
-        this.recommend = res.data.corporates
+        this.recommend = res.data.recommend
         console.log(this.recommend)
+        console.log(res.data)
       })
       .catch(err => {
         console.log(err)

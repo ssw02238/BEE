@@ -67,9 +67,9 @@ def signup(request):
 # password 변경
 
 
-@swagger_auto_schema(methods=['put'], request_body=PasswordSerializer, 
-                        manual_parameters=[openapi.Parameter('header_test', openapi.IN_HEADER, 
-                            description="a header for  test", type=openapi.TYPE_STRING)])
+@swagger_auto_schema(methods=['put'], request_body=PasswordSerializer,
+                     manual_parameters=[openapi.Parameter('header_test', openapi.IN_HEADER,
+                                                          description="a header for  test", type=openapi.TYPE_STRING)])
 @api_view(['PUT'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -100,7 +100,8 @@ def profile(request):
     client_email = request.user.email
 
     if MBTI.objects.filter(user=client):
-        mbti_score = [client.mbti.e_score, client.mbti.s_score, client.mbti.g_score]
+        mbti_score = [client.mbti.e_score,
+                      client.mbti.s_score, client.mbti.g_score]
     else:
         mbti_score = []
 
@@ -119,19 +120,19 @@ def profile(request):
 
 # mbti 점수 저장 & 추천 기업 저장
 @swagger_auto_schema(methods=['post', 'put'], request_body=MbtiSerializer)
-@api_view(['POST', 'PUT',])
+@api_view(['POST', 'PUT', ])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
 def mbti(request):
     User = get_user_model()
     user = request.user
-    
+
     # 처음 했을 때 새로 저장
     if request.method == 'POST':
         serializer = MbtiSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=user)
-    
+
     # 다시 했을 때 수정해서 저장
     elif request.method == 'PUT':
         test = get_object_or_404(MBTI, user=user)
@@ -153,22 +154,22 @@ def mbti(request):
 
     # 코사인 유사도가 높은 20개 기업 순서대로 출력
     cos_sim = cosine_similarity(user_df, corp_df)
-    cos_sim_rank = cos_sim.argsort()[0,::-1][:20]
+    cos_sim_rank = cos_sim.argsort()[0, ::-1][:20]
     cos_sim_corps = corp_df.iloc[cos_sim_rank]
 
     # 코사인 유사도 상위 20개 기업에 대해 유클리디안 거리 비교 및 상위 3개 출력
     sim_dist = euclidean_distances(user_df, cos_sim_corps)
     dist_sim_rank = sim_dist.argsort()[0][:3]
     dist_sim_corps = cos_sim_corps.index[dist_sim_rank]
-    
+
     # 결과 저장
     user_mbti = user.mbti
     user_mbti.first = dist_sim_corps[0]
     user_mbti.second = dist_sim_corps[1]
     user_mbti.third = dist_sim_corps[2]
     user_mbti.save()
-    
-    return Response(status=status.HTTP_200_OK)
+
+    return Response({'mbti': request.data.values()}, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
@@ -185,13 +186,17 @@ def profile_esg(request):
             'g_score': client.mbti.g_score,
         }
         recommend = [
-            CorporateSerializer(get_object_or_404(Corporate, id=client.mbti.first)).data,
-            CorporateSerializer(get_object_or_404(Corporate, id=client.mbti.second)).data,
-            CorporateSerializer(get_object_or_404(Corporate, id=client.mbti.third)).data,
+            CorporateSerializer(get_object_or_404(
+                Corporate, id=client.mbti.first)).data,
+            CorporateSerializer(get_object_or_404(
+                Corporate, id=client.mbti.second)).data,
+            CorporateSerializer(get_object_or_404(
+                Corporate, id=client.mbti.third)).data,
         ]
     else:
         mbti_score = []
-        recommend = CorporateSerializer(Corporate.objects.order_by('-ESG_rating')[:3], many=True).data
+        recommend = CorporateSerializer(
+            Corporate.objects.order_by('-ESG_rating')[:3], many=True).data
 
     # corporates_serializer = CorporateSerializer(
     #     client.scrap_corporates.all(), many=True)

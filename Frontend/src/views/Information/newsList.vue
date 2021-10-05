@@ -19,10 +19,10 @@
     </thead>
 
     <tbody v-for="(content, idx) in paginated" :key="idx">
-      <tr style="height:50px;">
+      <tr style="height:50px;" @click="goPage(content.url)" class="news-body">
         <!-- <th scope="row">1</th> -->
         <td>{{ 10 * (page - 1) + idx + 1 }} </td>
-        <td class="news-link text-decoration-none" @click="goPage(content.url)">{{ content.title }} </td>
+        <td class="news-link">{{ content.title }} </td>
         <td>{{ content.date }} </td>
       </tr>
     </tbody>
@@ -133,8 +133,11 @@ th,td{
     text-align: center;
 }
 .news-link {
-  text-decoration: underline; 
-  text-underline-position:under;
+  text-decoration: none;
+}
+.news-body:hover {
+  background-color: rgba(255,255,255,0.55);
+  cursor: pointer;
 }
 .table {
   color:white;
