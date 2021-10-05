@@ -33,7 +33,12 @@
 
     <hr style="color:yellow">
     <!-- 기업 순위 --> 
-    <h3 class="my-4">Monthly Ranking</h3>  
+    <div class="d-flex justify-content-between">
+      <h3 class="my-4">Monthly Ranking</h3>
+      <RouterLink :to="{ name: 'esgRank' }" class="routerLink">
+        <div type=button class="mt-4 pt-2 px-2" style="color:#FABD02;">더보기</div>
+      </RouterLink>
+    </div>
     <rankTable id="font" :paginated="paginated" :page="page"/> 
 
     <hr style="color:yellow">
@@ -197,6 +202,9 @@ export default {
        console.log('여기 pk', pk)
       this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
       },  
+    goRank: function() {
+
+    }
     
   },
   async mounted() {
