@@ -2,7 +2,7 @@
   <table class="table" style="font-size:15px; text-align:center">
       <thead style="background-color:#1b1b1b;">
         <tr>
-          <th scope="col">Rank</th>
+          <th scope="col">No</th>
           <th scope="col">기업</th>
           <th scope="col">E</th>
           <th scope="col">S</th>
@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody v-for="(corporate, idx) in paginated" :key="idx"
-      @click="goDetail(corporate.pk)" style="background-color:black;">
+      @click="goDetail(corporate.pk)" class="table-body">
         <tr id="font">
           <th><div type="button">{{ 10 * (page - 1) + idx + 1 }}</div></th>
           <th><div type="button">{{ corporate.name }}</div></th>
@@ -43,6 +43,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.table-body:hover {
+  background-color: rgba(255,255,255,0.55);
+  cursor: pointer;
+}
 
 </style>

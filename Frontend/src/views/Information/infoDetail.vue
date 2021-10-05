@@ -3,8 +3,8 @@
     <h1 class="corporate-name" style="display:inline">{{ corporate.name }}</h1>
     <!-- scrap list에 따른 분기 처리 진행할 것... -->
     <!-- render 될 때 scrap 여부 확인할 수 있는 방법 강구할 것 -->
-    <b-icon icon="star-fill" variant="warning" font-scale="2" @click="addScrap" type="button" v-if="is_scrap"></b-icon>
-    <b-icon icon="star" variant="warning" font-scale="2" @click="addScrap" type="button" v-else></b-icon>
+    <b-icon icon="star-fill" variant="warning" font-scale="2" class="scrap-btn" @click="addScrap" type="button" v-if="is_scrap"></b-icon>
+    <b-icon icon="star" variant="warning" font-scale="2" class="scrap-btn" @click="addScrap" type="button" v-else></b-icon>
     <div class="scrap-score">
       <div class="ps-2">Total: {{ corporate.ESG_rating.toFixed(0) }} / 300</div>
     </div>
@@ -49,14 +49,14 @@
     <table v-if="newsList.length > 0" class="table table-dark table-hover">
       <thead>
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">No</th>
           <th scope="col">Title</th>
           <th scope="col">Date</th>
         </tr>
       </thead>
-      <tbody id="font" v-for="(news, idx) in newsList" :key="idx">
+      <tbody id="font" v-for="(news, idx) in newsList" :key="idx" class="news-body" @click="goPage(news.url)">
           <th scope="row"><span class="table-text">{{ idx + 1 }}</span></th>
-          <td><span class="news-link" @click="goPage(news.url)">{{ news.title }}</span></td>
+          <td><span class="news-link">{{ news.title }}</span></td>
           <td><span class="table-text">{{ news.date }}</span></td>
       </tbody>
     </table>
@@ -120,10 +120,10 @@ export default {
     },
     goDetail(pk) {
       this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
-      },  
-      goPage(url){
-        window.open(url, "_blank")
-      },
+    },  
+    goPage(url){
+      window.open(url, "_blank")
+    },
     addScrap: function () {
       axios.post(`corporates/${this.pk}/scrap/`, {headers:this.setToken()})
 
@@ -205,6 +205,20 @@ export default {
 </script>
 
 <style scoped>
+.scrap-btn {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+}
+.scrap-btn:hover {
+  transform: scale(1.15);
+  -webkit-transform: scale(1.15);
+  -moz-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+  -o-transform: scale(1.15);
+}
 .corporate-name {
   color: #FABD02;
   background-color:rgb(0, 0, 0);
@@ -250,16 +264,18 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  text-decoration: underline; 
-  text-underline-position:under;
+  text-decoration: none; 
 }
-
 .table-text {
   color: white;
   background: transparent;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+}
+.news-body:hover {
+  background-color: rgba(255,255,255,0.55);
+  cursor: pointer;
 }
 
 </style>
