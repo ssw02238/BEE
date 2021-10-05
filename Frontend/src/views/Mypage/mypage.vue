@@ -3,83 +3,53 @@
     <div class="mb-5">
       <Profile />
     </div>
-  <div class="mypage row">
-    <scrapList
-    :corporates="corporates"
-    />
-        <!-- 테이블 시작 -->
-        <!-- <table class="table" style="width: 20%;margin: auto">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">스크랩 기업</th>
-            </tr>
-          </thead>
-          <tbody>
+    <div class="mypage row">
+      <scrapList
+      :corporates="corporates"
+      />
+        <!-- 추천 기업 --> 
+        <table class="table" style="width: 20%;margin: auto">
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">추천 기업</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td> 삼성전자 </td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td> LG 디스플레이 </td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td> CJ ENM </td>
+              </tr>
+              <!-- <tr>
+                <th scope="row">4</th>
+                <td> 녹십자 </td>
+              </tr> -->
+            </tbody>
+          </table>
+    
+        <!-- ESG Chart 시작 -->
+          <!-- <div class="card" style="width: 30%;margin: auto" > -->
+            <!-- <div class="card-body"> -->
+              <div style="display:flex;width:33%;">
+              <!-- <h5 class="card-title"> ESG 성향 </h5> -->
 
-            <tr v-for="(corporate, idx) in corporates" :key="idx">
-              <th scope="row">1</th>
-              <td> {{ corporate.name }} </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td> {{ corporate.name }} </td>
-            </tr>
-            <tr v-if="coporates.length > 3">
-              <th scope="row">3</th>
-              <td> {{ corporate.name }} </td>
-            </tr>
-            <tr v-if="corporates.length > 4">
-              <th scope="row">4</th>
-              <td> {{ corporate.name }} </td>
-            </tr>
-          </tbody>
-        </table> -->
-      <!-- 테이블 종료 -->
-
-      <!-- 추천 기업 --> 
-      <table class="table" style="width: 20%;margin: auto">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">추천 기업</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td> 삼성전자 </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td> LG 디스플레이 </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td> CJ ENM </td>
-            </tr>
-            <!-- <tr>
-              <th scope="row">4</th>
-              <td> 녹십자 </td>
-            </tr> -->
-          </tbody>
-        </table>
-  
-      <!-- ESG Chart 시작 -->
-        <!-- <div class="card" style="width: 30%;margin: auto" > -->
-          <!-- <div class="card-body"> -->
-            <div style="display:flex;width:33%;">
-            <!-- <h5 class="card-title"> ESG 성향 </h5> -->
-
-                <Graph
-                :e_score="e_score"
-                :s_score="s_score"
-                :g_score="g_score"
-                 />
+                  <Graph
+                  :e_score="e_score"
+                  :s_score="s_score"
+                  :g_score="g_score"
+                  />
+            <!-- </div> -->
           <!-- </div> -->
-        <!-- </div> -->
-        <!-- ESG Chart 종료 -->
-  </div>
+          <!-- ESG Chart 종료 -->
+    </div>
   </div>
 
     <RouterLink class="routerLink" :to="{ name: 'test' }">

@@ -2,7 +2,7 @@
   <div class="d-flex">
     <form action="#" @submit="search">
       <input v-model="searchContent" placeholder="기업 검색" >
-      <button>검색</button>
+      <!-- <button class="btn btn-secondary">검색</button> -->
     </form>
   </div>
 </template>

@@ -71,12 +71,18 @@ def add_scrap(request, corp_id):
     #스크랩 취소 (이미 스크랩한 유저)
     if corp.scrap_user.filter(pk=request.user.pk).exists():
         corp.scrap_user.remove(request.user)
+        corp.scrap_cnt -= 1
+        # print(corp.scrap_cnt)
+        corp.save()
         scrap_flag['messages'] = '스크랩 취소'
         return JsonResponse(scrap_flag, status=status.HTTP_204_NO_CONTENT)
 
     #스크랩 추가
     else:
         corp.scrap_user.add(request.user)
+        corp.scrap_cnt += 1
+        # print(corp.scrap_cnt)
+        corp.save()
         scrap_flag['is_scrap'] = True
         scrap_flag['messages'] = '스크랩 성공'
         return JsonResponse(scrap_flag, status=status.HTTP_201_CREATED)

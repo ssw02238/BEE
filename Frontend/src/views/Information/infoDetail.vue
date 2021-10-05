@@ -4,7 +4,7 @@
     <!-- scrap list에 따른 분기 처리 진행할 것... -->
     <!-- render 될 때 scrap 여부 확인할 수 있는 방법 강구할 것 -->
     <b-icon icon="star-fill" variant="warning" font-scale="2" @click="addScrap" type="button" v-if="is_scrap"></b-icon>
-    <b-icon icon="star" font-scale="2" @click="addScrap" type="button" v-else></b-icon>
+    <b-icon icon="star" variant="warning" font-scale="2" @click="addScrap" type="button" v-else></b-icon>
     <div class="scrap-score">
       <div class="ps-2">Total: {{ corporate.ESG_rating.toFixed(0) }} / 300</div>
     </div>

@@ -12,15 +12,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr @click="moveToDetail(corporates[0].pk)">
       <th scope="row">1</th>
       <td>{{ corporates[0].name }}</td>
     </tr>
-    <tr>
+    <tr @click="moveToDetail(corporates[1].pk)">
       <th scope="row">2</th>
       <td>{{ corporates[1].name }}</td>
     </tr>
-    <tr>
+    <tr @click="moveToDetail(corporates[2].pk)">
       <th scope="row">3</th>
       <td>{{ corporates[2].name }}</td>
     </tr>
@@ -51,6 +51,9 @@ export default {
       .catch(err => {
         console.log(err)
       })
+    },
+    moveToDetail: function (id) {
+      console.log(id)
     }
   },
   async mounted() {
