@@ -1,9 +1,7 @@
 <template>
   <div id="back">
-
     <!-- nav bar -->
     <nav-bar v-if="$route.name !== 'welcome'"/>
-    
     <router-view />
     <footer-bar v-if="$route.name !== 'welcome'"/>
   </div>
@@ -62,7 +60,7 @@ export default {
 #back {
   font-family: 'SLEIGothicTTF';
   background-image: url("BackgroundIMG.jpg"); 
-  min-height: 100%;
+  height: 100%;
   background-position:center;
   background-attachment: fixed;
   border:0;

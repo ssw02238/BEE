@@ -2,7 +2,6 @@
   <div class="container">
     <h1 class="corporate-name" style="display:inline">{{ corporate.name }}</h1>
     <!-- scrap list에 따른 분기 처리 진행할 것... -->
-    <!-- render 될 때 scrap 여부 확인할 수 있는 방법 강구할 것 -->
     <b-icon icon="star-fill" variant="warning" font-scale="2" class="scrap-btn" @click="addScrap" type="button" v-if="is_scrap"></b-icon>
     <b-icon icon="star" variant="warning" font-scale="2" class="scrap-btn" @click="addScrap" type="button" v-else></b-icon>
     <div class="scrap-score">
@@ -125,21 +124,31 @@ export default {
       window.open(url, "_blank")
     },
     addScrap: function () {
-      axios.post(`corporates/${this.pk}/scrap/`, {headers:this.setToken()})
-
-      .then(res => {
-        // console.log(res)
-        if (res.status == 201) {
-          this.is_scrap = true
-          // console.log(this.is_scrap)
-        } else {
-          this.is_scrap = false
-          // console.log(this.is_scrap)
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
+      const config = this.setToken()
+      axios.post(`corporates/${this.pk}/scrap/`,{}, {headers: config})
+        .then(res => {
+          // console.log(res)
+          if (res.status == 201) {
+            this.is_scrap = true
+            // console.log(this.is_scrap)
+          } else {
+            this.is_scrap = false
+            // console.log(this.is_scrap)
+          }
+        })
+        .catch((error) => {
+          // Error 😨
+          if (error.response) {
+            if (error.response.status === 404) {
+              alert("존재하지 않는 기업입니다.")
+            }
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log('Error', error.message);
+          }
+          console.log(error.config);
+        });
     },
     getDetail(pk) {
       axios.get(`corporates/${pk}/detail/`, {headers:this.setToken()})

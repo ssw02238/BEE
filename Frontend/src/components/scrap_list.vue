@@ -7,9 +7,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(corporate, index, idx) in corporates" :key="idx">
+      <tr v-for="(corporate, index, idx) in corporates" :key="idx" @click="moveToDetail(corporate.pk)">
         <th scope="row">{{ index + 1 }}</th>
-        <td> {{ corporate.name }} </td>
+        <td class=" detail-btn" > {{ corporate.name }} </td>
       </tr>
     </tbody>
   </table>
@@ -21,9 +21,18 @@ export default {
   props: {
     corporates: Array,
   },
+  methods: {
+    moveToDetail: function (pk) {
+      this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
+    }
+  }
 }
 </script>
 
-<style>
+<style scoped>
 
+.detail-btn:hover {
+  text-decoration: underline;
+  text-underline-position:under;
+  cursor: pointer;}
 </style>

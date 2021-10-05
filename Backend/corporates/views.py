@@ -58,7 +58,7 @@ def similar_corp(request, corp_id):
     return JsonResponse(sim_corps)
 
 @swagger_auto_schema(methods=['post'], request_body=no_body, responses={204: '스크랩 취소', 200: '스크랩 성공'})
-@api_view(['POST'])
+@api_view(['POST',])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
 def add_scrap(request, corp_id):

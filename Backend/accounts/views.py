@@ -89,8 +89,6 @@ def password(request):
         return Response({'message': '성공적으로 변경되었습니다.'}, status=status.HTTP_200_OK)
 
 # 마이페이지
-
-
 @api_view(['GET'])
 @authentication_classes([JSONWebTokenAuthentication])
 @permission_classes([IsAuthenticated])
