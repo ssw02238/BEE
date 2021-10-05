@@ -14,7 +14,7 @@ export default {
     data() {
         return {
             series: [{
-            data: [35, 14, 20]
+            data: []
           }],
           chartOptions: {
             chart: {
@@ -46,8 +46,23 @@ export default {
           },
         }
     },
+
+    //1. split  - localstorage 
+    //2. axios  -
+
     async mounted() {
-    this.series[0].data = localStorage.getItem('mbti')
+    let temp = localStorage.getItem('mbti').split(",")
+          for ( var i in temp ) {
+            console.log(i)
+    this.series[0].data.push(parseInt(temp[i]))
+      }
+           console.log(temp)
+    // E
+    // this.series[0].data.push(localStorage.getItem('mbti')[0])
+    // S
+    // this.series[0].data.push(localStorage.getItem('mbti')[2])
+    // G
+    // this.series[0].data.push(localStorage.getItem('mbti')[4])
   }      
 }
 </script>
