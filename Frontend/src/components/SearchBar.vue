@@ -32,7 +32,7 @@ export default {
           // Error 😨
           if (error.response) {
             if (error.response.status === 404) {
-              alert("존재하지 않는 기업입니다.", "실패", 'error')
+              alert("존재하지 않는 기업입니다.")
             }
           } else if (error.request) {
             console.log(error.request);

@@ -3,20 +3,22 @@
 
 <!-- Rank div 시작 -->
     <div class="card text-center top-card" style="background-color: black; margin: auto;">
-      <div class="card-header" style="font-size:2rem; color:white; text-align:left;">
-        Ranks
-      </div>
-      <searchBar/>
-      <!-- 드롭다운 -->
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="float: right;">
-          필터링
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#" @click="getErank()">E 점수 순</a></li>
-          <li><a class="dropdown-item" href="#" @click="getSrank()">S 점수 순</a></li>
-          <li><a class="dropdown-item" href="#" @click="getGrank()">G 점수 순</a></li>
-        </ul>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="card-header" style="font-size:2rem; color:white; text-align:left;">
+          Ranks
+        </div>
+        <searchBar/>
+        <!-- 드롭다운 -->
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="float: right;">
+            필터링
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="#" @click="getErank()">E 점수 순</a></li>
+            <li><a class="dropdown-item" href="#" @click="getSrank()">S 점수 순</a></li>
+            <li><a class="dropdown-item" href="#" @click="getGrank()">G 점수 순</a></li>
+          </ul>
+        </div>
       </div>
     <!-- 드롭다운 끝 -->
 

@@ -18,28 +18,28 @@ class Corporate(models.Model):
 
 class Environment(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
-    co2 = models.IntegerField()
-    energy = models.IntegerField()
+    co2 = models.FloatField(blank=True, null=True)
+    energy = models.FloatField(blank=True, null=True)
     total = models.FloatField()
     news_pos_cnt = models.IntegerField()
     news_neg_cnt = models.IntegerField()
 
 class Social(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
-    average_term = models.FloatField()
-    term_ratio = models.FloatField()
-    woman_ratio = models.FloatField()
+    average_term = models.FloatField(blank=True, null=True)
+    term_ratio = models.FloatField(blank=True, null=True)
+    woman_ratio = models.FloatField(blank=True, null=True)
     total = models.FloatField()
     news_pos_cnt = models.IntegerField()
     news_neg_cnt = models.IntegerField()
     
 class Governance(models.Model):
     corporate = models.ForeignKey(Corporate, on_delete=models.CASCADE)
-    board_ratio = models.FloatField()
-    board_independency = models.FloatField()
-    salary_gap = models.FloatField()
-    dividen_ratio = models.FloatField()
-    largest_shareholder = models.FloatField()
+    board_ratio = models.FloatField(blank=True, null=True)
+    board_independency = models.BooleanField(blank=True, null=True)
+    salary_gap = models.FloatField(blank=True, null=True)
+    dividen_ratio = models.FloatField(blank=True, null=True)
+    largest_shareholder = models.FloatField(blank=True, null=True)
     total = models.FloatField()
     news_pos_cnt = models.IntegerField()
     news_neg_cnt = models.IntegerField()
