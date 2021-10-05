@@ -40,10 +40,7 @@ export default {
   },
   methods: {
     getRank: function () {
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/boards/popularcorp/',
-      })
+        axios.get('boards/popularcorp/')
       .then(res => {
         // console.log(res)
         this.corporates = res.data
@@ -64,5 +61,8 @@ export default {
 <style scoped>
 th, td {
   color:#f3c438
+}
+p {
+  color: #FABD02
 }
 </style>

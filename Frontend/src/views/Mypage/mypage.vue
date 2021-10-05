@@ -86,12 +86,7 @@ export default {
       return config
     },
     getScrap: function () {
-      console.log(1)
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/accounts/profile/',
-        headers: this.setToken()
-      })
+      axios.get('accounts/profile/', {headers:this.setToken()})
       .then(res => {
         this.corporates = res.data.corporates
         console.log(this.corporates)

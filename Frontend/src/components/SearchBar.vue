@@ -19,11 +19,7 @@ export default {
   },
   methods: {
     search: function () {
-      // console.log(this.searchContent)
-      axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/corporates/search/${this.searchContent}`,
-      })
+      axios.get( `corporates/search/${this.searchContent}`)
         .then(res => {
           console.log(res.data.pk)
           this.$router.push({name: 'infoDetail', params: {pk: res.data.pk}})

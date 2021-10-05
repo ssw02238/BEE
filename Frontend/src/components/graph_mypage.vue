@@ -41,11 +41,8 @@ export default {
       return config
     },
       get_esg() {
-      axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/accounts/profile_esg/`,
-        headers: this.setToken()
-      })
+      axios.get( 'accounts/profile_esg/', {headers:this.setToken()})
+
         .then(res => {
               if (res.data.mbti) {
                 this.series[0].data[0] = res.data.mbti.e_score

@@ -2,17 +2,18 @@
   <div style="margin-bottom: 100px;">
     <div class="mb-4">
         <p style="font-size:2rem; color:#f3c438; margin-left:180px">News</p>
-        <p style="font-soze: 1.2rem; margin-left:180px;">Kospi 200개 기업의 ESG관련 뉴스를 확인해보세요</p>
+        <p style="font-soze: 1.2rem; 
+        margin-left:180px;
+        background-color:black;
+        color: #FABD02">
+        Kospi 200개 기업의 ESG관련 뉴스를 확인해보세요
+        </p>
     </div>
     <table class="table" style="width: 75%;margin:auto;">
     <thead style="background-color: rgb(27, 27, 27);">
       <tr>
         <th scope="col">No</th>
         <th scope="col">기사 제목</th>
-<<<<<<< HEAD
-        <!-- <th scope="col">기업</th> -->
-=======
->>>>>>> feat/fe/rank
         <th scope="col">날짜</th>
       </tr>
     </thead>
@@ -21,12 +22,7 @@
       <tr style="height:50px;">
         <!-- <th scope="row">1</th> -->
         <td>{{ 10 * (page - 1) + idx + 1 }} </td>
-<<<<<<< HEAD
-        <td class="news-link" @click="goPage(content.url)">{{ content.title }} </td>
-        <!-- <td>{{ content.corporate}}</td>             -->
-=======
         <td class="news-link text-decoration-none" @click="goPage(content.url)">{{ content.title }} </td>
->>>>>>> feat/fe/rank
         <td>{{ content.date }} </td>
       </tr>
     </tbody>
@@ -75,11 +71,8 @@ export default {
     },
     // 뉴스 리스트 출력 
     getNews() {
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/boards/news/',
-        headers: this.setToken()
-      })
+      axios.get('boards/news/', {headers:this.setToken()})
+      
         .then(res => {
           this.news = res.data
           console.log('받아온 뉴스', this.news)
@@ -107,19 +100,16 @@ export default {
     },
 
     // scrap 하기 ??
-    getScrap() {
-      axios({
-        method: 'post',
-        url: 'http://127.0.0.1:8000/api/corporates/${corp_id}/scrap/',
-        headers: this.setToken()
-      })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log('오류', err)
-        })
-    }
+    // getScrap() {
+    //   axios.post('corporates/${corp_id}/scrap/', {headers:this.setToken()})
+      
+    //     .then(res => {
+    //       console.log(res)
+    //     })
+    //     .catch(err => {
+    //       console.log('오류', err)
+    //     })
+    // }
   },
   async mounted() {
     this.getNews()

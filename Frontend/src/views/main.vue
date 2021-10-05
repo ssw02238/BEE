@@ -48,7 +48,7 @@
     <div class="todaycorp" style="display:flex; align-items:center">
       <div style="width: 30%">
         <h4 class="card-title mt-4 mb-4">오늘의 기업 <br> {{ todayCorp }}</h4>
-        <p id="font">*오늘의 기업이란,<br> 하루 ESG 기사 언급량<br> 1위 기업을 의미합니다.</p>
+        <p id="font" style="color:#FABD02">*오늘의 기업이란,<br> 하루 ESG 기사 언급량<br> 1위 기업을 의미합니다.</p>
       </div>
       <div style="width: 70%">
         <ul class="list-group card-text" id="font">
@@ -89,7 +89,6 @@
 </template>
 
 <script>
-import rest from '../js/httpCommon.js'
 import axios from 'axios'
 import rankTable from '../components/table.vue'
 import Top from '../components/Top.vue'
@@ -135,11 +134,7 @@ export default {
     },
     // ESG 1위 기업 출력 
     getBestCorp: function () {
-      rest.axios({
-        method: 'get',
-        url: 'boards/bestcorp/',
-        headers: this.setToken()
-      })
+      axios.get('boards/bestcorp/', {headers:this.setToken()})
         .then(res => {
           console.log('1위 esg 기업 정보', res.data)
           this.esg_top = res.data.name
@@ -166,11 +161,7 @@ export default {
     },
     // ESG 전체 순위 리스트 조회 
     getESGRank() {
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/boards/esg-ranking/',
-        headers: this.setToken()
-      })
+      axios.get('boards/esg-ranking/', {headers:this.setToken()})
         .then(res => {
           // console.log('전체 순위 리스트', res)
           this.paginated = res.data.corp_data.slice(0, 5)
@@ -182,11 +173,7 @@ export default {
     },
     // 오늘의 기업 출력 
     getNewsTop: function () {
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/boards/hottestcorp/',
-        headers: this.setToken()
-      })
+      axios.get('boards/hottestcorp/', {headers:this.setToken()})
         .then(res => {
           console.log('오늘의 기업 정보', res)
           console.log(res.data)
