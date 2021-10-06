@@ -258,7 +258,7 @@ export default {
         .then(res => {
           console.log('요청 제대로', res)         
           localStorage.setItem('mbti', res.data.mbti)
-          this.$router.push({ name: 'mypage' })
+          this.$router.push({ name: 'myPage' })
           this.$router.go()
         })
         .catch(err => {
@@ -275,7 +275,7 @@ export default {
         .then(res => {
           console.log('요청 제대로', res)           
           localStorage.setItem('mbti', res.data.mbti)
-          this.$router.push({ name: 'mypage' })
+          this.$router.push({ name: 'myPage' })
           this.$router.go()
         })
         .catch(err => {
