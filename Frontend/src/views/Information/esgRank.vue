@@ -52,7 +52,7 @@
     </div>
     <!-- rank div 끝 -->
     <hr style="color:yellow; height:5px;">
-<!-- Graph div 시작 -->
+    <!-- Graph div 시작 -->
     <div class="card text-center top-card" style="background-color: black; margin: auto;">
       <div class="card-header" style="font-size:2rem; color:#f3c438; text-align:left;">
         Graphs
@@ -62,7 +62,7 @@
         
         <Graph/>
         
-        <Graph2/>
+        <!-- <Graph2/> -->
         <Scrap/>
               </div>
 <!-- Graph 끝 --> 
@@ -77,13 +77,12 @@ import axios from 'axios'
 
 import Table from '../../components/table.vue'
 import Graph from '../../components/graph_rank.vue'
-import Graph2 from '../../components/graph_rank2.vue'
 import Scrap from '../../components/scrap_rank.vue'
 import SearchBar from '../../components/SearchBar.vue'
 export default {
   name: 'esgRank',
   components: {
-  Table,Graph,Graph2,Scrap,SearchBar
+  Table,Graph,Scrap,SearchBar
   },
   data() {
     return{
@@ -118,7 +117,6 @@ export default {
       let numberOfPages = Math.ceil(this.rank.length / this.perPage);
       for (let index = 1; index <= numberOfPages; index ++) {
         this.pages.push(index);
-        // console.log(this.pages, '페이지 세팅')
       }
     },
     paginate(rank) {
@@ -126,15 +124,12 @@ export default {
       let perPage = this.perPage
       let from = (page * perPage) - perPage;
       let to = (page * perPage);
-      console.log('잘린 애들', rank.slice(from, to))
-      console.log('현재 페이지', page)
       return  rank.slice(from, to)
     },
     getErank() {
       axios.get('boards/e-ranking/', {headers:this.setToken()})
 
         .then(res => {
-          console.log('e순위', this.rank)
           this.rank = res.data
         })
         .catch(err => {
@@ -146,7 +141,6 @@ export default {
 
         .then(res => {
           this.rank = res.data
-          console.log('s순위', this.rank)
         })
         .catch(err => {
           console.log('s 순위 오류', err)
@@ -157,7 +151,6 @@ export default {
 
         .then(res => {
           this.rank = res.data
-          console.log('g순위', this.rank)
         })
         .catch(err => {
           console.log('G 순위 오류', err)

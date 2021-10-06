@@ -69,7 +69,7 @@
         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
           <div id="font"> 
           <b>ESG 경영</b>이란 무엇일까요? <br><br>
-          2004년 UN에서 처음 사용되어, 투자자가 <b>환경, 사회, 거버넌스</b>와 같은 ESG 요소를 통합적으로 고려하여 투자하는 것이
+          2004년 UN에서 처음 사용되어, 투자자가 <b>환경, 사회, 지배구조</b>와 같은 ESG 요소를 통합적으로 고려하여 투자하는 것이
           건강한 투자라는 인식을 심어준 용어입니다. <hr>
           ESG 경영이란 'Environment', 'Social', 'Governance'의 앞 글자를 따서 만들어진 단어로<br><br>
           기업이 <b>친환경, 사회적 책임, 지배구조 개선</b> 등을 고려해야 지속 가능한 경영을 할 수 있다는 의미를 가지고 있습니다.<br><br>
@@ -111,12 +111,12 @@ img{
 }
 .tab-content {
   background-color: rgba(0,0,0,1);
-  height: 300px;
+  height: 350px;
   min-height: 300px;
   color:white;
   margin-top: 10px;
   margin-left: 3px;
-  margin-bottom: 8rem;
+  margin-bottom: 5rem;
   padding: 3px;
 }
 .nav-link {

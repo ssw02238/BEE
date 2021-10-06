@@ -14,7 +14,7 @@
                   <form>
                     <div class="mb-3 form-text">
                       <label for="exampleInputEmail1" class="form-label"> Email id</label>
-                      <input type="id" class="form-control" id="idInput" v-model="credentials.email" placeholder="name@example.com">
+                      <input type="id" class="form-control" id="idInput" v-model="credentials.email" placeholder="id@example.com">
                     </div>
                     <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -26,8 +26,8 @@
 
               <div class="modal-footer">
                 <slot name="footer">
-                  <button type="submit" class="btn btn-warning" @click="[$emit('close'), login(credentials)]">로그인</button>
-                  <button type="submit" class="btn btn-danger" @click="[$emit('close')]">취소</button>
+                  <button type="submit" class="btn btn-secondary" @click="[$emit('close')]">취소</button>
+                  <button type="submit" class="btn btn-dark" @click="[$emit('close'), login(credentials)]">로그인</button>
                 </slot>
               </div>
             </div>
@@ -59,7 +59,6 @@ export default {
     login: function () {
         axios.post('accounts/api-token-auth/', this.credentials)
       .then(res => {
-        console.log('결과', res)
         localStorage.setItem('jwt', res.data.token)
         this.$emit('login')
       })
@@ -67,7 +66,7 @@ export default {
         console.log(res)
         axios.get( 'accounts/profile/', {headers:this.setToken()})
       .then(res => {
-        console.log('닉네임 받기', res.data)
+        console.log(res)
         localStorage.setItem('uid', res.data.id)
         localStorage.setItem('nickname', res.data.nickname)
         localStorage.setItem('email', res.data.email)
@@ -78,9 +77,8 @@ export default {
        })
       })
       .catch(err => {
+        console.loe(err)
         this.$router.push({ name: 'signup'})
-        console.log('회원가입으로 이동')
-        console.log(err)
       })
     }
   }

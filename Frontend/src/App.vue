@@ -41,22 +41,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
-/* 나중에 반응형 할때 쓰기 */
-/* #app {
-    max-width: 1400px;
-
-    margin-left: auto;
-    margin-right: auto;
-
-    padding: 80px 24px;
-  }
-
-  @media (min-width: 1200px) {
-    #app {
-      padding-left: 80px;
-      padding-right: 80px;
-    }
-  } */
 #back {
   font-family: 'SLEIGothicTTF';
   background-image: url("BackgroundIMG.jpg"); 

@@ -4,7 +4,6 @@
         <p style="font-size:2rem; color:#f3c438; margin-left:180px">News</p>
         <p style="font-soze: 1.2rem; 
         margin-left:180px;
-        background-color:black;
         color: #FABD02">
         Kospi 200개 기업의 ESG관련 뉴스를 확인해보세요
         </p>
@@ -12,15 +11,14 @@
     <table class="table" style="width: 75%;margin:auto;">
     <thead style="background-color: rgb(27, 27, 27);">
       <tr>
-        <th scope="col">No</th>
-        <th scope="col">기사 제목</th>
-        <th scope="col">날짜</th>
+        <th scope="col" style="width:10%">No</th>
+        <th scope="col" style="width:50%">기사 제목</th>
+        <th scope="col" style="width:20%">날짜</th>
       </tr>
     </thead>
 
     <tbody v-for="(content, idx) in paginated" :key="idx">
       <tr style="height:50px;" @click="goPage(content.url)" class="news-body">
-        <!-- <th scope="row">1</th> -->
         <td>{{ 10 * (page - 1) + idx + 1 }} </td>
         <td class="news-link">{{ content.title }} </td>
         <td>{{ content.date }} </td>
@@ -75,7 +73,6 @@ export default {
       
         .then(res => {
           this.news = res.data
-          console.log('받아온 뉴스', this.news)
         })
         .catch(err => {
           console.log('뉴스 오류', err)
@@ -98,18 +95,6 @@ export default {
       let to = (page * perPage);
       return  news.slice(from, to)
     },
-
-    // scrap 하기 ??
-    // getScrap() {
-    //   axios.post('corporates/${corp_id}/scrap/', {headers:this.setToken()})
-      
-    //     .then(res => {
-    //       console.log(res)
-    //     })
-    //     .catch(err => {
-    //       console.log('오류', err)
-    //     })
-    // }
   },
   async mounted() {
     this.getNews()
@@ -122,7 +107,6 @@ export default {
   watch: {
     news () {
       this.setPages();
-      
     }
   },
 }

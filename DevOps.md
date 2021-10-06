@@ -293,5 +293,5 @@
 
   - nginx 재시작
 
-    - `sudo systemctl start nginx`
+    - `sudo systemctl restart nginx`
 

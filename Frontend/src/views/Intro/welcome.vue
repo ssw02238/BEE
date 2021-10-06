@@ -2,9 +2,6 @@
   <div class="container">
     <!-- welcome 상단 --> 
     <div class="card text-center top-card">
-      <!-- <div class="card-header" style="font-size:2rem;">
-        BEE
-      </div> -->
       <div class="card-body">
         <img src="@/assets/logo.png" width="280">
         <p class="card-text" style="font-size:1.5rem;">Best ESG Enterprises</p>
@@ -87,10 +84,8 @@ h4, p{
 }
 .moving-card {
   margin-top: 166px;
-  margin-bottom: 30px;
   display:flex;
   justify-content: space-around;
-  /* border:solid 0.5px #FABD02 */
 }
 .card{
   background-color:rgba(0,0,0,0.4);

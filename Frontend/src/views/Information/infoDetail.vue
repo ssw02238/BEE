@@ -1,11 +1,10 @@
 <template>
   <div class="container">
     <h1 class="corporate-name" style="display:inline">{{ corporate.name }}</h1>
-    <!-- scrap list에 따른 분기 처리 진행할 것... -->
     <b-icon icon="star-fill" variant="warning" font-scale="2" class="scrap-btn" @click="addScrap" type="button" v-if="is_scrap"></b-icon>
     <b-icon icon="star" variant="warning" font-scale="2" class="scrap-btn" @click="addScrap" type="button" v-else></b-icon>
     <div class="scrap-score">
-      <div class="ps-2">Total: {{ corporate.ESG_rating.toFixed(0) }} / 300</div>
+      <div class="ps-2">총점 {{ corporate.ESG_rating }} / 300</div>
     </div>
     <!-- ESG evalutaion --> 
 
@@ -13,14 +12,12 @@
       <div class="row g-0">
         <div class="col-md-4">
           <Graph
-          :E_rating="E_rating"
-          :S_rating="S_rating"
-          :G_rating="G_rating"/>
+          />
         </div>
 
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">E: {{ corporate.E_rating.toFixed(2) }} / S: {{ corporate.S_rating.toFixed(2) }} / G: {{ corporate.G_rating.toFixed(2) }}</h5> 
+            <h5 class="card-title">E: {{ E_rating }} · S: {{ S_rating }} · G: {{ G_rating }}</h5> 
             <hr style="color:gold; height:5px;">
             <div>
               <Top class="Top"
@@ -63,39 +60,37 @@
     <hr style="color:gold; height:8px;">
 
     <!-- 유사기업 보여주기 --> 
-    <h2 class="corporate-name">Recommendations</h2>
+    <h2 class="corporate-name">유사 기업</h2>
     
     <div class="d-flex justify-content-around">
     <div v-for="corporate in recommends" :key="corporate.pk">
-      <div class="recomd card" >
+      <div class="dh card" >
 
         <div class="card-body" style="width: 250px; height: 140px;" @click="goDetail(corporate.pk)">       
           <div class="d-flex justify-content-between">
             <h5 class="mb-1">{{ corporate.name }} </h5>
-            <!-- <small>스크랩 담기 ▲</small> -->
           </div>
-          <p class="card-text mt-4" style="color:black;">E: {{ corporate.E_rating.toFixed(2)}} S:{{ corporate.S_rating.toFixed(2) }} G:{{ corporate.G_rating.toFixed(2) }}</p>
+          <p class="card-text mt-4">총점: {{ corporate.ESG_rating }}</p>
+
         </div>
 
       </div>
     </div>
   </div>
-        
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+
 import Top from '../../components/Top.vue'
 import Graph from '../../components/graph_infodetail.vue' 
-// import { mdiBookmarkOutline } from '@mdi/js';
 
 export default {
   name: 'infoDetail',
   components: {
     Graph,
     Top,
-    // Scrap,
   },  
   data() {
     return {
@@ -119,6 +114,7 @@ export default {
     },
     goDetail(pk) {
       this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
+      this.$router.go()
     },  
     goPage(url){
       window.open(url, "_blank")
@@ -127,13 +123,10 @@ export default {
       const config = this.setToken()
       axios.post(`corporates/${this.pk}/scrap/`,{}, {headers: config})
         .then(res => {
-          // console.log(res)
           if (res.status == 201) {
             this.is_scrap = true
-            // console.log(this.is_scrap)
           } else {
             this.is_scrap = false
-            // console.log(this.is_scrap)
           }
         })
         .catch((error) => {
@@ -164,21 +157,78 @@ export default {
           this.E_rating = this.corporate.E_rating
           this.S_rating = this.corporate.S_rating
           this.G_rating = this.corporate.G_rating
-          this.e1 = this.corporate.environment_evaluation[0].co2
-          this.e2 = this.corporate.environment_evaluation[0].energy
-          this.s1 = this.corporate.social_evaluation[0].woman_ratio
-          this.s2 = this.corporate.social_evaluation[0].average_term
-          this.s3 = this.corporate.social_evaluation[0].term_ratio
-          this.g1 = this.corporate.governance_evaluation[0].board_ratio
+          
+          if (this.corporate.environment_evaluation[0].co2 == 0) {
+            this.e1 = '-'
+          }
+          else {
+            this.e1 = this.corporate.environment_evaluation[0].co2
+          }
+
+          if (this.corporate.environment_evaluation[0].co2 == 0) {
+            this.e2 = '-'
+          }
+          else {
+            this.e2 = this.corporate.environment_evaluation[0].energy
+          }
+          // s score
+          if (this.corporate.environment_evaluation[0].co2 == 0) {
+            this.s1 = '-'
+          }
+          else {
+            this.s1 = this.corporate.social_evaluation[0].woman_ratio
+          }
+
+          if (this.corporate.environment_evaluation[0].co2 == 0) {
+            this.s2 = '-'
+          }
+          else {
+            this.s2 = this.corporate.social_evaluation[0].average_term
+          }
+          if (this.corporate.environment_evaluation[0].co2 == 0) {
+            this.s3 = '-'
+          }
+          else {
+            this.s3 = this.corporate.social_evaluation[0].term_ratio
+          }
+
+          // g score
+          if (this.corporate.environment_evaluation[0].co2 == 0) {
+            this.g1 = '-'
+          }
+          else {
+            this.g1 = this.corporate.governance_evaluation[0].board_ratio
+          }
           if (this.corporate.governance_evaluation[0].board_independency == true) {
             this.g2 = '일치'
           }
-          else{
+          else if (this.corporate.governance_evaluation[0].board_independency == false) {
             this.g2 = '불일치'
           }
-          this.g3 = this.corporate.governance_evaluation[0].largest_shareholder
-          this.g4 = this.corporate.governance_evaluation[0].salary_gap
-          this.g5 = this.corporate.governance_evaluation[0].dividen_ratio
+          else {
+            this.g2 = '.'
+          }
+
+          if (this.corporate.environment_evaluation[0].co2 == 0) {
+            this.g3 = '-'
+          }
+          else {
+            this.g3 = this.corporate.governance_evaluation[0].largest_shareholder
+          }
+
+          if (this.corporate.environment_evaluation[0].co2 == 0) {
+            this.g4 = '-'
+          }
+          else {
+            this.g4 = this.corporate.governance_evaluation[0].salary_gap
+          }
+
+          if (this.corporate.environment_evaluation[0].co2 == 0) {
+            this.g5 = '-'
+          }
+          else {
+            this.g5 = this.corporate.governance_evaluation[0].dividen_ratio
+          }
           this.newsList = this.corporate.news.reverse()
         })
         .catch(err => {
@@ -189,7 +239,6 @@ export default {
       axios.get(`corporates/${pk}/similarcorp/`, {headers:this.setToken()})
 
         .then(res => {
-          console.log('추천 기업 정보', res.data.corporates)
           this.recommends = res.data.corporates
         })
         .catch(err => {
@@ -230,7 +279,6 @@ export default {
 }
 .corporate-name {
   color: #FABD02;
-  background-color:rgb(0, 0, 0);
   padding: 8px;
 }
 .no-news {
@@ -254,9 +302,10 @@ export default {
   margin-bottom: 50px;
   display:flex;
   justify-content: space-around;
-  background-color:white;
+  background-color:rgb(0, 0, 0);
+  color:white;
+  position:relative;
 }
-
 .scrap-score {
   color:#e6cb7c;
   display: flex;
@@ -286,5 +335,42 @@ export default {
   background-color: rgba(255,255,255,0.55);
   cursor: pointer;
 }
-
+.dh {
+  width: 220px;
+  height: 120px;
+  background-color:rgb(0, 0, 0);
+  color:white;
+  position: relative;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  text-align: center;
+  border-right: solid 1px rgb(68, 67, 67);
+  border-left: solid 1px rgb(68, 67, 67);
+}
+.dh:hover {
+  background-color: #242423;
+  cursor: pointer;
+}
+.dh:before {
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: 0;
+  width: 220px;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 25px solid rgb(68, 67, 67);
+}
+.dh:after {
+  content: "";
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  width: 220px;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 25px solid rgb(68, 67, 67);
+}
 </style>

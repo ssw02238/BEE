@@ -1,6 +1,6 @@
 <template>
   <div class="main-div">
-    <h1>Ranks</h1>
+    <h3>ESG Top 1</h3>
     <hr style="color:yellow">
 
     <!-- 1위 기업 정보 --> 
@@ -8,7 +8,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
           <button class="accordion-button collapsed" id="font" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-            ESG TOP 1 {{ esg_top }}
+            {{ esg_top }}
             <span class="ms-5"><b>▷ 확인하기</b></span>
           </button>
         </h2>
@@ -34,7 +34,7 @@
     <hr style="color:yellow">
     <!-- 기업 순위 --> 
     <div class="d-flex justify-content-between">
-      <h3 class="my-4">Monthly Ranking</h3>
+      <h3 class="my-4">ESG Ranks</h3>
       <RouterLink :to="{ name: 'esgRank' }" class="routerLink">
         <div type=button class="mt-4 pt-2 px-2" style="color:#FABD02;">더보기</div>
       </RouterLink>
@@ -42,10 +42,11 @@
     <rankTable id="font" :paginated="paginated" :page="page"/> 
 
     <hr style="color:yellow">
+
     <div class="todaytest mt-4" style="display:flex; justify-content: space-between;">
 
-    <!-- 오늘의 기업 --> 
     <div class="todaycorp" style="display:flex; align-items:center">
+      
       <div style="width: 30%">
         <h4 class="card-title mt-3 mb-3">오늘의 기업</h4>
         <h4 class="mb-4">{{ todayCorp }}</h4>
@@ -72,14 +73,15 @@
     </div>
 
     <div class="mbti d-flex flex-column justify-content-center" v-else style="width: 50%;">
-      <RouterLink class="routerLink" :to="{ name: 'test' }">
+
         <div>
           <button class="btn btn-lg btn-block" 
-          style="width:100%; background-color:#FABD01;">
+          style="width:100%; background-color:#FABD01;"
+          @click="gotest()">
             ESG mbti 확인하기
           </button>
         </div>
-      </RouterLink>
+
     </div>
 
   </div>
@@ -118,7 +120,7 @@ export default {
       // 전체 순위
       paginated: '',
       page: 1,
-      todayCorp: '포스코', // 오늘의 기업
+      todayCorp: '', // 오늘의 기업
       todayCorpPk: '',
       todayCorpNews: [], // 오늘의 기업 뉴스
       nickname: '',
@@ -142,18 +144,21 @@ export default {
         .then(res => {
           console.log('1위 esg 기업 정보', res.data)
           this.esg_top = res.data.name
+          
           this.e1 = res.data.environment_evaluation[0].co2
           this.e2 = res.data.environment_evaluation[0].energy
           this.s1 = res.data.social_evaluation[0].woman_ratio
           this.s2 = res.data.social_evaluation[0].average_term
           this.s3 = res.data.social_evaluation[0].term_ratio
           this.g1 = res.data.governance_evaluation[0].board_ratio
+
           if (res.data.governance_evaluation[0].board_independency == true) {
             this.g2 = '일치'
           }
           else{
             this.g2 = '불일치'
           }
+
           this.g3 = res.data.governance_evaluation[0].largest_shareholder
           this.g4 = res.data.governance_evaluation[0].salary_gap
           this.g5 = res.data.governance_evaluation[0].dividen_ratio   
@@ -167,9 +172,7 @@ export default {
     getESGRank() {
       axios.get('boards/esg-ranking/', {headers:this.setToken()})
         .then(res => {
-          // console.log('전체 순위 리스트', res)
           this.paginated = res.data.corp_data.slice(0, 5)
-          console.log(this.paginated)
         })
         .catch(err => {
           console.log('전체 순위 오류', err)
@@ -179,7 +182,6 @@ export default {
     getNewsTop: function () {
       axios.get('boards/hottestcorp/', {headers:this.setToken()})
         .then(res => {
-          console.log('오늘의 기업 정보', res)
           console.log(res.data)
           this.todayCorp = res.data.name
           this.todayCorpPk = res.data.pk
@@ -190,11 +192,15 @@ export default {
         })
     },
     goDetail(pk) {
-       console.log('여기 pk', pk)
       this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
       },  
-    goRank: function() {
-
+    gotest(){
+      if (this.nickname) {
+        this.$router.push({ name: 'test'})
+      }
+      else {
+        alert('로그인을 진행해주세요')        
+      }
     }
     
   },
