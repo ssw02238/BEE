@@ -13,9 +13,7 @@
       <div class="row g-0">
         <div class="col-md-4">
           <Graph
-          :E_rating="E_rating"
-          :S_rating="S_rating"
-          :G_rating="G_rating"/>
+          />
         </div>
 
         <div class="col-md-8">
