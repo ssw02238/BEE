@@ -1,7 +1,7 @@
 <!-- 세로 막대 차트 -->
 <template>
     <div id="chart">
-      <p class="card-text" style="font-size:1.5rem;">평균 점수</p>
+      <p class="card-text" style="font-size:1.5rem;">전 기업 평균 점수</p>
         <apexchart style="color:#FABD02;" class="chart" type="bar" height="200" :options="chartOptions" :series="series"></apexchart>
     </div>
 </template>
@@ -63,7 +63,6 @@ export default {
               this.series[0].data.push(this.e_avg)
               this.series[0].data.push(this.s_avg)
               this.series[0].data.push(this.g_avg)
-              // console.log(this.series[0].data)
             })
             .catch(err => {
               console.log('전체 순위 오류', err)

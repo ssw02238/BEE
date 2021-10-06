@@ -76,14 +76,15 @@
     </div>
 
     <div class="mbti d-flex flex-column justify-content-center" v-else style="width: 50%;">
-      <RouterLink class="routerLink" :to="{ name: 'test' }">
+
         <div>
           <button class="btn btn-lg btn-block" 
-          style="width:100%; background-color:#FABD01;">
+          style="width:100%; background-color:#FABD01;"
+          @click="gotest()">
             ESG mbti 확인하기
           </button>
         </div>
-      </RouterLink>
+
     </div>
 
   </div>
@@ -146,18 +147,21 @@ export default {
         .then(res => {
           console.log('1위 esg 기업 정보', res.data)
           this.esg_top = res.data.name
+          
           this.e1 = res.data.environment_evaluation[0].co2
           this.e2 = res.data.environment_evaluation[0].energy
           this.s1 = res.data.social_evaluation[0].woman_ratio
           this.s2 = res.data.social_evaluation[0].average_term
           this.s3 = res.data.social_evaluation[0].term_ratio
           this.g1 = res.data.governance_evaluation[0].board_ratio
+
           if (res.data.governance_evaluation[0].board_independency == true) {
             this.g2 = '일치'
           }
           else{
             this.g2 = '불일치'
           }
+
           this.g3 = res.data.governance_evaluation[0].largest_shareholder
           this.g4 = res.data.governance_evaluation[0].salary_gap
           this.g5 = res.data.governance_evaluation[0].dividen_ratio   
@@ -197,8 +201,13 @@ export default {
        console.log('여기 pk', pk)
       this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
       },  
-    goRank: function() {
-
+    gotest(){
+      if (this.nickname) {
+        this.$router.push({ name: 'test'})
+      }
+      else {
+        alert('로그인을 진행해주세요')        
+      }
     }
     
   },

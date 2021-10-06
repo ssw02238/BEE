@@ -44,19 +44,12 @@ export default {
       axios.get( 'accounts/profile_esg/', {headers:this.setToken()})
 
         .then(res => {
-          // console.log(res.data.mbti.e_score)
-              // if (res.data.mbti) {
-              //   this.series[0].data[0] = res.data.mbti.e_score
-              //   this.series[0].data[1] = res.data.mbti.s_score
-              //   this.series[0].data[2] = res.data.mbti.g_score
-              // }
               
               this.series[0].data.push(res.data.mbti.e_score)
               this.series[0].data.push(res.data.mbti.s_score)
               this.series[0].data.push(res.data.mbti.g_score)
               this.recommend = res.data.recommend
               console.log(this.series[0].data)
-                            console.log("dd")
 
           })
         .catch(err => {

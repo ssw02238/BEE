@@ -4,7 +4,6 @@
         <p style="font-size:2rem; color:#f3c438; margin-left:180px">News</p>
         <p style="font-soze: 1.2rem; 
         margin-left:180px;
-        background-color:black;
         color: #FABD02">
         Kospi 200개 기업의 ESG관련 뉴스를 확인해보세요
         </p>
@@ -12,9 +11,9 @@
     <table class="table" style="width: 75%;margin:auto;">
     <thead style="background-color: rgb(27, 27, 27);">
       <tr>
-        <th scope="col">No</th>
-        <th scope="col">기사 제목</th>
-        <th scope="col">날짜</th>
+        <th scope="col" style="width:10%">No</th>
+        <th scope="col" style="width:50%">기사 제목</th>
+        <th scope="col" style="width:20%">날짜</th>
       </tr>
     </thead>
 

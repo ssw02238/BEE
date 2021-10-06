@@ -58,9 +58,6 @@ export default {
         }
     },
 
-    //1. split  - localstorage 
-    //2. axios  -
-
     async mounted() {
     let temp = localStorage.getItem('mbti').split(",")
           for ( var i in temp ) {
@@ -68,12 +65,6 @@ export default {
     this.series[0].data.push(parseInt(temp[i]))
       }
            console.log(temp)
-    // E
-    // this.series[0].data.push(localStorage.getItem('mbti')[0])
-    // S
-    // this.series[0].data.push(localStorage.getItem('mbti')[2])
-    // G
-    // this.series[0].data.push(localStorage.getItem('mbti')[4])
   }      
 }
 </script>

@@ -14,11 +14,11 @@
                 <slot name="body">
                   <form>
                     <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Email Id</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" v-model="credentials.email" placeholder="name@example.com">
+                      <label for="exampleInputEmail1" class="form-label">Email id</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" v-model="credentials.email" placeholder="id@example.com">
                     </div>
                     <div class="mb-3">
-                      <label for="nickname" class="form-label">nickname</label>
+                      <label for="nickname" class="form-label">Nickname</label>
                       <input type="text" class="form-control" id="nickname" v-model="credentials.nickname">
                     </div>
                     <div class="mb-3">
@@ -35,8 +35,8 @@
 
               <div class="modal-footer">
                 <slot name="footer">
-                  <button type="submit" class="btn btn-warning" @click="[signup(credentials),$emit('close')]">회원가입</button>
-                  <button type="submit" class="btn btn-danger" @click="[$emit('close')]">취소</button>
+                  <button type="submit" class="btn btn-secondary" @click="[$emit('close')]">취소</button>
+                  <button type="submit" class="btn btn-dark" @click="[signup(credentials),$emit('close')]">회원가입</button>
                 </slot>
               </div>
             </div>

@@ -116,7 +116,7 @@ def similarity(request):
     df['S_rating'] = (S_df['news_pos_cnt']+1)/(S_df['news_pos_cnt']+S_df['news_neg_cnt']+2)*20 + S_df['total']*0.8
     df['G_rating'] = (G_df['news_pos_cnt']+1)/(G_df['news_pos_cnt']+G_df['news_neg_cnt']+2)*20 + G_df['total']*0.8
     df['ESG_rating'] = df['E_rating'] + df['S_rating'] + df['G_rating']
-    df = df.round(3)
+    df = df.round(2)
 
     corp_rating = df[['E_rating', 'S_rating', 'G_rating']]
     sim = euclidean_distances(corp_rating, corp_rating)

@@ -14,7 +14,7 @@
                   <form>
                     <div class="mb-3 form-text">
                       <label for="exampleInputEmail1" class="form-label"> Email id</label>
-                      <input type="id" class="form-control" id="idInput" v-model="credentials.email" placeholder="name@example.com">
+                      <input type="id" class="form-control" id="idInput" v-model="credentials.email" placeholder="id@example.com">
                     </div>
                     <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -26,8 +26,8 @@
 
               <div class="modal-footer">
                 <slot name="footer">
-                  <button type="submit" class="btn btn-warning" @click="[$emit('close'), login(credentials)]">로그인</button>
-                  <button type="submit" class="btn btn-danger" @click="[$emit('close')]">취소</button>
+                  <button type="submit" class="btn btn-secondary" @click="[$emit('close')]">취소</button>
+                  <button type="submit" class="btn btn-dark" @click="[$emit('close'), login(credentials)]">로그인</button>
                 </slot>
               </div>
             </div>

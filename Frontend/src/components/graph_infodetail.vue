@@ -37,6 +37,9 @@ export default {
         this.$electron.shell.openExternal(link)
       }
     },
+    async mounted () {
+      console.log(this.E_rating)
+    }
 }
 </script>
 
