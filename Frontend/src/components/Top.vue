@@ -61,7 +61,7 @@
             <td>{{ g1.toFixed(2) }}%</td>
         </tr>
         <tr>
-            <th scope="row">대표이사와 이사회 의장 일치 여부</th>
+            <th scope="row">대표이사와 이사회 의장 <br> 일치 여부</th>
             <td>{{ g2 }}</td>
         </tr>
         <tr>

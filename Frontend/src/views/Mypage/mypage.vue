@@ -7,7 +7,7 @@
       <div class="d-flex justify-content-center mb-5" >
         <button class="btn btn-lg" 
         style="width:20%; background-color:#FABD01;">
-          ESG mbti 확인하기
+          ESG mbti TEST
         </button>
       </div>
     </RouterLink>

@@ -63,9 +63,6 @@ export default {
           console.log('정보 가져오기 오류', err)
         })
   },
-      // open (link) {
-      //   this.$electron.shell.openExternal(link)
-      // }
     }, 
     async mounted(){
       this.get_esg()

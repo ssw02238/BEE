@@ -62,7 +62,7 @@
         
         <Graph/>
         
-        <Graph2/>
+        <!-- <Graph2/> -->
         <Scrap/>
               </div>
 <!-- Graph 끝 --> 
@@ -77,13 +77,13 @@ import axios from 'axios'
 
 import Table from '../../components/table.vue'
 import Graph from '../../components/graph_rank.vue'
-import Graph2 from '../../components/graph_rank2.vue'
+// import Graph2 from '../../components/graph_rank2.vue'
 import Scrap from '../../components/scrap_rank.vue'
 import SearchBar from '../../components/SearchBar.vue'
 export default {
   name: 'esgRank',
   components: {
-  Table,Graph,Graph2,Scrap,SearchBar
+  Table,Graph,Scrap,SearchBar
   },
   data() {
     return{

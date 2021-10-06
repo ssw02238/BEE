@@ -14,6 +14,7 @@ export default {
     data() {
         return {
             series: [{
+            name: 'score',
             data: []
           }],
           chartOptions: {
@@ -38,7 +39,17 @@ export default {
               labels: {
                   style: {
                       colors: ['#FABD02'],
-                      fontSize: '15px',
+                      fontSize: '10px',
+                      fontFamily: 'Pretendard-Regular'
+                  }
+              }
+            },
+            yaxis: {
+              categories: ['E Score', 'S Score', 'G Score'],
+              labels: {
+                  style: {
+                      colors: ['#FABD02'],
+                      fontSize: '10px',
                       fontFamily: 'Pretendard-Regular'
                   }
               }

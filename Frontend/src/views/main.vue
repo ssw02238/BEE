@@ -1,6 +1,6 @@
 <template>
   <div class="main-div">
-    <h1>Ranks</h1>
+    <h3>ESG Top 1</h3>
     <hr style="color:yellow">
 
     <!-- 1위 기업 정보 --> 
@@ -8,7 +8,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="flush-headingOne">
           <button class="accordion-button collapsed" id="font" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-            ESG TOP 1 {{ esg_top }}
+            {{ esg_top }}
             <span class="ms-5"><b>▷ 확인하기</b></span>
           </button>
         </h2>
@@ -34,7 +34,7 @@
     <hr style="color:yellow">
     <!-- 기업 순위 --> 
     <div class="d-flex justify-content-between">
-      <h3 class="my-4">Monthly Ranking</h3>
+      <h3 class="my-4">ESG Ranks</h3>
       <RouterLink :to="{ name: 'esgRank' }" class="routerLink">
         <div type=button class="mt-4 pt-2 px-2" style="color:#FABD02;">더보기</div>
       </RouterLink>
@@ -42,10 +42,14 @@
     <rankTable id="font" :paginated="paginated" :page="page"/> 
 
     <hr style="color:yellow">
+    <!-- 오늘의 기업 --> 
+    <!-- <h3 class="my-4">오늘의 기업</h3>
+    <p id="font" style="color:#FABD02;">*오늘의 기업이란, 하루 ESG 기사 언급량 1위 기업을 의미합니다.</p> -->
+
     <div class="todaytest mt-4" style="display:flex; justify-content: space-between;">
 
-    <!-- 오늘의 기업 --> 
     <div class="todaycorp" style="display:flex; align-items:center">
+      
       <div style="width: 30%">
         <h4 class="card-title mt-3 mb-3">오늘의 기업</h4>
         <h4 class="mb-4">{{ todayCorp }}</h4>

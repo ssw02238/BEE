@@ -20,7 +20,7 @@
 
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">E: {{ corporate.E_rating.toFixed(2) }} / S: {{ corporate.S_rating.toFixed(2) }} / G: {{ corporate.G_rating.toFixed(2) }}</h5> 
+            <h5 class="card-title">E: {{ E_rating.toFixed(2) }} · S: {{ S_rating.toFixed(2) }} · G: {{ G_rating.toFixed(2) }}</h5> 
             <hr style="color:gold; height:5px;">
             <div>
               <Top class="Top"
@@ -63,7 +63,7 @@
     <hr style="color:gold; height:8px;">
 
     <!-- 유사기업 보여주기 --> 
-    <h2 class="corporate-name">Recommendations</h2>
+    <h2 class="corporate-name">유사 기업</h2>
     
     <div class="d-flex justify-content-around">
     <div v-for="corporate in recommends" :key="corporate.pk">

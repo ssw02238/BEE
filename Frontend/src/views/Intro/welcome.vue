@@ -87,10 +87,8 @@ h4, p{
 }
 .moving-card {
   margin-top: 166px;
-  margin-bottom: 30px;
   display:flex;
   justify-content: space-around;
-  /* border:solid 0.5px #FABD02 */
 }
 .card{
   background-color:rgba(0,0,0,0.4);
