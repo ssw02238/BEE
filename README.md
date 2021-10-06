@@ -1,105 +1,47 @@
-# 기획서 
+# 🐝BEE
+
+> Best ESG Enterprises
+>
+> 개발 기간 : 8/30 ~ 10/8 (6주)
+>
+> 배포 주소: https://bestesg.shop/
 
 
 
+## 📒목차
 
-
-## TEAM 소개
-
-> SSAFY 5기 특화 PJT 빅데이터(추천) 서울 3반 2팀 
-
-
-
-### MEMBER
-
-- Leader : 이규정
-- Follower
-  - 김예찬
-  - 김윤서
-  - 방지환
-  - 정희진
-
-
-
-### 역할 분담
-
-#### 1) dev
-
-- Data : 전 인원
-- BackEnd : 방지환, 이규정, 정희진
-- FrontEnd : 김윤서, 김예찬
+- [기획 의도](#🎡기획 의도)
+- [서비스 소개](#👀서비스 소개)
+- [개발 스택](#💻개발 스택)
+- [서비스구조](#🔗서비스 구조)
+- [Getting Started](#⚙ Getting Started)
+- [프로젝트 기획](#📃프로젝트 기획)
+  - [데이터 수집](#🏸데이터 수집 경로)
+  - [Design](#🎨Design)
+  - [ERD 설계](#📝ERD 설계)
+  - [API 설계](#✒API 설계)
+- [프로젝트 규칙](#🤝협업 규칙)
+- [팀원 소개](#😀팀원 소개])
 
 
 
-#### 2) etc
+## 🎡기획 의도
 
-- 노션 관리 : 주차 별 담당자 지정 
-- 지라 관리 : All
-  - 에픽 : 모든 인원
-  - 스토리 : 협업 인원 // point : 시간 단위 (주 당 40시간 이상)
-  - 부작업 : 스토리 담당 인원
+#### 🖼기획 배경
 
-- 발표 : 김예찬
-- UCC : 추후 협의
+- 동학 개미운동이라는 단어가 등장할 정도로 투자에 대한 관심도가 높아진 지금, 기업을 평가하는 새로운 기준인 **ESG**가 등장하게 되었습니다.
 
+- **ESG 경영**이란 **'Environment', 'Social', 'Governance'**의 앞 글자를 따서 만들어진 단어로 기업이 **친환경, 사회적 책임, 지배구조 개선** 등을 고려해야 지속 가능한 경영을 할 수 있다는 의미입니다.
 
+- ESG는 이러한 환경, 사회, 지배구조 관련 이슈뿐만 아니라 기업의 재무성과 **지속 가능성**에 영향을 미칠 수 있는 모든 **비재무적 요인**들을 포함합니다.
 
-### RULE
+- 그러나, 현재는 ESG에 대한 명확한 기준이 정해져 있지 않아 제대로 된 판단을 하기 어렵습니다.
 
-#### 1) 시간 ⏱️
-
-- Core time
-  - 오전 : 10:00~ 11:50
-  - 오후 : 13:20 ~ 18:00
-- Meeting
-  - 주간 : 월요일 30분 - 방향에 관한
-  - 일간 (스크럼 회의) : 이슈 공유 등
-    - 오전 반 별 미팅 종료 10분 후
-    - 오후 17시 50분
-
-#### 2) 간트차트
-
-![간트차트](README.assets/간트차트.png)
+**BEE**는 불안정한 ESG 평가 지표를 견고히 함으로써 추후 가치 평가에 대한 새로운 패러다임을 제시하고자 합니다.
 
 
 
-#### 3) Convention
-
-> [자세히](#convention-detail)
-
-- GIT 브랜치 작업 절차 및 Commit message 관련 규칙 설정
-- JIRA 이슈생성 규칙 및 Policy 작성
-
-
-
-## PROJECT 소개
-
-
-
-### 기획 의도
-
-#### 1) 의도
-
-- BackGround
-
-  저금리, 저성장 기조가 장기화됨에 따라 일반인들 또한 은행 예금(상품)의 한계를 느끼고 따라서, 주식 등 다른 투자처에 관심이 늘어나고 있다. 그 결과 올해 초 코스피는 최초로 3000을 돌파하는 등의 기염을 토했다. 하지만 전문가들은 개미 투자자의 수익의 지속성에 대한 의문을 품고 있다. 우리는 개미 (소액, 일반) 투자자들의 장기적인 수익 창출을 돕기 위해 재무 정보에서 나아가 시장에서 쉽게 얻기 힘든 비재무 데이터 즉, ESG 등 지속 가능 경영에 대한 정보를 제공하고자 하였다. 
-
-- ESG 투자란?
-
-  - 투자를 결정하는 과정에서 재무적인 요소 말고도  비재무적인 요소 예를 들어서 환경 (Environment), 사회 (Social), 지배구조 (Governance)를 고려하는 투자를 말함. 
-
-  - 현재 ESG 투자에 대한 관심도가 높아지고 있지만 이 ESG의 지표가 명확하지 않아서 표준화에 착수하는 과정에 있다.
-
-  - why?
-
-    - 환경, 사회, 지배구조 등 범인류적으로 긍정적인 가치를 생산할 수 있는 기업, 정책들에 관심도가 높아지고 있는 가운데, 해당 영역에 투자를 한다면 장기적인 관점에서 투자자, 기업, 사회 모두에게 득이 될 수 있다.
-
-    - KCGS (한국기업지배구조연구소) : 왜 책임투자인가? http://www.cgs.or.kr/business/esg_tab01.jsp
-    - ESG 공시 의무화 기사 (2025년) : https://www.mk.co.kr/news/stock/view/2021/01/46387/
-
-
-
-#### 2) 타겟
+#### ✨이런 분들에게 추천합니다.
 
 - 투자에 관심이 있지만, 정보에 대한 확신이 없는 개미 투자자
 - 디지털에 대한 수용력이 높은 MZ 세대 
@@ -109,73 +51,146 @@
 
 
 
-#### 3) 목표
+## 👀서비스 소개
 
-- 새롭게 구체화하여 제작한 esg 평가 지표를 활용해서 유저들에게 투자 인사이트를 제공함과 동시에 유저 관련 서비스를 제공
-- 현재 불안정한 ESG 평가 지표를 견고히 함으로써 추후 가치 평가에 대한 새로운 패러다임을 제시한다.
+> 소개 영상 : [UCC]()
+>
+> 사용 설명서: [서비스 시나리오]()
 
-- 지속가능경영과 책임투자에 대한 투자자의 관심이 늘어난다면, 기업의 책임감을 독려하는 원동력이 될 것
-- 이를 통해 기업, 사회, 투자자 모두에게 득이 되는 자원분배의 선순환 구조를 만들 수 있다.
-
-
-
-### 기획 내용
-
-#### 1) 추천 서비스
-
-> ESG 성적이 좋은 기업 + 개인화 알고리즘
-
-- ESG 같은 평가 지표를 활용하여 주식 추천 ( 1~100위 )
-- 개인 취향에 맞는 추천 (추후 논의 예정) 
-  - 위험회피성향
-  - 관심 섹터 설정
-  - E,S,G 가중치 부여
-  - 그 외
-    - MBTI (재미적 요소)
-
-- 컨텐츠 기반 추천
-  - 기업 상세 페이지 등 유사 평가를 갖는 기업 추천
+- 1
+- 2
+- 3
 
 
 
-#### 2) 정보 제공 서비스
+## 💻개발 스택
 
-정보를 시각화 하여 제공함으로써 유저에게 투자 인사이트를 제공함.
+#### FE
 
-- 제공 정보
-  - 기업 별 ESG 평가 세부 내용
-    - E : 환경 - 온실가스 배출량 등
-    - S : 사화 - 노동 형평성 등
-    - G : 지배구조 - 건전한 기업 구조 등등
-  - 기업 별 재무 정보
-  - 기업 별 ESG 관련 기사
+- Vue.js, vue-cli, vue-router, Bootstrap, Apexcharts.js
+
+#### BE
 
 
+- Django REST API, JWT, Swagger, MySQL(AWS RDS), [KoBERT](https://github.com/SKTBrain/KoBERT)
 
-#### 3) 그 외 서비스
+#### 배포
 
-- **설문지** 통해서 내가 선호하는 esg가 높은 기업이 어딜까?
+- AWS EC2, Nginx, gunicorn
 
-  -> 그 기업 추천 해주기 - 그 기업에대한 좋은 기사들만 노출
+#### 협업툴
 
-
-
-- 소액투자 (짠테크)
-
-  추천 받은 종목 중에 하나를 목표로 설정하여 잔돈 모으기 시작 (다른 종목 선택 가능함)
-
-  - 유저 계좌에 잔돈 (단위 설정 가능)을 통해 설정한(추천받은) 종목으로 자동 투자가 가능함
-  - `1주 구매까지 x% 남음` → 챌린지 요소 부여 (Gamification)
-  - `목표 종목 100% 도달 시` → 자동 매매 가정 / 거래 후 동일 종목 도전 여부 묻기
-  - 나도 이제 삼성전자 주주?!!!! or 주주총회 가즈아!!!!
-  - 해당 종목을 계속할 건지, 다른 종목할건지
-  - 지금까지 총 짜투리금액, 거래 내역
+- JIRA(일정 관리), Gitlab(코드 관리), Notion(내용 정리)
+- Discord, Webex (팀미팅)
 
 
 
+## 🔗서비스 구조
+
+> 구성도
+
+Django, Vuejs, AWS, Nginx, MySQL
+
+일단위 뉴스 및 추천기업 정보 업데이트
 
 
-## Convention Detail
+
+## ⚙ Getting Started
+
+> 프로젝트 환경설정
+
+#### Backend (Django)
+
+```bash
+# 가상환경 생성
+$ python -m venv venv
+# 가상환경 활성화
+$ source venv/Scripts/activate
+# KoBERT 관련 설치
+$ pip install mxnet
+$ pip install git+https://git@github.com/SKTBrain/KoBERT.git@master
+# requirements 설치
+$ pip install -r requirements.txt
+# migrations
+$ python manage.py migrate
+# 실행
+$ python manage.py runserver
+```
+
+#### Frontend (Vue.js)
+
+```bash
+# 라이브러리 설치
+$ yarn install
+# vuejs 실행
+$ yarn serve
+```
+
+#### Server
+
+> [배포문서 참고](./DevOps.md)
+
+
+
+
+
+## 📃프로젝트 기획
+
+> [기능명세서](./Design/특화기능명세서.xlsx)
+
+### 🏸데이터 수집 경로
+
+> [데이터](./Data)
+
+- **환경(E)**
+  - [온실가스종합정보센터](http://www.gir.go.kr/home/main.do)
+- **사회(S), 지배구조(G)**
+  - [OpenDART](https://opendart.fss.or.kr/)
+- **뉴스 기사**
+  - [네이버 뉴스 검색 API](https://developers.naver.com/docs/serviceapi/search/news/news.md#%EB%89%B4%EC%8A%A4)
+
+
+
+### 🎨Design
+
+> [Wireframe](./Design/UI/wireframe.pdf)
+>
+> [Figma](./Design/UI/prototype.pdf)
+
+![Figma](./README.assets/Figma.png)
+
+
+
+### 📝ERD 설계
+
+> [ERDCloud](https://www.erdcloud.com/d/tMztBqeYp7RCeeWSp)
+
+![ERD](./README.assets/ERD.png)
+
+
+
+### ✒API 설계
+
+> RESTful API 문서화 + Swagger를 통한 확인
+>
+> [API 문서](./Design/api문서.md)
+
+![Swagger](./README.assets/swagger.png)
+
+
+
+## 🤝프로젝트 규칙
+
+### 시간 ⏱️
+
+- Core time
+  - 오전 : 10:00~ 11:50
+  - 오후 : 13:20 ~ 18:00
+- Meeting
+  - 주간 : 월요일 30분 - 방향에 관한
+  - 일간 (스크럼 회의) : 이슈 공유 등
+    - 오전 반 별 미팅 종료 10분 후
+    - 오후 17시 50분
 
 ### GIT
 
@@ -199,15 +214,16 @@
 
   - 생성
 
-    ```
-    git branch <branch name>
+    ```bash
+    $ git branch <branch name>
     ```
 
   - 이동
 
-    ```
-    git switch <branch name>
-    or checkout
+    ```bash
+    $ git switch <branch name>
+    # 또는
+    $ git checkout <branch name>
     ```
 
   - 개별작업 : 각 팀원 로컬에서 작업 수행
@@ -216,36 +232,36 @@
 
     - branch에서 커밋
 
-      ```
-      git add <file name>
+      ```bash
+      $ git add <file name>
       
-      git commit -m <commit message>
+      $ git commit -m <commit message>
       ```
 
     - HEAD 변환
 
-      ```
-      git switch <branch name> ; ex) develop 상위 브랜치
+      ```bash
+      $ git switch <branch name> ; ex) develop 상위 브랜치
       ```
 
     - 병합
 
-      ```
-      git merge <branch name> ; 이때 브랜치 이름은 작업 후 커밋한 브랜치 이름임
+      ```bash
+      $ git merge <branch name> ; 이때 브랜치 이름은 작업 후 커밋한 브랜치 이름임
       ```
 
     - 원격저장소에 올리기
 
-      ```
-      git push origin <branch name> : 이때 브랜치 이름은 머지를 진행한 브랜치임
+      ```bash
+      $ git push origin <branch name> : 이때 브랜치 이름은 머지를 진행한 브랜치임
       ```
 
       
 
   - 삭제
 
-    ```
-    git branch -d <branch name> : 삭제할 브랜치 이름
+    ```bash
+    $ git branch -d <branch name> : 삭제할 브랜치 이름
     ```
 
     - 머지 이후에 브랜치를 삭제하고 다시 만들어 진행할 것
@@ -256,16 +272,19 @@
 
 - Commit Message
 
-  ```
-  {FIX|CLEANUP|FEATURE|DOC}: {MESSAGE}
+  ```bash
+  $ git commit -m {FIX|CLEANUP|FEATURE|DOC}: {MESSAGE}
   ```
 
   - 대분류
+
     - FIX : 버그 수정
     - CLEANUP : 코드 정리, 주석 정리(리팩토링)
     - FEATURE : 기능 구현
     - DOC : 문서 작업
     - 더 필요한 것은 추가 (ENHANCE)
+
+    
 
 ### JIRA
 
@@ -299,4 +318,51 @@
 - 업데이트
   - 매일 저녁 스크럼 회의 이후 개별 업데이트
     - 커멘트 달기 등등
+
+
+
+
+
+## 😀팀원 소개
+
+> 담당 역할, 기술
+
+#### 이규정 (Leader)
+
+- G 데이터 수집 및 분석
+
+- BE
+- API 문서 작성
+- FE 배포
+
+#### 김윤서
+
+- S 데이터 수집 및 분석
+
+- FE
+- mbti 기능 구현
+
+#### 김예찬
+
+- S 데이터 수집 및 분석
+- FE
+- mbti 기능 구현
+
+- BE 배포
+
+#### 방지환
+
+- G 데이터 수집 및 분석
+
+- BE, Swagger 적용
+- KoBERT 텍스트 분류 모델 학습
+- 뉴스 기사 텍스트 분석 및 일 단위 뉴스 DB 업데이트 구현
+
+#### 정희진
+
+- E 데이터 수집 및 분석
+
+- BE
+- 추천 알고리즘
+- UCC 제작
 

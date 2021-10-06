@@ -5,7 +5,7 @@ import store from './store'
 
 //base url 
 import axios from "axios"
-axios.defaults.baseURL = "http://127.0.0.1:8000/"
+axios.defaults.baseURL = "https://bestesg.shop/api/"
 
 Vue.config.productionTip = false
 
