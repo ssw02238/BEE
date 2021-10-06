@@ -42,9 +42,6 @@
     <rankTable id="font" :paginated="paginated" :page="page"/> 
 
     <hr style="color:yellow">
-    <!-- 오늘의 기업 --> 
-    <!-- <h3 class="my-4">오늘의 기업</h3>
-    <p id="font" style="color:#FABD02;">*오늘의 기업이란, 하루 ESG 기사 언급량 1위 기업을 의미합니다.</p> -->
 
     <div class="todaytest mt-4" style="display:flex; justify-content: space-between;">
 
@@ -123,7 +120,7 @@ export default {
       // 전체 순위
       paginated: '',
       page: 1,
-      todayCorp: '포스코', // 오늘의 기업
+      todayCorp: '', // 오늘의 기업
       todayCorpPk: '',
       todayCorpNews: [], // 오늘의 기업 뉴스
       nickname: '',
@@ -175,9 +172,7 @@ export default {
     getESGRank() {
       axios.get('boards/esg-ranking/', {headers:this.setToken()})
         .then(res => {
-          // console.log('전체 순위 리스트', res)
           this.paginated = res.data.corp_data.slice(0, 5)
-          console.log(this.paginated)
         })
         .catch(err => {
           console.log('전체 순위 오류', err)
@@ -187,7 +182,6 @@ export default {
     getNewsTop: function () {
       axios.get('boards/hottestcorp/', {headers:this.setToken()})
         .then(res => {
-          console.log('오늘의 기업 정보', res)
           console.log(res.data)
           this.todayCorp = res.data.name
           this.todayCorpPk = res.data.pk
@@ -198,7 +192,6 @@ export default {
         })
     },
     goDetail(pk) {
-       console.log('여기 pk', pk)
       this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
       },  
     gotest(){

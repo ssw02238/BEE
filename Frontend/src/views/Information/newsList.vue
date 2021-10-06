@@ -19,7 +19,6 @@
 
     <tbody v-for="(content, idx) in paginated" :key="idx">
       <tr style="height:50px;" @click="goPage(content.url)" class="news-body">
-        <!-- <th scope="row">1</th> -->
         <td>{{ 10 * (page - 1) + idx + 1 }} </td>
         <td class="news-link">{{ content.title }} </td>
         <td>{{ content.date }} </td>
@@ -74,7 +73,6 @@ export default {
       
         .then(res => {
           this.news = res.data
-          console.log('받아온 뉴스', this.news)
         })
         .catch(err => {
           console.log('뉴스 오류', err)
@@ -97,18 +95,6 @@ export default {
       let to = (page * perPage);
       return  news.slice(from, to)
     },
-
-    // scrap 하기 ??
-    // getScrap() {
-    //   axios.post('corporates/${corp_id}/scrap/', {headers:this.setToken()})
-      
-    //     .then(res => {
-    //       console.log(res)
-    //     })
-    //     .catch(err => {
-    //       console.log('오류', err)
-    //     })
-    // }
   },
   async mounted() {
     this.getNews()
@@ -121,7 +107,6 @@ export default {
   watch: {
     news () {
       this.setPages();
-      
     }
   },
 }

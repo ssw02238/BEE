@@ -57,14 +57,11 @@ export default {
           },
         }
     },
-
     async mounted() {
     let temp = localStorage.getItem('mbti').split(",")
           for ( var i in temp ) {
-            console.log(i)
-    this.series[0].data.push(parseInt(temp[i]))
+            this.series[0].data.push(parseInt(temp[i]))
       }
-           console.log(temp)
   }      
 }
 </script>

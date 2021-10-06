@@ -47,15 +47,12 @@ export default {
           this.E_rating = res.data.E_rating
           this.S_rating = res.data.S_rating
           this.G_rating = res.data.G_rating
-          console.log(this.E_rating, 'e점수')
           this.series[0].data.push(this.E_rating)
           this.series[0].data.push(this.S_rating)
           this.series[0].data.push(this.G_rating)
-
-          console.log(this.series, '넣은 데이터')
         })
         .catch(err => {
-          console.log('자식에서 오류', err)
+          console.log('오류', err)
         })
       }
     },

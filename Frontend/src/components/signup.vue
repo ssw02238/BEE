@@ -64,7 +64,6 @@ export default {
       axios.post('accounts/signup/',this.credentials)
         .then(res => {
           console.log(res)
-
           alert('회원가입에 성공하였습니다. 로그인을 진행해주세요')
           this.$router.push({ name: 'main' })
           this.$router.go()
@@ -121,16 +120,6 @@ export default {
 .modal-default-button {
   float: right;
 }
-
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
-
 .modal-enter {
   opacity: 0;
 }

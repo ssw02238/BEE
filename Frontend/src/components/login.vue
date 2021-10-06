@@ -59,7 +59,6 @@ export default {
     login: function () {
         axios.post('accounts/api-token-auth/', this.credentials)
       .then(res => {
-        console.log('결과', res)
         localStorage.setItem('jwt', res.data.token)
         this.$emit('login')
       })
@@ -67,7 +66,7 @@ export default {
         console.log(res)
         axios.get( 'accounts/profile/', {headers:this.setToken()})
       .then(res => {
-        console.log('닉네임 받기', res.data)
+        console.log(res)
         localStorage.setItem('uid', res.data.id)
         localStorage.setItem('nickname', res.data.nickname)
         localStorage.setItem('email', res.data.email)
@@ -78,9 +77,8 @@ export default {
        })
       })
       .catch(err => {
+        console.loe(err)
         this.$router.push({ name: 'signup'})
-        console.log('회원가입으로 이동')
-        console.log(err)
       })
     }
   }

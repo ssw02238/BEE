@@ -2,9 +2,6 @@
   <div class="container">
     <!-- welcome 상단 --> 
     <div class="card text-center top-card">
-      <!-- <div class="card-header" style="font-size:2rem;">
-        BEE
-      </div> -->
       <div class="card-body">
         <img src="@/assets/logo.png" width="280">
         <p class="card-text" style="font-size:1.5rem;">Best ESG Enterprises</p>

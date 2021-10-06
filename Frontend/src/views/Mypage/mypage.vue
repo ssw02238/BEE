@@ -19,33 +19,12 @@
       <recommendList
       :corporates="recommend"
       />
-        <!-- ESG Chart 시작 -->
-          <!-- <div class="card" style="width: 30%;margin: auto" > -->
-            <!-- <div class="card-body"> -->
-              <!-- <div style="display:flex;width:33%;"> -->
-              <!-- <h5 class="card-title"> ESG 성향 </h5> -->
-<!-- 
-                  <Graph
-                  :e_score="e_score"
-                  :s_score="s_score"
-                  :g_score="g_score"
-                  /> -->
-            <!-- </div> -->
-          <!-- </div> -->
-          <!-- ESG Chart 종료 -->
-    <!-- </div> -->
   </div>
-
-    <!-- <RouterLink class="routerLink" :to="{ name: 'test' }">
-      <p>ESG Mbti</p>
-    </RouterLink> -->
-
   </div>
 </template>
 
 <script>
 import Profile from '../../components/Profile.vue';
-// import Graph from '../../components/graph_mypage.vue';
 import scrapList from '../../components/scrap_list.vue';
 import recommendList from '../../components/recommend_list.vue';
 

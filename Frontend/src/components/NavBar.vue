@@ -55,7 +55,6 @@
 
 <script>
 import Modal from "./login.vue"
-
 import Modal2 from "./signup.vue"
 export default {
   components:{
@@ -79,8 +78,6 @@ export default {
       localStorage.removeItem('email')
       localStorage.removeItem('mbti')
       localStorage.removeItem('uid')
-      console.log('logout 성공')
-
       this.$router.push({ name: 'welcome' })
     },
   },
@@ -111,10 +108,6 @@ export default {
 }
 p {
   color:#FABD02;
-}
-/* 전체 네브 바 */
-.navbar {
- 
 }
 
 /*00. 글씨 네브바  */

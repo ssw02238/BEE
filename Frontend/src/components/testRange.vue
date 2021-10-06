@@ -1,6 +1,5 @@
 <template>
   <div>
- <!-- <form v-on:submit="submitForm"> -->
     <!-- 문제 1번 -->
     <label for="customRange1" class="form-label1 question">Q 1. 나는 제로 웨이스트를 실천하는 기업에 대해 2개 이상 알고 있다.</label>
     
@@ -207,11 +206,7 @@
     </b-form-group>
 
   <button @click="submitForm" class="btn btn-lg btn-block mt-5 mb-5" type="submit" style="width:100%; background-color:#FABD01">제출하기</button>
- <!-- </form> -->
-
   </div>
-
-  
 </template>
 
 <script>
@@ -255,8 +250,7 @@ export default {
         g_score:parseFloat(this.selected3) + parseFloat(this.selected6)+ parseFloat(this.selected9)},
        {headers: config}
        )    
-        .then(res => {
-          console.log('요청 제대로', res)         
+        .then(res => {       
           localStorage.setItem('mbti', res.data.mbti)
           this.$router.push({ name: 'myPage' })
           this.$router.go()
@@ -272,8 +266,7 @@ export default {
         g_score:parseFloat(this.selected3) + parseFloat(this.selected6)+ parseFloat(this.selected9)},
        {headers: config}
        )
-        .then(res => {
-          console.log('요청 제대로', res)           
+        .then(res => {          
           localStorage.setItem('mbti', res.data.mbti)
           this.$router.push({ name: 'myPage' })
           this.$router.go()

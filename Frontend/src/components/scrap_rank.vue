@@ -42,7 +42,6 @@ export default {
     getRank: function () {
         axios.get('boards/popularcorp/')
       .then(res => {
-        // console.log(res)
         this.corporates = res.data
       }) 
       .catch(err => {

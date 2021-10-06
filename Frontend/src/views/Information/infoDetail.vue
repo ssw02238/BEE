@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h1 class="corporate-name" style="display:inline">{{ corporate.name }}</h1>
-    <!-- scrap list에 따른 분기 처리 진행할 것... -->
     <b-icon icon="star-fill" variant="warning" font-scale="2" class="scrap-btn" @click="addScrap" type="button" v-if="is_scrap"></b-icon>
     <b-icon icon="star" variant="warning" font-scale="2" class="scrap-btn" @click="addScrap" type="button" v-else></b-icon>
     <div class="scrap-score">
@@ -70,9 +69,7 @@
         <div class="card-body" style="width: 250px; height: 140px;" @click="goDetail(corporate.pk)">       
           <div class="d-flex justify-content-between">
             <h5 class="mb-1">{{ corporate.name }} </h5>
-            <!-- <small>스크랩 담기 ▲</small> -->
           </div>
-          <!-- <p class="card-text mt-4">E: {{ corporate.E_rating.toFixed(2)}} S:{{ corporate.S_rating.toFixed(2) }} G:{{ corporate.G_rating.toFixed(2) }}</p> -->
           <p class="card-text mt-4">총점: {{ corporate.ESG_rating }}</p>
 
         </div>
@@ -80,7 +77,6 @@
       </div>
     </div>
   </div>
-  <!-- <div class="dh"></div> -->
   </div>
 </template>
 
@@ -89,15 +85,12 @@ import axios from 'axios'
 
 import Top from '../../components/Top.vue'
 import Graph from '../../components/graph_infodetail.vue' 
-// import { mdiBookmarkOutline } from '@mdi/js';
 
 export default {
   name: 'infoDetail',
   components: {
     Graph,
     Top,
-
-    // Scrap,
   },  
   data() {
     return {
@@ -121,6 +114,7 @@ export default {
     },
     goDetail(pk) {
       this.$router.push({ name: 'infoDetail',  params: {pk: pk }})
+      this.$router.go()
     },  
     goPage(url){
       window.open(url, "_blank")
@@ -129,13 +123,10 @@ export default {
       const config = this.setToken()
       axios.post(`corporates/${this.pk}/scrap/`,{}, {headers: config})
         .then(res => {
-          // console.log(res)
           if (res.status == 201) {
             this.is_scrap = true
-            // console.log(this.is_scrap)
           } else {
             this.is_scrap = false
-            // console.log(this.is_scrap)
           }
         })
         .catch((error) => {
@@ -248,7 +239,6 @@ export default {
       axios.get(`corporates/${pk}/similarcorp/`, {headers:this.setToken()})
 
         .then(res => {
-          console.log('추천 기업 정보', res.data.corporates)
           this.recommends = res.data.corporates
         })
         .catch(err => {
@@ -289,7 +279,6 @@ export default {
 }
 .corporate-name {
   color: #FABD02;
-  /* background-color:rgb(0, 0, 0); */
   padding: 8px;
 }
 .no-news {
@@ -317,13 +306,6 @@ export default {
   color:white;
   position:relative;
 }
-/* .recomd:hover {
-  background-color: rgba(255,255,255,0.55);
-  background-color: rgba(255,255,255,0.55);
-  cursor: pointer;
-} */
-
-
 .scrap-score {
   color:#e6cb7c;
   display: flex;
