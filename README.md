@@ -53,9 +53,11 @@
 
 ## 👀서비스 소개
 
-> 소개 영상 : [UCC]()
+> 소개 영상 : [UCC](./서울_3반_A302_UCC경진대회.mp4)
 >
 > 사용 설명서: [서비스 시나리오](./exec/시연시나리오.md)
+
+#### 미리보기
 
 - Main + Rank
 
@@ -95,11 +97,9 @@
 
 ## 🔗서비스 구조
 
-> 구성도
+![아키텍처](./README.assets/아키텍처.png)
 
-Django, Vuejs, AWS, Nginx, MySQL
 
-일단위 뉴스 및 추천기업 정보 업데이트
 
 
 
@@ -136,7 +136,7 @@ $ yarn serve
 
 #### Server
 
-> [배포문서 참고](./DevOps.md)
+> [배포문서 참고](./exec/배포스크립트.md)
 
 
 
@@ -339,38 +339,37 @@ $ yarn serve
 
 - G 데이터 수집 및 분석
 
-- BE
+- Backend
 - API 문서 작성
-- FE 배포
+- Frontend 배포
 
 #### 김윤서
 
 - S 데이터 수집 및 분석
-
-- FE
+- Frontend
+- 컴포넌트 구조 설계
 - mbti 기능 구현
 
 #### 김예찬
 
 - S 데이터 수집 및 분석
-- FE
+- Frontend
 - mbti 기능 구현
 
-- BE 배포
+- Backend 배포
 
 #### 방지환
 
 - G 데이터 수집 및 분석
 
-- BE, Swagger 적용
-- KoBERT 텍스트 분류 모델 학습
+- Backend, Swagger 적용
+- KoBERT 분류 모델 학습
 - 뉴스 기사 텍스트 분석 및 일 단위 뉴스 DB 업데이트 구현
 
 #### 정희진
 
 - E 데이터 수집 및 분석
 
-- BE
-- 추천 알고리즘
+- Backend
+- 유사도 분석을 통한 추천 알고리즘(Cosine Similarity + Euclidean Distance) 및 DB 업데이트 구현
 - UCC 제작
-
