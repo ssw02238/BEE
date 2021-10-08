@@ -339,30 +339,30 @@ $ yarn serve
 
 - G 데이터 수집 및 분석
 
-- BE
+- Backend
 - API 문서 작성
-- FE 배포
+- Frontend 배포
 
 #### 김윤서
 
 - S 데이터 수집 및 분석
 
-- FE
+- Frontend
 - mbti 기능 구현
 
 #### 김예찬
 
 - S 데이터 수집 및 분석
-- FE
+- Frontend
 - mbti 기능 구현
 
-- BE 배포
+- Backend 배포
 
 #### 방지환
 
 - G 데이터 수집 및 분석
 
-- BE, Swagger 적용
+- Backend, Swagger 적용
 - KoBERT 텍스트 분류 모델 학습
 - 뉴스 기사 텍스트 분석 및 일 단위 뉴스 DB 업데이트 구현
 
@@ -370,7 +370,7 @@ $ yarn serve
 
 - E 데이터 수집 및 분석
 
-- BE
+- Backend
 - 유사도 분석을 통한 추천 알고리즘(Cosine Similarity + Euclidean Distance) 및 DB 업데이트 구현
 - UCC 제작
 
