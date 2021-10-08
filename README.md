@@ -369,7 +369,6 @@ $ yarn serve
 #### 정희진
 
 - E 데이터 수집 및 분석
-
 - Backend
 - 유사도 분석을 통한 추천 알고리즘(Cosine Similarity + Euclidean Distance) 및 DB 업데이트 구현
 - UCC 제작
