@@ -57,9 +57,17 @@
 >
 > 사용 설명서: [서비스 시나리오](./exec/시연시나리오.md)
 
-- 1
-- 2
-- 3
+- Main + Rank
+
+  ![MAIN](README.assets/MAIN.gif)
+
+- Detail
+
+  ![DETAIL](README.assets/DETAIL.gif)
+
+- ESG MBTI
+
+  ![MBTI](README.assets/MBTI.gif)
 
 
 
