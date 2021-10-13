@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-x89i0(zt2-8z6iy-*f_r)q39^%mrmsf%9o7(_gk*#ykq!@x^wi'
+SECRET_KEY = 
 # deploy
 # SECRET_KEY = os.environ['SECRET_KEY']
 
@@ -86,13 +86,13 @@ WSGI_APPLICATION = 'bee.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# password를 어떻게 숨길까...
+# 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'BEE',
         'USER': 'admin',
-        'PASSWORD': '1q2w3e4r5t!',
+        'PASSWORD': '',
         'HOST': 'bee.cjkrtt0iwcwz.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',
     }
