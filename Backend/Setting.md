@@ -18,9 +18,7 @@
 
     - [참고](https://designdevelop.tistory.com/68)
 
-    - hostname : `bee.cjkrtt0iwcwz.ap-northeast-2.rds.amazonaws.com`
-    - user : `admin`
-    - pw : `1q2w3e4r5t!`
+   
 
 
 
