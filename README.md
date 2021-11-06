@@ -4,7 +4,7 @@
 >
 > 개발 기간 : 8/30 ~ 10/8 (6주)
 >
-> 배포 주소: https://bestesg.shop/
+> 배포 주소: https://www.besg.shop/
 
 
 
